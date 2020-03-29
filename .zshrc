@@ -76,7 +76,7 @@ autoload -U compinit && compinit -u
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,8 +106,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-plugins=(… zsh-completions)
-autoload -U compinit && compinit
+# plugins=(… zsh-completions)
+# autoload -U compinit && compinit
 
 # 文字コードの指定
 export LANG=ja_JP.UTF-8
@@ -116,3 +116,4 @@ export LANG=ja_JP.UTF-8
 setopt print_eight_bit
 
 
+# source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

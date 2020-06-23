@@ -114,6 +114,7 @@ export LANG=ja_JP.UTF-8
 
 # 日本語ファイル名を表示可能にする
 setopt print_eight_bit
-
+exec fish
 
 # source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0

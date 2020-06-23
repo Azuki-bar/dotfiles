@@ -46,4 +46,7 @@ set laststatus=2
 " オートインデント
 set autoindent
 
+"文字コードをutf-8に"
+set encoding=utf8
+
 

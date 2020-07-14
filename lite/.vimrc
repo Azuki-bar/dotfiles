@@ -44,13 +44,13 @@ set smartcase
 set laststatus=2
 
 " オートインデント
-set autoindent
-
+" set autoindent
+set smartindent
 "文字コードをutf-8に"
 set encoding=utf8
 
 "インサートモードのESCの機能をjjにも
-"inoremap <silent> jj <ESC>
+inoremap <silent> jj <ESC>
 
 "クリップボード有効化
 set clipboard=unnamedplus

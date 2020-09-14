@@ -36,4 +36,14 @@ ln -s ~/dotfiles/"$file"
 done 
 
 ```
+## 5 キー割当を変更する
+```Bash
+ln -s ~/dotfiles/.xkb 
+```
+を実行してシンボリックリンクを貼る。
 
+その後`.bashrc`などの実行時呼び出しファイルに
+```Bash
+xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mykbd $DISPLAY 2> /dev/null  
+```
+を追記する。

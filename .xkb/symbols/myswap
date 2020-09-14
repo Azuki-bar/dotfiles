@@ -3,4 +3,5 @@ xkb_symbols "swapkeys" {
     key <MUHE> { [ Alt_L] };
     key <HENK> { [ Alt_R] };
     key <HKTG> { [ Alt_R] };
+    key <RCTL> { [ Alt_R] };
 };

@@ -36,7 +36,7 @@ git clone git@github.com:Azuki-bar/dotfiles.git
 ### 2 パッケージのダウンロード
 
 ```Bash
-sudo apt install -y fish curl vim
+sudo apt install -y fish curl vim network-manager-l2tp-gnome
 ```
 
 ### 3 ログインシェルを Bash のまま Fish に変更する

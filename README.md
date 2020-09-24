@@ -70,4 +70,12 @@ xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mykbd $DISPLAY 2> /dev/null
 
 ### 6 Git の設定を変更する
 
-工事中
+Github の no-reply メールアドレス以外では Github にコミットできないようになっているのでそのメールアドレスを指定すること。
+
+最終行は`gitignore_global`の存在位置を教えてあげるコマンド。
+
+```Bash
+git config --global user.name Azuki-bar
+git config --global user.email 42642269+Azuki-bar@users.noreply.github.com
+git config --global core.excludesfile ~/.gitignore_global
+```

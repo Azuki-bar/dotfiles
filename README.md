@@ -33,6 +33,15 @@ Github に対して作成した公開鍵を登録してください。
 git clone git@github.com:Azuki-bar/dotfiles.git
 ```
 
+その後 `~/.ssh/config` のファイルに以下を追記してください。
+
+```config
+Host github github.com
+  HostName github.com
+  IdentityFile ~/.ssh/
+  User git
+```
+
 ### 2 パッケージのダウンロード
 
 ```Bash

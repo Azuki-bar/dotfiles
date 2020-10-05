@@ -13,6 +13,7 @@
     - [4 シンボリックリンクを貼る](#4-シンボリックリンクを貼る)
     - [5 キー割当を変更する](#5-キー割当を変更する)
     - [6 Git の設定を変更する](#6-git-の設定を変更する)
+    - [7 ネットワークの設定を変更する](#7-ネットワークの設定を変更する)
 
 <!-- /TOC -->
 
@@ -104,3 +105,20 @@ git config --global user.name Azuki-bar
 git config --global user.email 42642269+Azuki-bar@users.noreply.github.com
 git config --global core.excludesfile ~/.gitignore_global
 ```
+
+### 7 ネットワークの設定を変更する
+
+`nmcli`を用いて設定します。
+何故か知りませんが Ubuntu20.04 では GUI で個別のプロキシ設定ができないので……
+
+電通大への VPN 設定と UEC Wireless の接続設定を済ませておいてください。
+
+`nmcli connection edit UECWireless`で`nmcli`の対話型設定モードに入ります。
+
+その後`goto proxy` `set proxy.method auto`,`set proxy.pac-url proxy.uec.ac.jp`
+として設定を追記します。
+
+最後に`save persistent`で恒久的に設定を保存します。
+
+もし VPN 環境でも同様のことを実現したいときは`nmcli connection edit ****`
+のアスタリスク部分に VPN の設定名を入れて同様のことを行ってください。

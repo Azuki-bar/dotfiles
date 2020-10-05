@@ -115,7 +115,7 @@ git config --global core.excludesfile ~/.gitignore_global
 
 `nmcli connection edit UECWireless`で`nmcli`の対話型設定モードに入ります。
 
-その後`goto proxy` `set proxy.method auto`,`set proxy.pac-url proxy.uec.ac.jp`
+その後`goto proxy`,`set proxy.method auto`,`set proxy.pac-url proxy.uec.ac.jp`
 として設定を追記します。
 
 最後に`save persistent`で恒久的に設定を保存します。

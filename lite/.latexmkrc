@@ -1,7 +1,8 @@
 #!/usr/bin/perl
 
-$latex     = 'uplatex %O -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode -file-line-error %S';
+$latex     = 'uplatex %O -kanji=utf8 -synctex=1 -interaction=nonstopmode -file-line-error %S';
 $xelatex   = 'xelatex %O -no-pdf -synctex=1 -shell-escape -interaction=nonstopmode %S';
+$lualatex  = 'lualatex -shell-escape -synctex=1 -interaction=nonstopmode';
 
 $bibtex    = 'upbibtex %O %B';
 $biber     = 'biber %O --bblencoding=utf8 -u -U --output_safechars %B';

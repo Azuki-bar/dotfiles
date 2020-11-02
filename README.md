@@ -98,14 +98,14 @@ xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mykbd $DISPLAY 2> /dev/null
 
 Github の no-reply メールアドレス以外では Github にコミットできないようになっているのでそのメールアドレスを指定すること。
 
-最終行は`gitignore_global`の存在位置を教えてあげるコマンド。
 
 ```Bash
 git config --global user.name Azuki-bar
 git config --global user.email 42642269+Azuki-bar@users.noreply.github.com
-git config --global core.excludesfile ~/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global # gitignore_global 
+git config --global core.quatepath false # 日本語ファイル名を正常に表示する
 ```
-
+[参考リンク](https://dev.classmethod.jp/articles/git-avoid-illegal-charactor-tips/)
 ### 7 ネットワークの設定を変更する
 
 `nmcli`を用いて設定します。

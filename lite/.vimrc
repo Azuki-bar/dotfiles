@@ -46,17 +46,23 @@ set laststatus=2
 " オートインデント
 " set autoindent
 set smartindent
-"文字コードをutf-8に"
+" 文字コードをutf-8に"
 set encoding=utf8
 
-"インサートモードのESCの機能をjjにも
+" インサートモードのESCの機能をjjにも
 inoremap <silent> jj <ESC>
 
-"クリップボード有効化
+" クリップボード有効化
 set clipboard=unnamedplus
 
-"行末折返し無効化
+" 行末折返し無効化
 set nowrap
 
-"80列目に縦線を入れる
+" 80列目に縦線を入れる
 set colorcolumn=80
+
+" :eで開くときにファイル候補表示
+set wildmenu 
+
+" ヤンクしたときにクリップボードに入るようにする。
+set clipboard=unnamedplus

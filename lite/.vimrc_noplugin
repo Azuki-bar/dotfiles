@@ -60,3 +60,20 @@ set nowrap
 
 "80列目に縦線を入れる
 set colorcolumn=80
+
+" :eで開くときにファイル候補表示
+set wildmenu 
+
+" ヤンクしたときにクリップボードに入るようにする。
+set clipboard=unnamedplus
+
+" ★が崩れるのを解決
+set ambiwidth=double
+
+" 検索結果ハイライト
+set hlsearch
+" ハイライトをESC二度押しで解除
+nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
+" カーソルラインハイライト
+set cursorline

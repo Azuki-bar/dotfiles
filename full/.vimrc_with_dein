@@ -106,6 +106,22 @@ set wildmenu
 " ヤンクしたときにクリップボードに入るようにする。
 set clipboard=unnamedplus
 
+" ★が崩れるのを解決
+set ambiwidth=double
+
+" 検索結果ハイライト
+set hlsearch
+
+" ハイライトをESC二度押しで解除
+nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
+" カーソルラインハイライト
+set cursorline
+
+" 
+" ここからプラグイン依存設定
+"
+
 " 補完のときの挙動をIDEに揃える
 set completeopt=menuone,noinsert
 
@@ -121,3 +137,11 @@ inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#use-tab-and-s-tab-to-navigate-the-completion-list
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" https://qiita.com/shinespark/items/1d6ec0de89aa537da505
+let g:quickrun_config = {
+  \ 'python': {
+  \   'command': 'python3'
+  \ },
+  \}
+

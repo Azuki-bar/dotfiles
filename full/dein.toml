@@ -14,3 +14,11 @@ repo = 'markonm/traces.vim'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 
+[[plugins]]
+repo = 'tyru/caw.vim'
+
+[[plugins]]
+repo = 'preservim/nerdtree'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'

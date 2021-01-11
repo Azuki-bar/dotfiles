@@ -3,8 +3,6 @@
 # https://qiita.com/miy4/items/dd0e2aec388138f803c5
 """
 $ sudo groupadd uinput
-do not run this command
-$ sudo useradd -G input,uinput -s /sbin/nologin xkeysnail
 """
 import re
 from xkeysnail.transform import *
@@ -18,8 +16,6 @@ define_multipurpose_modmap({
 })
 
 define_modmap({
-#    K("MUHENKAN"): K("Alt-L"),
-#    K("HENKAN"): K("Alt-R"),
     Key.MUHENKAN: Key.LEFT_ALT,
     Key.HENKAN: Key.RIGHT_ALT
 })

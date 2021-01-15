@@ -13,6 +13,14 @@ repo = 'markonm/traces.vim'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
+hook_source = '''
+" https://qiita.com/shinespark/items/1d6ec0de89aa537da505
+let g:quickrun_config = {
+    'python': {
+        'command': 'python3'
+    },
+}
+'''
 
 [[plugins]]
 repo = 'tyru/caw.vim'
@@ -22,3 +30,13 @@ repo = 'preservim/nerdtree'
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'rhysd/vim-clang-format'
+hook_add = '''
+" clang formatの設定
+autocmd FileType c ClangFormatAutoEnable
+'''
+
+# [[plugins]]
+# repo = 'vim-autopep8'

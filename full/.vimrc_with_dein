@@ -138,12 +138,6 @@ inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" https://qiita.com/shinespark/items/1d6ec0de89aa537da505
-let g:quickrun_config = {
-  \ 'python': {
-  \   'command': 'python3'
-  \ },
-  \}
 
 " https://qiita.com/Linda_pp/items/9e0c94eb82b18071db34
 if has('vim_starting')
@@ -155,4 +149,3 @@ if has('vim_starting')
     let &t_SR .= "\e[4 q"
 endif
 " ここまで
-

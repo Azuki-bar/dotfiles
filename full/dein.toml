@@ -16,8 +16,8 @@ repo = 'thinca/vim-quickrun'
 hook_source = '''
 " https://qiita.com/shinespark/items/1d6ec0de89aa537da505
 let g:quickrun_config = {
-    'python': {
-        'command': 'python3'
+    "python": {
+        "command": "python3"
     },
 }
 '''
@@ -40,3 +40,7 @@ autocmd FileType c ClangFormatAutoEnable
 
 # [[plugins]]
 # repo = 'vim-autopep8'
+
+[[plugins]]
+repo = "airblade/vim-gitgutter"
+

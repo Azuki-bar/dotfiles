@@ -118,7 +118,14 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " カーソルラインハイライト
 set cursorline
 
-" 
+" カッコなどの自動補完
+inoremap { {}<Left>
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap ( ()<ESC>i
+inoremap (<Enter> ()<Left><CR><ESC><S-o>
+inoremap " ""<Left>
+inoremap ' ''<Left>
+
 " ここからプラグイン依存設定
 "
 

@@ -1,0 +1,6 @@
+#!/bin/env bash
+
+clock_mhz=`lscpu |awk '/CPU MHz/ {print $3}'`
+clock_ghz=`echo "scale=1; $clock_mhz/1000" | bc | sed "s/^\./0./"`
+echo $clock_ghz
+

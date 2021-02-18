@@ -1,0 +1,5 @@
+#!/bin/env bash
+
+speed=$(sensors | grep -i fan |awk '{print $3}')
+echo $speed
+

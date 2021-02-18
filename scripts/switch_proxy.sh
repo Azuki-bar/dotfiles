@@ -4,10 +4,10 @@ proxy_address="http://proxy.uec.ac.jp:8080"
 grep -e '^\#' $file >/dev/null
 if [ $? -ne 0 ];then
     sudo sed -i -e 's/\(.*\)/\#\1/g' $file 
-    export HTTP_PROXY=
-    export HTTPS_PROXY=
-    export http_proxy=
-    export https_proxy=
+    export -n HTTP_PROXY
+    export -n HTTPS_PROXY
+    export -n http_proxy
+    export -n https_proxy
     git config --global --unset http.proxy 
     git config --global --unset https.proxy 
     git config --global --unset url."https://github.com/".insteadOf git@github.com:

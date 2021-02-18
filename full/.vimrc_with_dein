@@ -118,16 +118,23 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " カーソルラインハイライト
 set cursorline
 
-" カッコなどの自動補完
-inoremap { {}<Left>
-inoremap {<Enter> {}<Left><CR><ESC><S-o>
-inoremap ( ()<ESC>i
-inoremap (<Enter> ()<Left><CR><ESC><S-o>
-inoremap " ""<Left>
-inoremap ' ''<Left>
+" 
+filetype plugin indent on
+
+" " カッコなどの自動補完
+" inoremap { {}<Left>
+" inoremap {<Enter> {}<Left><CR><ESC><S-o>
+" inoremap ( ()<ESC>i
+" inoremap (<Enter> ()<Left><CR><ESC><S-o>
+" inoremap " ""<Left>
+" inoremap ' ''<Left>
+
+
 
 " ここからプラグイン依存設定
 "
+" かっこの補完をするcoc-pairsの設定
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " 補完のときの挙動をIDEに揃える
 set completeopt=menuone,noinsert

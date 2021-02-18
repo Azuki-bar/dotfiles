@@ -224,13 +224,14 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id start_yaskkserv2
 exec --no-startup-id $HOME/.fehbg # 壁紙
 
-exec --no-startup-id xset s 450 #スクリーンセーバー 
-exec --no-startup-id xset dpms 300 600 86400 #左からモニタ電源オフ システムのサスペンド システムのパワーオフ
+# exec --no-startup-id xset s 450 #スクリーンセーバー 
+# exec --no-startup-id xset dpms 300 600 86400 #左からモニタ電源オフ システムのサスペンド システムのパワーオフ
 # exec --no-startup-id xss-lock -n `xset dpms force off` -- i3lock -n -i `ls $HOME/Pictures/wallpaper/png_image/* |shuf -n1 --` &
 # exec --no-startup-id xss-lock -- i3locker.sh # i3locker.sh がスクリーンセーバのように振る舞う サスペンドの時にも呼ばれる 
 exec --no-startup-id battery-monitor-loop.sh
+
 title_align center
-# exec --no-startup-id flameshot gui 
+exec --no-startup-id autorandr -l only
 
 # color config
 # https://colorhunt.co/palette/213437
@@ -242,3 +243,4 @@ title_align center
 # client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 # client.background       #ffffff
+

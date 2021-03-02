@@ -1,9 +1,10 @@
 #!/bin/env bash
-file=/etc/apt/apt.conf
+# file=/etc/apt/apt.conf
+file=$HOME/.proxy_config
 proxy_address="http://proxy.uec.ac.jp:8080"
 grep -e '^\#' $file >/dev/null
 if [ $? -ne 0 ];then
-    sudo sed -i -e 's/\(.*\)/\#\1/g' $file 
+    sed -i -e 's/\(.*\)/\#\1/g' $file 
     export -n HTTP_PROXY
     export -n HTTPS_PROXY
     export -n http_proxy
@@ -14,7 +15,7 @@ if [ $? -ne 0 ];then
     git config --global --unset url."https://".insteadOf git://
     echo proxy on to off
 else
-    sudo sed -i -e 's/^\#\(.*\)/\1/g' $file 
+    sed -i -e 's/^\#\(.*\)/\1/g' $file 
     export HTTP_PROXY=$proxy_address
     export HTTPS_PROXY=$proxy_address
     export http_proxy=$proxy_address

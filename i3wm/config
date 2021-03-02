@@ -50,7 +50,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec xfce4-terminal
 
 # kill focused window
 # bindsym $mod+Shift+q kill
@@ -60,7 +60,7 @@ bindsym $mod+t kill
 # bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec rofi -show run 
 # bindsym $mod+d exec rofi -modi combi -show combi
-bindsym $mod+d exec rofi -combi-rofi -show combi -mobi combi -show-icons
+bindsym $mod+d exec LANG=ja_JP.UTF8 rofi -combi-rofi -show combi -mobi combi -show-icons
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -231,7 +231,7 @@ exec --no-startup-id $HOME/.fehbg # 壁紙
 exec --no-startup-id battery-monitor-loop.sh
 
 title_align center
-exec --no-startup-id autorandr -l only
+# exec --no-startup-id autorandr -l only
 
 # color config
 # https://colorhunt.co/palette/213437

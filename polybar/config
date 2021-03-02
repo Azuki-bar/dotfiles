@@ -51,12 +51,12 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Source Han Code JP H:pixelsize=12;1
-font-1 = FontAwesome:pixelsize=12;0
+font-0 = Noto Sans CJK JP DemiLight :pixelsize=12;1
+font-1 = FontAwesome:pixelsize=10;0
 font-2 = Siji:style=Regular
 
 modules-left = i3 wlan eth wlan_bt 
-modules-center= date 
+modules-center= date
 modules-right = backlight-acpi pulseaudio memory battery cpu temperature fanspeed cpu_clock
 
 tray-position = right

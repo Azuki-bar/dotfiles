@@ -6,16 +6,21 @@ $ sudo groupadd uinput
 """
 import re
 from xkeysnail.transform import *
+# "^(?!.*(Inkscape)).*$"
 
-define_multipurpose_modmap({
-    # SandS
-    Key.SPACE: [Key.SPACE, Key.LEFT_SHIFT],
-    # Capslock is escape when pressed and released. Control when held down.
-    Key.CAPSLOCK: [Key.ESC, Key.LEFT_CTRL],
-    Key.LEFT_CTRL: [Key.ESC, Key.LEFT_CTRL]
-})
+# define_multipurpose_modmap({})
 
 define_modmap({
     Key.MUHENKAN: Key.LEFT_ALT,
-    Key.HENKAN: Key.RIGHT_ALT
+    Key.HENKAN: Key.RIGHT_ALT,
+    Key.CAPSLOCK: Key.LEFT_CTRL
 })
+
+define_conditional_multipurpose_modmap(
+    lambda wm_class: wm_class not in ("Inkscape"),
+    {
+        Key.CAPSLOCK: [Key.ESC, Key.LEFT_CTRL],
+        Key.LEFT_CTRL: [Key.ESC, Key.LEFT_CTRL],
+        # SandS
+        Key.SPACE: [Key.SPACE, Key.LEFT_SHIFT],
+    })

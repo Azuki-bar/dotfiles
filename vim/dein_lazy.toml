@@ -1,0 +1,93 @@
+# [[plugins]] # 置換のプレビュー
+# repo = 'markonm/traces.vim'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]] # コメントアウト
+repo = 'tpope/vim-commentary'
+
+[[plugins]] # ファイラー
+repo = 'preservim/nerdtree'
+
+[[plugins]]
+repo = 'rhysd/vim-clang-format'
+hook_add = '''
+    " clang formatの設定
+    autocmd FileType c ClangFormatAutoEnable
+'''
+
+[[plugins]] # gitの表示
+repo = "airblade/vim-gitgutter"
+
+[[plugins]]
+repo = "mbbill/undotree"
+hook_add = '''
+    nnoremap <F5> :UndotreeToggle<CR>
+'''
+
+[[plugins]] 
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'mindriot101/vim-yapf'
+hook_add = '''
+    autocmd FileType python nnoremap <A-l> :Yapf<CR>
+'''
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+    let g:indentLine_color_term = 239
+    let g:indentLine_char = '¦'
+'''
+
+[[plugins]]
+repo = 'prettier/vim-prettier'
+hook_add = '''
+    autocmd FileType javascript nnoremap <A-l> :PrettierAsync<CR>
+    autocmd FileType typescript nnoremap <A-l> :PrettierAsync<CR>
+    autocmd FileType less nnoremap <A-l> :PrettierAsync<CR>
+    autocmd FileType scss nnoremap <A-l> :PrettierAsync<CR>
+    autocmd FileType css nnoremap <A-l> :PrettierAsync<CR>
+    autocmd FileType json nnoremap <A-l> :PrettierAsync<CR>
+    autocmd FileType graphql nnoremap <A-l> :PrettierAsync<CR>
+    autocmd FileType markdown nnoremap <A-l> :PrettierAsync<CR>
+'''
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'lervag/vimtex'
+hook_add = '''
+    set shellslash
+    let g:vimtex_compiler_progname = 'nvr'  
+    let g:vimtex_view_general_viewer = 'evince'
+    let g:vimtex_compiler_latexmk = {
+    \     'background': 1,
+    \     'build_dir': '',
+    \     'executable': 'latexmk',
+    \     'options': [
+    \     '-lualatex',
+    \    ],
+    \}
+'''
+
+# [[plugins]]
+# repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+hook_add = '''
+    let g:vim_markdown_folding_disabled = 1
+'''

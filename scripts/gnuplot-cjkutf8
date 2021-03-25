@@ -1,0 +1,7 @@
+#!/bin/env bash
+
+sed -i '4i \\\\\\\\usepackage{siunitx} \
+                          \\\\usepackage{CJKutf8}' $1
+
+pdflatex $1
+

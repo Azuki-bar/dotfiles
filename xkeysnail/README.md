@@ -10,7 +10,7 @@ ExecStart=/usr/local/bin/xkeysnail -q /home/azukibar/.config/xkeysnail/config.py
 Type=simple
 Restart=always
 RestartSec=10s
-# たぶん :0 で問題ないと思いますが環境にもよります。`echo $DISPLAY`の値を設定してください
+
 Environment=DISPLAY=:0
 [Install]
 WantedBy=default.target
@@ -21,3 +21,5 @@ please write this script to `~/.config/systemd/user/xkeysnail.service`
 systemctl --user enable xkeysnail
 systemctl --user start xkeysnail
 ```
+
+参考にしたサイトからそのまま持ってきているのでそちらを見てください。

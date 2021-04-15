@@ -17,7 +17,7 @@ define_modmap({
 })
 
 define_conditional_multipurpose_modmap(
-    lambda wm_class: wm_class not in ("Inkscape","Gimp"),
+    lambda wm_class: wm_class not in ("Inkscape","Gimp","Minecraft 1.16.5"),
     {
         Key.CAPSLOCK: [Key.ESC, Key.LEFT_CTRL],
         Key.LEFT_CTRL: [Key.ESC, Key.LEFT_CTRL],

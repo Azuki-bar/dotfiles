@@ -4,8 +4,11 @@
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 
-[[plugins]] # コメントアウト
-repo = 'tpope/vim-commentary'
+# [[plugins]]
+# repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = "tpope/vim-commentary"
 
 [[plugins]] # ファイラー
 repo = 'preservim/nerdtree'
@@ -14,7 +17,7 @@ repo = 'preservim/nerdtree'
 repo = 'rhysd/vim-clang-format'
 hook_add = '''
     " clang formatの設定
-    autocmd FileType c ClangFormatAutoEnable
+    autocmd FileType c nnoremap <A-l> :ClangFormat<CR>
 '''
 
 [[plugins]] # gitの表示
@@ -26,8 +29,8 @@ hook_add = '''
     nnoremap <F5> :UndotreeToggle<CR>
 '''
 
-[[plugins]] 
-repo = 'tpope/vim-surround'
+# [[plugins]] 
+# repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'mindriot101/vim-yapf'
@@ -56,9 +59,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'cohama/lexima.vim'
-
-[[plugins]]
 repo = 'lervag/vimtex'
 hook_add = '''
     set shellslash
@@ -80,11 +80,11 @@ hook_add = '''
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
 
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
+# [[plugins]]
+# repo = 'Shougo/neosnippet.vim'
+# 
+# [[plugins]]
+# repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'

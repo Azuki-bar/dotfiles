@@ -1,7 +1,11 @@
 #!/bin/env bash
+grep siunitx $1
+if [ $? -ne 0 ];then
+    echo hoge
+    sed -ie '4i \\\\usepackage{siunitx} \
+\\usepackage{CJKutf8}' $1
+fi
 
-sed -i '4i \\\\\\\\usepackage{siunitx} \
-                          \\\\usepackage{CJKutf8}' $1
-
+# head $1 
 pdflatex $1
 

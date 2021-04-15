@@ -8,10 +8,6 @@ merged = 0
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 
-
-# [[plugins]]
-# repo = 'tomtom/tcomment_vim'
-
 # [[plugins]]
 # repo = 'vim-autopep8'
 

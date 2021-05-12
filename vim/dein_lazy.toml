@@ -101,3 +101,10 @@ repo = 'plasticboy/vim-markdown'
 hook_add = '''
     let g:vim_markdown_folding_disabled = 1
 '''
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+hook_add = '''
+    let g:lexima_enable_endwise_rules = 1
+'''
+

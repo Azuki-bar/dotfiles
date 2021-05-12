@@ -133,9 +133,6 @@ nnoremap s "_s
 autocmd BufNewFile,BufRead *.toml  setfiletype=toml
 " ここからプラグイン依存設定
 "
-" かっこの補完をするcoc-pairsの設定
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 " 補完のときの挙動をIDEに揃える
 set completeopt=menuone,noinsert
 

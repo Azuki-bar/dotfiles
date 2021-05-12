@@ -4,6 +4,10 @@
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 merged = 0
+hook_add = '''
+" かっこの補完をするcoc-pairsの設定
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+'''
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'

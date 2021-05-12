@@ -8,7 +8,7 @@ repo = 'thinca/vim-quickrun'
 # repo = 'tomtom/tcomment_vim'
 
 [[plugins]]
-repo = "tpope/vim-commentary"
+repo = 'tpope/vim-commentary'
 
 [[plugins]] # ファイラー
 repo = 'preservim/nerdtree'
@@ -26,11 +26,12 @@ on_ft = ['ruby']
 hook_add = '''
     autocmd FileType ruby nnoremap <A-l> :Rufo<CR>
 '''
+
 [[plugins]] # gitの表示
-repo = "airblade/vim-gitgutter"
+repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = "mbbill/undotree"
+repo = 'mbbill/undotree'
 hook_add = '''
     nnoremap <F5> :UndotreeToggle<CR>
 '''

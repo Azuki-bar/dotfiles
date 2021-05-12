@@ -20,6 +20,12 @@ hook_add = '''
     autocmd FileType c nnoremap <A-l> :ClangFormat<CR>
 '''
 
+[[plugins]]
+repo = 'ruby-formatter/rufo-vim'
+on_ft = ['ruby']
+hook_add = '''
+    autocmd FileType ruby nnoremap <A-l> :Rufo<CR>
+'''
 [[plugins]] # gitの表示
 repo = "airblade/vim-gitgutter"
 

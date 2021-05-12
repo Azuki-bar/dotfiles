@@ -7,20 +7,19 @@ endif
 set runtimepath+=$HOME/.config/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('$HOME/.config/dein/')
-  call dein#begin('$HOME/.config/dein/')
+if dein#load_state('~/.config/dein/')
+  call dein#begin('~/.config/dein/')
 
   " Let dein manage dein
   " Required:
-  call dein#add('$HOME/.config/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.config/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here like this:
   "call dein#add('Shougo/neosnippet.vim')
   "call dein#add('Shougo/neosnippet-snippets')
 
-  call dein#load_toml('$HOME/.config/nvim/dein.toml', {'lazy': 0})
-  call dein#load_toml('$HOME/.config/nvim/dein_lazy.toml', {'lazy': 1})
-
+  call dein#load_toml('~/.config/nvim/dein.toml', {'lazy': 0})
+  call dein#load_toml('~/.config/nvim/dein_lazy.toml', {'lazy': 1})
   " Required:
   call dein#end()
   call dein#save_state()

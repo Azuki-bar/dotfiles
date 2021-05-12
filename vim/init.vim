@@ -119,7 +119,6 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " カーソルラインハイライト
 set cursorline
 
-set incsearch
 set inccommand=split
 
 

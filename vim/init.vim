@@ -1,26 +1,36 @@
+" https://zaief.jp/vim/dein
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=$HOME/.config/dein/repos/github.com/Shougo/dein.vim
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" Required:
-if dein#load_state('~/.config/dein/')
-  call dein#begin('~/.config/dein/')
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone --depth=1 https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('~/.config/dein/repos/github.com/Shougo/dein.vim')
+" 設定開始
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-  " Add or remove your plugins here like this:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
+  " プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイル（後述）を用意しておく
+  let g:rc_dir    = expand('~/.config/nvim/')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
-  call dein#load_toml('~/.config/nvim/dein.toml', {'lazy': 0})
-  call dein#load_toml('~/.config/nvim/dein_lazy.toml', {'lazy': 1})
-  " Required:
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
   call dein#end()
   call dein#save_state()
 endif

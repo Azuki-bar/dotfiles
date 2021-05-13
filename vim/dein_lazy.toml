@@ -1,14 +1,8 @@
 # [[plugins]] # 置換のプレビュー
 # repo = 'markonm/traces.vim'
 
-[[plugins]]
-repo = 'thinca/vim-quickrun'
-
 # [[plugins]]
 # repo = 'tomtom/tcomment_vim'
-
-[[plugins]]
-repo = 'tpope/vim-commentary'
 
 [[plugins]] # ファイラー
 repo = 'preservim/nerdtree'
@@ -27,9 +21,6 @@ on_ft = ['ruby']
 hook_add = '''
     autocmd FileType ruby nnoremap <A-l> :Rufo<CR>
 '''
-
-[[plugins]] # gitの表示
-repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'mbbill/undotree'
@@ -96,20 +87,3 @@ repo = 'Shougo/neocomplete.vim'
 # [[plugins]]
 # repo = 'Shougo/neosnippet-snippets'
 
-[[plugins]]
-repo = 'plasticboy/vim-markdown'
-hook_add = '''
-    let g:vim_markdown_folding_disabled = 1
-'''
-
-[[plugins]]
-repo = 'cohama/lexima.vim'
-hook_add = '''
-    let g:lexima_enable_endwise_rules = 1
-'''
-
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'

@@ -89,3 +89,33 @@ let g:airline_theme = "onedark"
 # let ayucolor="mirage"
 # colorscheme ayu
 # '''
+#
+# from lazy
+#
+[[plugins]]
+repo = 'cohama/lexima.vim'
+hook_add = '''
+    let g:lexima_enable_endwise_rules = 1
+'''
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+hook_source = '''
+    let g:vim_markdown_folding_disabled = 1
+'''
+
+[[plugins]] # gitの表示
+repo = 'airblade/vim-gitgutter'
+

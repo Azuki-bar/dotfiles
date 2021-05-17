@@ -119,3 +119,5 @@ hook_source = '''
 [[plugins]] # gitの表示
 repo = 'airblade/vim-gitgutter'
 
+[[plugins]]
+repo = 'chrisbra/csv.vim'

@@ -95,8 +95,15 @@ set laststatus=2
 " オートインデント
 " set autoindent
 set smartindent
+
 " 文字コードをutf-8に"
 set encoding=utf8
+
+" 文字コード自動判別
+set fileencodings=utf-8,sjis,iso2022-jp,euc-jp
+
+" 改行コード自動認識
+set fileformats=unix,dos,mac
 
 " インサートモードのESCの機能をjjにも
 inoremap <silent> jj <ESC>
@@ -130,8 +137,6 @@ set cursorline
 
 set inccommand=split
 
-
-" 
 filetype plugin indent on
 
 "https://qiita.com/itmammoth/items/312246b4b7688875d023#10x%E3%82%84s%E3%81%A7%E3%81%AF%E3%83%A4%E3%83%B3%E3%82%AF%E3%81%97%E3%81%AA%E3%81%84

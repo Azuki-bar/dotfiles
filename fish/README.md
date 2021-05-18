@@ -17,3 +17,11 @@ if test -n "$DESKTOP_SESSION"
 end
 
 ```
+
+`fish_plugins`
+```fish
+jorgebucaran/fisher
+oh-my-fish/theme-bobthefish
+edc/bass
+
+```

@@ -81,3 +81,6 @@ fabric.properties
 
 # Local History for Visual Studio Code
 .history/
+
+_minted*/
+*.synctex.gz

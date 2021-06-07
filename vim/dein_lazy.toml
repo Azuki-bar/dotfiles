@@ -22,12 +22,6 @@ hook_source = '''
     autocmd FileType ruby nnoremap <A-l> :Rufo<CR>
 '''
 
-[[plugins]]
-repo = 'mbbill/undotree'
-hook_source = '''
-    nnoremap <F5> :UndotreeToggle<CR>
-'''
-
 # [[plugins]] 
 # repo = 'tpope/vim-surround'
 

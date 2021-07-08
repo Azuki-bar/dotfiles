@@ -58,9 +58,9 @@ bindsym $mod+t kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
-# bindsym $mod+d exec rofi -show run 
+bindsym $mod+d exec rofi -show combi 
 # bindsym $mod+d exec rofi -modi combi -show combi
-bindsym $mod+d exec LANG=ja_JP.UTF8 rofi -combi-rofi -show combi -mobi combi -show-icons
+# bindsym $mod+d exec LANG=ja_JP.UTF8 rofi -combi-rofi -show combi -mobi combi -show-icons
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.

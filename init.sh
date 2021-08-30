@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
+ROOTDIR=~/dotfiles/
 
-echo "This is install script"
+git clone https://github.com/Azuki-bar/dotfiles.git
+cd $ROOTDIR
+${ROOTDIR}/vim/link_conf.sh
+$ROOTDIR/add_conf.sh

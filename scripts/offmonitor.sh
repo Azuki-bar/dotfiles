@@ -1,3 +1,3 @@
 #!/bin/env bash
 
-xrandr --output eDP1 --off
+xrandr --output eDP-1 --off

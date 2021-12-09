@@ -1,4 +1,5 @@
 #!/bin/bash
 
-#yaskkserv2 --google-cache-filename=/home/azukibar/.yaskkserv2.cache /home/azukibar/.config/skk/dictionary.yaskkserv2 &
-yaskkserv2 --google-japanese-input=notfound --google-suggest --google-cache-filename=$HOME/.yaskkserv2.cache $HOME/.config/skk/dictionary.yaskkserv2
+ yaskkserv2 --google-cache-filename=/home/azukibar/.yaskkserv2.cache /home/azukibar/.config/skk/dictionary.yaskkserv2 &
+# yaskkserv2 --google-japanese-input=notfound --google-suggest --google-cache-filename=$HOME/.yaskkserv2.cache $HOME/.config/skk/dictionary.yaskkserv2
+

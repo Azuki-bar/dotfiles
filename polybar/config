@@ -53,11 +53,12 @@ module-margin-right = 2
 
 font-0 = Noto Sans CJK JP DemiLight :pixelsize=12;1
 font-1 = FontAwesome:pixelsize=10;0
+#font-2 = Emoji:style=Regular
 font-2 = Siji:style=Regular
 
 modules-left = i3 wlan eth
 modules-center= date
-modules-right = backlight-acpi pulseaudio memory battery cpu temperature fanspeed cpu_clock
+modules-right = backlight pulseaudio memory battery cpu temperature fanspeed cpu_clock
 
 tray-position = right
 tray-padding = 2
@@ -77,70 +78,70 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
-width = 100%
-height = 27
-;offset-x = 1%
-;offset-y = 1%
-radius = 6.0
-fixed-center = false
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 4
-border-color = #00000000
-
-padding-left = 0
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 2
-
-;font-0 = fixed:pixelsize=10;1
-;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-;font-2 = siji:pixelsize=10;1
-
-;font-1 = FontAwesome5Free:style=Solid:size=10;4
-;font-2 = FontAwesome5Free:style=Regular:size=10;4
-;font-3 = FontAwesome5Brands:style=Regular:size=10;4
-
-;font-0 = DejavuSansMono:size=10;4
-;font-1 = NotoSansCJKJP:size=10;4
-;font-2 = FontAwesome:size=10;4
-;font-2 = Font Awesome 5 Free Regular:size=10;4
-;font-3 = Font Awesome 5 Free Solid:size=10;4
-;;;font-4 = Font Awesome 5 Brands Regular:size=10;4
-font-0 = Source Han Code JP H:pixelsize=12;1
-font-1 = FontAwesome:pixelsize=12;0
-
-modules-left = bspwm i3
-;modules-center = mpd
-modules-center= 
-modules-right = filesystem backlight-acpi alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
-
-tray-position = right
-tray-padding = 2
-;tray-background = #0063ff
-
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
+; [bar/example]
+; ;monitor = ${env:MONITOR:HDMI-1}
+; width = 100%
+; height = 27
+; ;offset-x = 1%
+; ;offset-y = 1%
+; radius = 6.0
+; fixed-center = false
+; 
+; background = ${colors.background}
+; foreground = ${colors.foreground}
+; 
+; line-size = 3
+; line-color = #f00
+; 
+; border-size = 4
+; border-color = #00000000
+; 
+; padding-left = 0
+; padding-right = 2
+; 
+; module-margin-left = 1
+; module-margin-right = 2
+; 
+; ;font-0 = fixed:pixelsize=10;1
+; ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+; ;font-2 = siji:pixelsize=10;1
+; 
+; ;font-1 = FontAwesome5Free:style=Solid:size=10;4
+; ;font-2 = FontAwesome5Free:style=Regular:size=10;4
+; ;font-3 = FontAwesome5Brands:style=Regular:size=10;4
+; 
+; ;font-0 = DejavuSansMono:size=10;4
+; ;font-1 = NotoSansCJKJP:size=10;4
+; ;font-2 = FontAwesome:size=10;4
+; ;font-2 = Font Awesome 5 Free Regular:size=10;4
+; ;font-3 = Font Awesome 5 Free Solid:size=10;4
+; ;;;font-4 = Font Awesome 5 Brands Regular:size=10;4
+; font-0 = Source Han Code JP H:pixelsize=12;1
+; font-1 = FontAwesome:pixelsize=12;0
+; 
+; modules-left = bspwm i3
+; ;modules-center = mpd
+; modules-center= 
+; modules-right = filesystem backlight-acpi alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+; 
+; tray-position = right
+; tray-padding = 2
+; ;tray-background = #0063ff
+; 
+; ;wm-restack = bspwm
+; ;wm-restack = i3
+; 
+; ;override-redirect = true
+; 
+; ;scroll-up = bspwm-desknext
+; ;scroll-down = bspwm-deskprev
+; 
+; ;scroll-up = i3wm-wsnext
+; ;scroll-down = i3wm-wsprev
+; 
+; cursor-click = pointer
+; cursor-scroll = ns-resize
+; 
 [module/vpn]
 type = custom/script
 exec = $HOME/.config/polybar/modules/vpn-networkmanager-status.sh
@@ -268,7 +269,7 @@ label-song-ellipsis = true
 
 [module/xbacklight]
 type = internal/xbacklight
-output = eDP1
+output = eDP
 format = <label> <bar>
 label = BL %percentage%%
 
@@ -283,10 +284,12 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
-[module/backlight-acpi]
+[module/backlight]
 inherit = module/xbacklight
 type = internal/backlight
-card = intel_backlight
+card = amdgpu_bl0
+use-actual-brightness = true
+enable-scroll = true
 
 [module/cpu]
 type = internal/cpu
@@ -307,7 +310,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -349,7 +352,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp1s0
+interface = enp5s0f3u1u1
 interval = 3.0
 
 format-connected-underline = #55aa55

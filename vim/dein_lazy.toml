@@ -16,6 +16,17 @@ hook_source = '''
 '''
 
 [[plugins]]
+repo = 'google/vim-maktaba'
+
+[[plugins]]
+repo = 'google/vim-codefmt'
+on_ft = ['java']
+depends = ['vim-maktaba']
+hook_source = '''
+    autocmd FileType java nnoremap <A-l> :FormatCode<CR>
+'''
+
+[[plugins]]
 repo = 'ruby-formatter/rufo-vim'
 on_ft = ['ruby']
 hook_source = '''
@@ -51,6 +62,7 @@ hook_source = '''
     autocmd FileType json nnoremap <A-l> :PrettierAsync<CR>
     autocmd FileType graphql nnoremap <A-l> :PrettierAsync<CR>
     autocmd FileType markdown nnoremap <A-l> :PrettierAsync<CR>
+    let g:prettier#config#tab_width = 2
 '''
 
 [[plugins]]

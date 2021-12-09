@@ -7,6 +7,7 @@ merged = 0
 hook_add = '''
 " かっこの補完をするcoc-pairsの設定
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+let g:coc_snippet_next = '<tab>'
 '''
 
 [[plugins]]
@@ -14,14 +15,6 @@ repo = 'vim-jp/vimdoc-ja'
 
 # [[plugins]]
 # repo = 'vim-autopep8'
-
-# [[plugins]]
-# repo = 'altercation/vim-colors-solarized'
-# hook_add = '''
-# let g:solarized_termcolors=256
-# set background=dark
-# colorscheme solarized
-# '''
 
 [[plugins]]
 repo = 'joshdick/onedark.vim'
@@ -102,12 +95,6 @@ hook_add = '''
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
-repo = 'osyo-manga/vim-precious'
-
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
-
-[[plugins]]
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
@@ -115,6 +102,9 @@ repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown']
 hook_add = '''
     let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_math = 0
+    let g:vim_markdown_new_list_item_indent = 2
+    let g:vim_markdown_auto_iinsert_bullets= 0 
 '''
 
 [[plugins]] # gitの表示
@@ -125,7 +115,46 @@ repo = 'chrisbra/csv.vim'
 
 [[plugins]]
 repo = 'mbbill/undotree'
-hook_source = '''
+hook_add = '''
     nnoremap <F5> :UndotreeToggle<CR>
 '''
 
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+hook_post_source = '''
+    let g:context_filetype#filetypes = {
+        'markdown': [
+            {
+                'start': '.*$',
+                'end': '$',
+                'filetype': 'plaintex',
+            },
+            {
+                'start': '.*$$',
+                'end': '$$',
+                'filetype': 'plaintex',
+            },
+        ],
+    }
+'''
+
+[[plugins]]
+repo = '907th/vim-auto-save'
+# repo = 'vim-scripts/vim-auto-save'
+hook_post_source = '''
+'''
+hook_add = '''
+    if expand("%:p") =~ 'COMMIT_EDITMSG'
+    else
+        let g:auto_save = 1
+    endif
+    let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+'''
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app && yarn install"'

@@ -43,9 +43,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 # my config
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5 
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 
-
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym XF86Display exec --no-startup-id arandr
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -115,6 +115,8 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+default_orientation horizontal
+
 no_focus [class="zoom" window_role="pop-up"]
 
 popup_during_fullscreen smart
@@ -129,6 +131,12 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+# enable window icons for all windows
+for_window [all] title_window_icon on
+
+# enable window icons for all windows with extra horizontal padding
+for_window [all] title_window_icon padding 3px
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -226,17 +234,20 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh
 exec --no-startup-id dunst
 exec --no-startup-id autorandr -c
 exec --no-startup-id blueman-applet
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id systemctl restart --user polybar.service
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # exec --no-startup-id $HOME/.config/xkeysnail/start.sh
 
 exec --no-startup-id start_yaskkserv2
 exec --no-startup-id $HOME/.fehbg # 壁紙
+exec --no-startup-id barrier
 
 # exec --no-startup-id xset s 450 #スクリーンセーバー 
 # exec --no-startup-id xset dpms 300 600 86400 #左からモニタ電源オフ システムのサスペンド システムのパワーオフ
 # exec --no-startup-id xss-lock -n `xset dpms force off` -- i3lock -n -i `ls $HOME/Pictures/wallpaper/png_image/* |shuf -n1 --` &
 # exec --no-startup-id xss-lock -- i3locker.sh # i3locker.sh がスクリーンセーバのように振る舞う サスペンドの時にも呼ばれる 
-exec --no-startup-id battery-monitor-loop.sh
+# exec --no-startup-id battery-monitor-loop.sh
+exec --no-startup-id systemctl --user restart battery-monitor.service
 
 title_align center
 # exec --no-startup-id autorandr -l only

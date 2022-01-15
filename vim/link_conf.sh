@@ -7,4 +7,6 @@ for i in `ls |grep -v '.sh$'`; do
 done
 
 mkdir -p ~/.config/coc/extensions/
-ln -s `pwd`"/coc/package.json" "$HOME/.config/coc/extensions/"
+ln -s `pwd`"/coc/package.json" "$home/.config/coc/extensions/"
+cd "$home/.config/coc/extensions/"
+yarn install --frozen-lockfile

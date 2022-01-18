@@ -1,4 +1,4 @@
-# [[plugins]] # 置換のプレビュー
+#: [[plugins]] # 置換のプレビュー
 # repo = 'markonm/traces.vim'
 
 # [[plugins]]
@@ -79,6 +79,9 @@ hook_source = '''
     \     '-lualatex',
     \    ],
     \}
+    autocmd FileType latex nnoremap <A-l> :!latexindent -s -w "%:p"<CR>
+    autocmd FileType tex nnoremap <A-l> :!latexindent -s -w "%:p"<CR>
+    autocmd FileType plaintex nnoremap <A-l> :!latexindent -s -w "%:p"<CR>
 '''
 
 # [[plugins]]

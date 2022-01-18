@@ -7,3 +7,7 @@ ln -s $HOME/dotfiles/vim/coc/package.json $HOME/.config/coc/extensions/
 ```
 cocupdate
 ```
+
+```
+:call coc#util#install()
+``

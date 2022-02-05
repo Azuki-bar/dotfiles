@@ -3,7 +3,6 @@
 if &compatible
   set nocompatible               " Be iMproved
 endif
-
 " プラグインが実際にインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
 " dein.vim 本体
@@ -43,6 +42,8 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
+call dein#call_hook('source')
+
 
 "End dein Scripts-------------------------
 
@@ -184,3 +185,4 @@ nnoremap gj j
 nnoremap gk k
 
 set hidden
+

@@ -1,5 +1,65 @@
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+
+hook_add = '''
+call ddc#custom#patch_global('sources', [
+            \ 'around',
+            \ 'vim-lsp',
+            \ 'file'
+            \])
+call ddc#custom#patch_global('sourceOptions', {
+      \ '_': {
+      \   'minAutoCompleteLength': 1,
+      \   'around': {'mark': 'A'},
+      \   'matchers': ['matcher_head'],
+      \   'converters': ['converter_remove_overlap'],
+      \ },
+      \ 'vim-lsp': {
+      \   'matchers': ['matcher_head'],
+      \   'mark': 'lsp',
+      \ },
+      \ 'file': {
+      \   'mark': 'F',
+      \   'isVolatile': v:true,
+      \   'forceCompletionPattern': '\S/\S*',
+      \ }
+      \}
+      \)
+call ddc#custom#patch_global('sourceParams', {
+      \ 'around': {'maxSize': 500},
+      \ })
+
+call ddc#enable()
+'''
+
 # [[plugins]]
-# repo = 'Shougo/dein.vim'
+# repo = 'Shougo/pum.vim'
+# hook_add = '''
+# '''
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+
+[[plugins]]
+repo = 'Shougo/ddc-converter_remove_overlap'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'shun/ddc-vim-lsp'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-file'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'

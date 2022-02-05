@@ -2,15 +2,6 @@
 # repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'neoclide/coc.nvim'
-merged = 0
-hook_add = '''
-" かっこの補完をするcoc-pairsの設定
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-let g:coc_snippet_next = '<tab>'
-'''
-
-[[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 
 # [[plugins]]
@@ -111,9 +102,6 @@ hook_add = '''
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = 'chrisbra/csv.vim'
-
-[[plugins]]
 repo = 'mbbill/undotree'
 hook_add = '''
     nnoremap <F5> :UndotreeToggle<CR>
@@ -144,8 +132,6 @@ hook_post_source = '''
 [[plugins]]
 repo = '907th/vim-auto-save'
 # repo = 'vim-scripts/vim-auto-save'
-hook_post_source = '''
-'''
 hook_add = '''
     if expand("%:p") =~ 'COMMIT_EDITMSG'
     else

@@ -1,20 +1,20 @@
 {
   "dependencies": {
-    "coc-clangd": ">=0.18.2",
+    "coc-clangd": ">=0.19.0",
     "coc-docker": ">=0.5.0",
     "coc-go": ">=1.1.0",
-    "coc-html": ">=1.6.0",
+    "coc-html": ">=1.6.1",
     "coc-java": ">=1.5.5",
     "coc-json": ">=1.4.1",
     "coc-lists": ">=1.4.2",
     "coc-markdownlint": ">=1.12.3",
-    "coc-pyright": ">=1.1.210",
+    "coc-pyright": ">=1.1.215",
     "coc-rust-analyzer": ">=0.59.1",
     "coc-sh": ">=0.6.1",
     "coc-snippets": ">=2.4.7",
     "coc-texlab": ">=3.2.0",
     "coc-toml": ">=1.1.0",
-    "coc-tsserver": ">=1.9.6",
+    "coc-tsserver": ">=1.9.9",
     "coc-yaml": ">=1.6.1"
   }
 }

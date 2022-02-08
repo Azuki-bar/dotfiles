@@ -1,30 +1,95 @@
-# [[plugins]]
-# repo = 'Shougo/dein.vim'
+[[plugins]]
+repo = 'vim-denops/denops.vim'
 
 [[plugins]]
-repo = 'neoclide/coc.nvim'
-merged = 0
 hook_add = '''
-" かっこの補完をするcoc-pairsの設定
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-let g:coc_snippet_next = '<tab>'
+call ddc#custom#patch_global('sources', [
+            \ 'around',
+            \ 'vim-lsp',
+            \ 'deoppet',
+            \ 'file'
+            \])
+call ddc#custom#patch_global('sourceOptions', {
+      \ '_': {
+      \   'minAutoCompleteLength': 1,
+      \   'around': {'mark': 'A'},
+      \   'matchers': ['matcher_head'],
+      \   'converters': ['converter_remove_overlap'],
+      \ },
+      \ 'vim-lsp': {
+      \   'matchers': ['matcher_head'],
+      \   'mark': 'lsp',
+      \ },
+      \ 'file': {
+      \   'mark': 'F',
+      \   'isVolatile': v:true,
+      \   'forceCompletionPattern': '\S/\S*',
+      \ },
+      \ 'deoppet': {
+      \   'dup': v:true, 
+      \   'mark': 'dp'
+      \},
+      \}
+      \)
+call ddc#custom#patch_global('sourceParams', {
+      \ 'around': {'maxSize': 500},
+      \ })
+
+call ddc#enable()
 '''
+repo = 'Shougo/ddc.vim'
+
+# [[plugins]]
+# repo = 'Shougo/pum.vim'
+# hook_add = '''
+# '''
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+
+[[plugins]]
+repo = 'Shougo/ddc-converter_remove_overlap'
+
+[[plugins]]
+repo = 'shun/ddc-vim-lsp'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-file'
+
+[[plugins]]
+repo = 'Shougo/deoppet.nvim'
+
+[[plugins]]
+hook_add = '''
+" check with C-k and key result
+" vim help key-notaion
+nnoremap <A-l> :LspDocumentFormat<CR>
+noremap <S-F6> :LspRename<CR>
+noremap <F18> :LspRename<CR>
+let g:lsp_fold_enabled = 0
+'''
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-icons'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 
-# [[plugins]]
-# repo = 'vim-autopep8'
-
 [[plugins]]
-repo = 'joshdick/onedark.vim'
 hook_add = '''
 colorscheme onedark
 let g:onedark_termcolors=256
 '''
+repo = 'joshdick/onedark.vim'
 
 [[plugins]]
-repo = 'vim-airline/vim-airline'
 hook_add = '''
 " https://qiita.com/park-jh/items/557a9d5b470947aef2f5
 " Powerline系フォントを利用する
@@ -50,7 +115,7 @@ let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.maxlinenr = '㏑'
-let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.branch = '⎇' 
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
@@ -68,12 +133,13 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰ '
 let g:airline_symbols.maxlinenr = ''
 '''
+repo = 'vim-airline/vim-airline'
 
 [[plugins]]
-repo = 'vim-airline/vim-airline-themes'
 hook_add = '''
 let g:airline_theme = "onedark"
 '''
+repo = 'vim-airline/vim-airline-themes'
 
 # [[plugins]]
 # repo = 'ayu-theme/ayu-vim'
@@ -86,10 +152,10 @@ let g:airline_theme = "onedark"
 # from lazy
 #
 [[plugins]]
-repo = 'cohama/lexima.vim'
 hook_add = '''
     let g:lexima_enable_endwise_rules = 1
 '''
+repo = 'cohama/lexima.vim'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
@@ -97,33 +163,29 @@ repo = 'tpope/vim-commentary'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 
-[[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
-hook_add = '''
-    let g:vim_markdown_folding_disabled = 1
-    let g:vim_markdown_math = 0
-    let g:vim_markdown_new_list_item_indent = 2
-    let g:vim_markdown_auto_iinsert_bullets= 0 
-'''
+# [[plugins]]
+# hook_add = '''
+#     let g:vim_markdown_folding_disabled = 1
+#     let g:vim_markdown_math = 0
+#     let g:vim_markdown_new_list_item_indent = 2
+#     let g:vim_markdown_auto_iinsert_bullets= 0 
+# '''
+# on_ft = ['markdown']
+# repo = 'plasticboy/vim-markdown'
 
 [[plugins]] # gitの表示
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = 'chrisbra/csv.vim'
-
-[[plugins]]
-repo = 'mbbill/undotree'
 hook_add = '''
     nnoremap <F5> :UndotreeToggle<CR>
 '''
+repo = 'mbbill/undotree'
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
 
 [[plugins]]
-repo = 'Shougo/context_filetype.vim'
 hook_post_source = '''
     let g:context_filetype#filetypes = {
         'markdown': [
@@ -140,12 +202,11 @@ hook_post_source = '''
         ],
     }
 '''
+repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = '907th/vim-auto-save'
 # repo = 'vim-scripts/vim-auto-save'
-hook_post_source = '''
-'''
 hook_add = '''
     if expand("%:p") =~ 'COMMIT_EDITMSG'
     else
@@ -155,6 +216,33 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'iamcco/markdown-preview.nvim'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
 build = 'sh -c "cd app && yarn install"'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+repo = 'iamcco/markdown-preview.nvim'
+
+
+[[plugins]]
+hook_post_update = '''
+    TSUpdate all    
+    lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained",
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    -- disable = {},
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+'''
+repo = 'nvim-treesitter/nvim-treesitter'

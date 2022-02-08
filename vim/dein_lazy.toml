@@ -7,63 +7,8 @@
 [[plugins]] # ファイラー
 repo = 'preservim/nerdtree'
 
-[[plugins]]
-repo = 'rhysd/vim-clang-format'
-on_ft = ['c']
-hook_source = '''
-    " clang formatの設定
-    autocmd FileType c nnoremap <A-l> :ClangFormat<CR>
-'''
-
-[[plugins]]
-repo = 'google/vim-maktaba'
-
-[[plugins]]
-repo = 'google/vim-codefmt'
-on_ft = ['java']
-depends = ['vim-maktaba']
-hook_source = '''
-    autocmd FileType java nnoremap <A-l> :FormatCode<CR>
-'''
-
-[[plugins]]
-repo = 'ruby-formatter/rufo-vim'
-on_ft = ['ruby']
-hook_source = '''
-    autocmd FileType ruby nnoremap <A-l> :Rufo<CR>
-'''
-
 # [[plugins]] 
 # repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'mindriot101/vim-yapf'
-on_ft = ['python']
-hook_source = '''
-    autocmd FileType python nnoremap <A-l> :Yapf<CR>
-'''
-
-[[plugins]]
-repo = 'Yggdroot/indentLine'
-hook_source = '''
-    let g:indentLine_color_term = 239
-    let g:indentLine_char = '¦'
-'''
-
-[[plugins]]
-repo = 'prettier/vim-prettier'
-on_ft = ['javascript', 'typescript', 'less', 'scss', 'css', 'json', 'graphql', 'markdown']
-hook_source = '''
-    autocmd FileType javascript nnoremap <A-l> :PrettierAsync<CR>
-    autocmd FileType typescript nnoremap <A-l> :PrettierAsync<CR>
-    autocmd FileType less nnoremap <A-l> :PrettierAsync<CR>
-    autocmd FileType scss nnoremap <A-l> :PrettierAsync<CR>
-    autocmd FileType css nnoremap <A-l> :PrettierAsync<CR>
-    autocmd FileType json nnoremap <A-l> :PrettierAsync<CR>
-    autocmd FileType graphql nnoremap <A-l> :PrettierAsync<CR>
-    autocmd FileType markdown nnoremap <A-l> :PrettierAsync<CR>
-    let g:prettier#config#tab_width = 2
-'''
 
 [[plugins]]
 repo = 'lervag/vimtex'
@@ -79,20 +24,5 @@ hook_source = '''
     \     '-lualatex',
     \    ],
     \}
-    autocmd FileType latex nnoremap <A-l> :!latexindent -s -w "%:p"<CR>
-    autocmd FileType tex nnoremap <A-l> :!latexindent -s -w "%:p"<CR>
-    autocmd FileType plaintex nnoremap <A-l> :!latexindent -s -w "%:p"<CR>
 '''
-
-# [[plugins]]
-# repo = 'honza/vim-snippets'
-
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-
-# [[plugins]]
-# repo = 'Shougo/neosnippet.vim'
-# 
-# [[plugins]]
-# repo = 'Shougo/neosnippet-snippets'
 

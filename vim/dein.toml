@@ -2,8 +2,6 @@
 repo = 'vim-denops/denops.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc.vim'
-
 hook_add = '''
 call ddc#custom#patch_global('sources', [
             \ 'around',
@@ -39,6 +37,7 @@ call ddc#custom#patch_global('sourceParams', {
 
 call ddc#enable()
 '''
+repo = 'Shougo/ddc.vim'
 
 # [[plugins]]
 # repo = 'Shougo/pum.vim'
@@ -65,7 +64,12 @@ repo = 'Shougo/deoppet.nvim'
 
 [[plugins]]
 hook_add = '''
+" check with C-k and key result
+" vim help key-notaion
 nnoremap <A-l> :LspDocumentFormat<CR>
+noremap <S-F6> :LspRename<CR>
+noremap <F18> :LspRename<CR>
+let g:lsp_fold_enabled = 0
 '''
 repo = 'prabirshrestha/vim-lsp'
 
@@ -77,9 +81,6 @@ repo = 'mattn/vim-lsp-icons'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
-
-# [[plugins]]
-# repo = 'vim-autopep8'
 
 [[plugins]]
 hook_add = '''
@@ -162,15 +163,15 @@ repo = 'tpope/vim-commentary'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 
-[[plugins]]
-hook_add = '''
-    let g:vim_markdown_folding_disabled = 1
-    let g:vim_markdown_math = 0
-    let g:vim_markdown_new_list_item_indent = 2
-    let g:vim_markdown_auto_iinsert_bullets= 0 
-'''
-on_ft = ['markdown']
-repo = 'plasticboy/vim-markdown'
+# [[plugins]]
+# hook_add = '''
+#     let g:vim_markdown_folding_disabled = 1
+#     let g:vim_markdown_math = 0
+#     let g:vim_markdown_new_list_item_indent = 2
+#     let g:vim_markdown_auto_iinsert_bullets= 0 
+# '''
+# on_ft = ['markdown']
+# repo = 'plasticboy/vim-markdown'
 
 [[plugins]] # gitの表示
 repo = 'airblade/vim-gitgutter'

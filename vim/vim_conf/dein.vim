@@ -25,9 +25,9 @@ if dein#load_state(s:dein_dir)
   let g:rc_dir    = expand('~/.config/nvim/')
 
   " TOML を読み込み、キャッシュしておく
-  call dein#load_toml(g:rc_dir . 'dein.toml', {'lazy': 0})
-  call dein#load_toml(g:rc_dir . 'dein_lazy.toml', {'lazy': 1})
-  call dein#load_toml(g:rc_dir . '3_dein_appearance.toml', {'lazy': 2})
+  call dein#load_toml(g:rc_dir . '0_dein.toml', {'lazy': 0})
+  call dein#load_toml(g:rc_dir . '1_dein_lazy.toml', {'lazy': 1})
+  call dein#load_toml(g:rc_dir . '2_dein_appearance.toml', {'lazy': 2})
 
   call dein#end()
   call dein#save_state()

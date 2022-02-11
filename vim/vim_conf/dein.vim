@@ -23,12 +23,11 @@ if dein#load_state(s:dein_dir)
   " プラグインリストを収めた TOML ファイル
   " 予め TOML ファイル（後述）を用意しておく
   let g:rc_dir    = expand('~/.config/nvim/')
-  let s:toml      = g:rc_dir . 'dein.toml'
-  let s:lazy_toml = g:rc_dir . 'dein_lazy.toml'
 
   " TOML を読み込み、キャッシュしておく
-  call dein#load_toml(s:toml,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#load_toml(g:rc_dir . 'dein.toml', {'lazy': 0})
+  call dein#load_toml(g:rc_dir . 'dein_lazy.toml', {'lazy': 1})
+  call dein#load_toml(g:rc_dir . '3_dein_appearance.toml', {'lazy': 2})
 
   call dein#end()
   call dein#save_state()

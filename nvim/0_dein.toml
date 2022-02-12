@@ -3,44 +3,7 @@ repo = 'vim-denops/denops.vim'
 
 [[plugins]]
 hook_add = '''
-call ddc#custom#patch_global('sources', [
-            \ 'around',
-            \ 'vim-lsp',
-            \ 'deoppet',
-            \ 'file'
-            \])
-call ddc#custom#patch_global('sourceOptions', {
-      \ '_': {
-      \   'minAutoCompleteLength': 1,
-      \   'around': {'mark': 'A'},
-      \   'matchers': ['matcher_head'],
-      \   'converters': ['converter_remove_overlap'],
-      \ },
-      \ 'vim-lsp': {
-      \   'matchers': ['matcher_fuzzy'],
-      \   'mark': 'lsp',
-      \ },
-      \ 'file': {
-      \   'mark': 'F',
-      \   'isVolatile': v:true,
-      \   'forceCompletionPattern': '\S/\S*',
-      \ },
-      \ 'deoppet': {
-      \   'dup': v:true, 
-      \   'mark': 'dp'
-      \},
-      \}
-      \)
-call ddc#custom#patch_global('sourceParams', {
-      \ 'around': {'maxSize': 500},
-      \ })
-call ddc#custom#patch_global('filterParams',{
-      \  'matcher_fuzzy' :{
-      \ 'splitMode': 'word'
-      \}
-      \})
-call ddc#enable()
-
+source $HOME/.config/nvim/plug_confs/ddc.vim
 '''
 repo = 'Shougo/ddc.vim'
 
@@ -130,20 +93,7 @@ depends = ['Shougo/context_filetype_vim']
 repo = 'osyo-manga/vim-precious'
 [[plugins]]
 hook_post_source = '''
-    let g:context_filetype#filetypes = {
-                \     'markdown': [
-                \         {
-                \             'start': '.*$',
-                \             'end': '$',
-                \             'filetype': 'plaintex',
-                \         },
-                \         {
-                \             'start': '.*$$',
-                \             'end': '$$',
-                \             'filetype': 'plaintex',
-                \         },
-                \     ],
-                \ }
+source $HOME/.config/nvim/plug_confs/context_filetype.vim
 '''
 repo = 'Shougo/context_filetype.vim'
 
@@ -166,27 +116,7 @@ repo = 'iamcco/markdown-preview.nvim'
 
 [[plugins]]
 hook_post_update = '''
-    TSUpdate all    
-    lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = "maintained",
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- list of language that will be disabled
-    -- disable = {},
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
+source $HOME/.config/nvim/plug_confs/nvim-treesitter.vim
 '''
 repo = 'nvim-treesitter/nvim-treesitter'
 
@@ -223,3 +153,6 @@ repo = 'vim-airline/vim-airline-themes'
 # let ayucolor="mirage"
 # colorscheme ayu
 # '''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'

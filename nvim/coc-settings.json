@@ -1,13 +1,13 @@
 {
-  "texlab.build.args": [
-    "-lualatex",
-    "-interaction=nonstopmode",
-    "-synctex=1",
-    "%f"
-  ],
-  "texlab.build.onSave": true,
-  "texlab.chktex.onEdit": true,
-  "texlab.chktex.onOpenAndSave": true,
-  "coc.preferences.extensionUpdateCheck": "daily",
-  "rust-analyzer.server.path": "/usr/bin/rust-analyzer"
+    "texlab.build.args": [
+        "-lualatex",
+        "-interaction=nonstopmode",
+        "-synctex=1",
+        "%f"
+    ],
+    "texlab.build.onSave": true,
+    "texlab.chktex.onEdit": true,
+    "texlab.chktex.onOpenAndSave": true,
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "rust-analyzer.server.path": "/usr/bin/rust-analyzer"
 }

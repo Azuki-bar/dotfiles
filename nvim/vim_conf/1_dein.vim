@@ -16,18 +16,19 @@ if &runtimepath !~# '/dein.vim'
   execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
+let g:dein#auto_recache = 1
+
 " 設定開始
 if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
 
   " プラグインリストを収めた TOML ファイル
   " 予め TOML ファイル（後述）を用意しておく
-  let g:rc_dir    = expand('~/.config/nvim/')
-
+  let s:rc_dir    = expand('~/.config/nvim/')
+  
+  call dein#begin(s:dein_dir)
   " TOML を読み込み、キャッシュしておく
-  call dein#load_toml(g:rc_dir . '0_dein.toml', {'lazy': 0})
-  call dein#load_toml(g:rc_dir . '1_dein_lazy.toml', {'lazy': 1})
-  call dein#load_toml(g:rc_dir . '2_dein_appearance.toml', {'lazy': 2})
+  call dein#load_toml(s:rc_dir . '0_dein.toml', {'lazy': 0})
+  call dein#load_toml(s:rc_dir . '1_dein_lazy.toml', {'lazy': 1})
 
   call dein#end()
   call dein#save_state()
@@ -41,8 +42,6 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
-call dein#call_hook('source')
-
 
 "End dein Scripts-------------------------
 

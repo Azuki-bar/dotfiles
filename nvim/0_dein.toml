@@ -95,7 +95,7 @@ repo = 'vim-jp/vimdoc-ja'
 #
 [[plugins]]
 hook_add = '''
-    let g:lexima_enable_endwise_rules = 1
+let g:lexima_enable_endwise_rules = 1
 '''
 repo = 'cohama/lexima.vim'
 
@@ -107,11 +107,11 @@ repo = 'thinca/vim-quickrun'
 
 [[plugins]]
 hook_add = '''
-    let g:vim_markdown_folding_disabled = 1
-    let g:vim_markdown_math = 0
-    let g:vim_markdown_new_list_item_indent = 2
-    let g:vim_markdown_auto_iinsert_bullets= 0 
-    let g:vim_markdown_conceal = 0
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_math = 0
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_auto_iinsert_bullets= 0 
+let g:vim_markdown_conceal = 0
 '''
 on_ft = ['markdown']
 repo = 'preservim/vim-markdown'
@@ -126,24 +126,24 @@ hook_add = '''
 repo = 'mbbill/undotree'
 
 [[plugins]]
+depends = ['Shougo/context_filetype_vim']
 repo = 'osyo-manga/vim-precious'
-
 [[plugins]]
 hook_post_source = '''
     let g:context_filetype#filetypes = {
-        'markdown': [
-            {
-                'start': '.*$',
-                'end': '$',
-                'filetype': 'plaintex',
-            },
-            {
-                'start': '.*$$',
-                'end': '$$',
-                'filetype': 'plaintex',
-            },
-        ],
-    }
+                \     'markdown': [
+                \         {
+                \             'start': '.*$',
+                \             'end': '$',
+                \             'filetype': 'plaintex',
+                \         },
+                \         {
+                \             'start': '.*$$',
+                \             'end': '$$',
+                \             'filetype': 'plaintex',
+                \         },
+                \     ],
+                \ }
 '''
 repo = 'Shougo/context_filetype.vim'
 
@@ -190,3 +190,36 @@ EOF
 '''
 repo = 'nvim-treesitter/nvim-treesitter'
 
+
+[[plugins]]
+hook_add = '''
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
+"colorscheme onedark
+let g:onedark_termcolors=256
+autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark 
+'''
+repo = 'joshdick/onedark.vim'
+
+[[plugins]]
+hook_add = '''
+source $HOME/.config/nvim/plug_confs/vim-airline.vim
+'''
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+depends = ['vim-airline/vim-airline']
+hook_add = '''
+let g:airline_theme = "onedark"
+'''
+repo = 'vim-airline/vim-airline-themes'
+
+# [[plugins]]
+# repo = 'ayu-theme/ayu-vim'
+# hook_add = '''
+# set termguicolors 
+# let ayucolor="mirage"
+# colorscheme ayu
+# '''

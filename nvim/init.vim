@@ -1,6 +1,4 @@
 " https://zenn.dev/comamoca/articles/58aa4c48f56e95 
-source ~/.config/nvim/vim_conf/dein.vim
-
 let splt = split(glob("~/.config/nvim/vim_conf/" . "*.vim"))
   
 for file in splt
@@ -30,9 +28,6 @@ set showmatch
 
 " タイトル表示
 set title
-
-" シンタックスハイライト
-syntax on
 
 " ステータスバー常に表示
 set laststatus=2

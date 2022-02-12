@@ -1,12 +1,3 @@
-[[plugins]]
-hook_add = '''
-colorscheme onedark
-let g:onedark_termcolors=256
-'''
-repo = 'joshdick/onedark.vim'
-
-[[plugins]]
-hook_add = '''
 " https://qiita.com/park-jh/items/557a9d5b470947aef2f5
 " Powerline系フォントを利用する
 set laststatus=2
@@ -48,19 +39,3 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰ '
 let g:airline_symbols.maxlinenr = ''
-'''
-repo = 'vim-airline/vim-airline'
-
-[[plugins]]
-hook_add = '''
-let g:airline_theme = "onedark"
-'''
-repo = 'vim-airline/vim-airline-themes'
-
-# [[plugins]]
-# repo = 'ayu-theme/ayu-vim'
-# hook_add = '''
-# set termguicolors 
-# let ayucolor="mirage"
-# colorscheme ayu
-# '''

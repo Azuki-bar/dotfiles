@@ -6,3 +6,4 @@ cd $ROOTDIR
 ${ROOTDIR}/nvim/link_conf.sh
 $ROOTDIR/git/add_conf.sh
 $ROOTDIR/fish/link.sh
+ln -s $ROOTDIR/alacritty/ $HOME/.config/

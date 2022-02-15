@@ -4,6 +4,7 @@ alias view='nvim -R'
 alias vvim='/usr/bin/vim'
 alias vi='nvim'
 alias vim='nvim'
+alias ls='exa'
 alias chmod='chmod --preserve-root'
 #status --is-interactive; and source (rbenv init -|psub)
 

@@ -1,0 +1,74 @@
+\documentclass[a4j,11pt,titlepage]{ltjsarticle}
+\title{}
+\date{\today}
+\author{}
+\usepackage{amsmath,amssymb} %言わずもがな
+\usepackage{type1cm} %フォントサイズ自由変更
+\usepackage{graphicx} % 画像
+\usepackage[separate-uncertainty]{siunitx}
+\usepackage[nobreak]{cite}
+
+\usepackage[cache=false]{minted}
+% \begin{minted}{LANG}
+% 
+% \end{minted}
+% \setminted{frame=single,fontsize=\footnotesize,fontseries=courier,breaklines,linenos}
+% \inputminted{LANG}{FILE}
+
+\setminted{frame=single,fontsize=\small,fontseries=courier,breaklines}
+
+\usepackage[version=4]{mhchem}
+\usepackage{url}
+
+% \usepackage[top=35mm,bottom=30mm,left=30mm,right=30mm]{geometry}  % Word標準設定
+% \usepackage[top=25.4mm,bottom=25.4mm,left=19.05mm,right=19.05mm]{geometry}  % Wordやや狭い設定
+% \usepackage[top=12.7mm,bottom=12.7mm,left=12.7mm,right=12.7mm]{geometry}  % Word狭い設定
+
+\usepackage{physics}
+
+\usepackage{enumerate} % \begin{enumerate}[{[1]}]で[1],[2]… \begin{enumerate}[(1)]でカッコつき数字
+
+
+\everymath{\displaystyle}
+
+\graphicspath{{./figure/}}
+
+\begin{document}
+\maketitle
+% 参考文献は\citeで導入 bibtexを導入しているので情報はbibへ入力を
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{目的}
+\label{section:目的}
+
+
+%%%%%%%%%%目的終わり%%%%%%%%%%
+
+\section{原理}
+\label{section:原理}
+
+
+%%%%%%%%%%原理終わり%%%%%%%%%%
+
+\section{方法}
+\label{section:方法}
+
+
+%%%%%%%%%%方法終わり%%%%%%%%%%
+
+\section{実験結果}
+\label{section:実験結果}
+
+
+%%%%%%%%%%実験結果終わり%%%%%%%%%%
+
+\section{考察}
+\label{section:考察}
+
+
+%%%%%%%%%%考察終わり%%%%%%%%%%
+
+\section{感想}
+
+\bibliography{sankou}
+\bibliographystyle{junsrt}
+\end{document}

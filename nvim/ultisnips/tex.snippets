@@ -1,0 +1,211 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet ma "invoke latex math mode" w
+\( ${1} \) 
+endsnippet
+
+snippet dis "import latex display math mode" w
+\[ 
+    ${1}
+\]
+endsnippet
+snippet bal "begin align" w
+\begin{align}
+    ${1}
+\end{align}
+endsnippet
+snippet report "report" b
+\documentclass[a4j,11pt,titlepage]{ltjsarticle}
+\title{${1}}
+\date{\today}
+\author{${2}}
+\usepackage{amsmath,amssymb} %言わずもがな
+\usepackage{type1cm} %フォントサイズ自由変更
+\usepackage{graphicx} % 画像
+\usepackage[separate-uncertainty]{siunitx}
+\usepackage[nobreak]{cite}
+
+\usepackage[cache=false]{minted}
+% \begin{minted}{LANG}
+% 
+% \end{minted}
+% \setminted{frame=single,fontsize=\footnotesize,fontseries=courier,breaklines,linenos}
+% \inputminted{LANG}{FILE}
+
+\setminted{frame=single,fontsize=\small,fontseries=courier,breaklines}
+
+\usepackage[version=4]{mhchem}
+\usepackage{url}
+
+% \usepackage[top=35mm,bottom=30mm,left=30mm,right=30mm]{geometry}  % Word標準設定
+% \usepackage[top=25.4mm,bottom=25.4mm,left=19.05mm,right=19.05mm]{geometry}  % Wordやや狭い設定
+% \usepackage[top=12.7mm,bottom=12.7mm,left=12.7mm,right=12.7mm]{geometry}  % Word狭い設定
+
+\usepackage{physics}
+
+\usepackage{enumerate} % \begin{enumerate}[{[1]}]で[1],[2]… \begin{enumerate}[(1)]でカッコつき数字
+
+
+\everymath{\displaystyle}
+
+\graphicspath{{./figure/}}
+
+\begin{document}
+\maketitle
+% 参考文献は\citeで導入 bibtexを導入しているので情報はbibへ入力を
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{目的}
+\label{section:目的}
+${0}
+
+%%%%%%%%%%目的終わり%%%%%%%%%%
+
+\section{原理}
+\label{section:原理}
+
+
+%%%%%%%%%%原理終わり%%%%%%%%%%
+
+\section{方法}
+\label{section:方法}
+
+
+%%%%%%%%%%方法終わり%%%%%%%%%%
+
+\section{実験結果}
+\label{section:実験結果}
+
+
+%%%%%%%%%%実験結果終わり%%%%%%%%%%
+
+\section{考察}
+\label{section:考察}
+
+
+%%%%%%%%%%考察終わり%%%%%%%%%%
+
+\section{感想}
+
+\bibliography{sankou}
+\bibliographystyle{junsrt}
+\end{document}
+endsnippet
+
+snippet zakki "zakki" b
+\documentclass[a4j,11pt]{ltjsarticle}
+\title{${1}}
+\date{\today}
+\author{${2}}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[nobreak]{cite}
+
+\usepackage{physics}
+
+\usepackage[cache=false]{minted}
+% \begin{minted}{LANG}
+% 
+% \end{minted}
+% \setminted{frame=single,fontsize=\footnotesize,fontseries=courier,breaklines,linenos}
+% \inputminted{LANG}{FILE}
+\setminted{frame=single,fontsize=\small,fontseries=courier,breaklines}
+
+\usepackage[version=4]{mhchem}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+% \usepackage[top=35mm,bottom=30mm,left=30mm,right=30mm]{geometry}  % Word標準設定
+% \usepackage[top=25.4mm,bottom=25.4mm,left=19.05mm,right=19.05mm]{geometry}  % Wordやや狭い設定
+% \usepackage[top=12.7mm,bottom=12.7mm,left=12.7mm,right=12.7mm]{geometry}  % Word狭い設定
+
+\usepackage{enumerate} % \begin{enumerate}[{[1]}]で[1],[2]… \begin{enumerate}[(1)]でカッコつき数字
+
+% \renewcommand{\labelenumi}{\fbox{\arabic{enumi}}}
+% \renewcommand{\labelenumi}{[\arabic{enumi}]}
+% \renewcommand{\labelenumii}{(\arabic{enumii})}
+
+% \renewcommand{\thesection}{問\arabic{section}.}
+% \renewcommand{\thesection}{\fbox{\arabic{section}}}
+% \renewcommand{\thesubsection}{(\arabic{subsection})}
+% \renewcommand{\thesubsubsection}{(\alph{subsubsection})}
+
+\everymath{\displaystyle}
+
+\graphicspath{{./figure/}}
+
+\begin{document}
+\maketitle
+${0}
+
+%\bibliographystyle{junsrt}
+%\bibliography{../sankou}
+
+\end{document}
+endsnippet
+snippet fig "LaTeXに図を追加" b
+\begin{figure}
+\centering
+\includegraphics[width=0.8\linewidth]{$0}
+\caption{$1}
+\label{figure:$2}
+"\end{figure}"
+endsnippet
+snippet table "Insert table" b
+\begin{table}
+ \centering
+	\caption{${0}}
+	\label{table:${2}}
+	\begin{tabular}{}
+	\toprule
+	\midrule
+	${0}
+	\bottomrule
+	\end{tabular}
+\end{table}
+endsnippet
+
+snippet mini "insert minipage" b
+\begin{figure}[tb]
+\centering
+\begin{minipage}{0.48\hsize}
+\centering
+\includegraphics[width=\linewidth]{${1}}
+\caption{${2}}
+\label{figure:${3}}
+\end{minipage}
+\begin{minipage}{0.48\hsize}
+\centering
+\includegraphics[width=\linewidth]{${4}}
+\caption{${5}}
+\label{figure:${6}}
+\end{minipage}
+\end{figure}
+endsnippet
+snippet @/ "frac" w
+\frac{${1}}{${2}} ${0}
+endsnippet

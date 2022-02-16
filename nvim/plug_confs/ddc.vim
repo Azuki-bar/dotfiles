@@ -1,9 +1,11 @@
 call ddc#custom#patch_global('sources', [
-            \ 'around',
-            \ 'vim-lsp',
-            \ 'deoppet',
-            \ 'file'
-            \])
+      \ 'ultisnips',
+      \ 'vim-lsp',
+      \ 'treesitter',
+      \ 'around',
+      \ 'file',
+      \ 'emoji',
+      \])
 call ddc#custom#patch_global('sourceOptions', {
       \ '_': {
       \   'minAutoCompleteLength': 1,
@@ -20,10 +22,12 @@ call ddc#custom#patch_global('sourceOptions', {
       \   'isVolatile': v:true,
       \   'forceCompletionPattern': '\S/\S*',
       \ },
-      \ 'deoppet': {
-      \   'dup': v:true, 
-      \   'mark': 'dp'
-      \},
+      \ 'treesitter':{'mark':'Tree'},
+      \ 'ultisnips':{'mark':'Snips'},
+      \ 'emoji': {
+      \   'mark':'emoji',
+      \   'matchers':['emoji'],
+      \ },
       \}
       \)
 call ddc#custom#patch_global('sourceParams', {
@@ -34,5 +38,8 @@ call ddc#custom#patch_global('filterParams',{
       \    'splitMode': 'word'
       \  }
       \})
+call ddc#custom#patch_global('keywordPattern', '[a-zA-Z_:]\w*')
+
+call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#enable()
 

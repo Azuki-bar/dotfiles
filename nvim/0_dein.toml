@@ -7,10 +7,11 @@ source $HOME/.config/nvim/plug_confs/ddc.vim
 '''
 repo = 'Shougo/ddc.vim'
 
-# [[plugins]]
-# repo = 'Shougo/pum.vim'
-# hook_add = '''
-# '''
+[[plugins]]
+hook_add = '''
+
+'''
+repo = 'Shougo/pum.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-around'
@@ -31,7 +32,13 @@ repo = 'shun/ddc-vim-lsp'
 repo = 'LumaKernel/ddc-file'
 
 [[plugins]]
-repo = 'Shougo/deoppet.nvim'
+repo = 'delphinus/ddc-treesitter'
+
+[[plugins]]
+repo = 'matsui54/ddc-ultisnips'
+
+[[plugins]]
+repo = 'gamoutatsumi/ddc-emoji'
 
 [[plugins]]
 hook_add = '''
@@ -41,6 +48,7 @@ nnoremap <A-l> :LspDocumentFormat<CR>
 noremap <S-F6> :LspRename<CR>
 noremap <F18> :LspRename<CR>
 let g:lsp_fold_enabled = 0
+let g:lsp_document_highlight_enabled = 0
 '''
 repo = 'prabirshrestha/vim-lsp'
 
@@ -53,12 +61,50 @@ repo = 'mattn/vim-lsp-icons'
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 
-#
-# from lazy
-#
 [[plugins]]
 hook_add = '''
 let g:lexima_enable_endwise_rules = 1
+let g:lexima_enable_newline_rules = 1
+
+call lexima#add_rule({
+            \ 'char': '$', 
+            \ 'input_after': '$',
+            \ 'filetype': 'latex'
+            \ })
+call lexima#add_rule({
+            \ 'char': '$',
+            \ 'at': '\%#\$',
+            \ 'leave': 1,
+            \ 'filetype': 'latex'
+            \ })
+call lexima#add_rule({
+            \ 'char': '<BS>',
+            \ 'at': '\$\%#\$',
+            \ 'delete': 1,
+            \ 'filetype': 'latex'
+            \ })
+call lexima#add_rule({
+            \ 'char': '「', 
+            \ 'input_after': '」',
+            \ 'filetype': 'markdown'
+            \ })
+call lexima#add_rule({
+            \ 'char': '『', 
+            \ 'input_after': '』',
+            \ 'filetype': 'markdown'
+            \ })
+call lexima#add_rule({
+            \ 'char': '<BS>',
+            \ 'at': '「\%#」',
+            \ 'delete': 1,
+            \ 'filetype': 'markdown'
+            \ })
+call lexima#add_rule({
+            \ 'char': '<BS>',
+            \ 'at': '『\%#』',
+            \ 'delete': 1,
+            \ 'filetype': 'markdown'
+            \ })
 '''
 repo = 'cohama/lexima.vim'
 
@@ -66,6 +112,10 @@ repo = 'cohama/lexima.vim'
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
+hook_add = '''
+nnoremap <F22> :QuickRun<CR>
+nnoremap <S-F10> :QuickRun<CR>
+'''
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
@@ -84,12 +134,12 @@ repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 hook_add = '''
-    nnoremap <F5> :UndotreeToggle<CR>
+nnoremap <F5> :UndotreeToggle<CR>
 '''
 repo = 'mbbill/undotree'
 
 [[plugins]]
-depends = ['Shougo/context_filetype_vim']
+depends = ['context_filetype_vim']
 repo = 'osyo-manga/vim-precious'
 [[plugins]]
 hook_post_source = '''
@@ -107,19 +157,6 @@ hook_add = '''
     endif
     let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 '''
-
-[[plugins]]
-build = 'sh -c "cd app && yarn install"'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-repo = 'iamcco/markdown-preview.nvim'
-
-
-[[plugins]]
-hook_post_update = '''
-source $HOME/.config/nvim/plug_confs/nvim-treesitter.vim
-'''
-repo = 'nvim-treesitter/nvim-treesitter'
-
 
 [[plugins]]
 hook_add = '''
@@ -140,7 +177,7 @@ source $HOME/.config/nvim/plug_confs/vim-airline.vim
 repo = 'vim-airline/vim-airline'
 
 [[plugins]]
-depends = ['vim-airline/vim-airline']
+depends = ['vim-airline']
 hook_add = '''
 let g:airline_theme = "onedark"
 '''
@@ -156,3 +193,36 @@ repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+hook_add = '''
+let g:UltiSnipsSnippetDirectories = [$HOME . "/.config/nvim/ultisnips"]
+'''
+repo = 'SirVer/ultisnips'
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+hook_post_source = '''
+nnoremap <M-1> :NERDTreeToggle<CR>
+'''
+repo = 'preservim/nerdtree'
+
+[[plugins]]
+build = './install --all'
+merged = 0
+repo = 'junegunn/fzf'
+
+[[plugins]]
+depends = ['fzf']
+hook_post_source = '''
+nnoremap <M-F> :Rg<CR>
+'''
+repo = 'junegunn/fzf.vim'
+
+[[plugins]]
+repo = 'tpope/vim-surround'

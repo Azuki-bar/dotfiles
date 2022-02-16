@@ -1,3 +1,6 @@
+" check with C-k and key result
+" vim help key-notaion
+
 " インサートモードのESCの機能をjjにも
 inoremap <silent> jj <ESC>
 
@@ -27,3 +30,4 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
+

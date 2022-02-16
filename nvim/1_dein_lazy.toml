@@ -4,14 +4,10 @@
 # [[plugins]]
 # repo = 'tomtom/tcomment_vim'
 
-[[plugins]] # ファイラー
-repo = 'preservim/nerdtree'
-
 # [[plugins]] 
 # repo = 'tpope/vim-surround'
 
 [[plugins]]
-repo = 'lervag/vimtex'
 hook_source = '''
     set shellslash
     let g:vimtex_compiler_progname = 'nvr'  
@@ -25,4 +21,58 @@ hook_source = '''
     \    ],
     \}
 '''
+on_ft = ['plaintex', 'tex']
+repo = 'lervag/vimtex'
 
+[[plugins]]
+hook_post_source = '''
+"source $HOME/.config/nvim/plug_confs/nvim-treesitter.vim
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained",
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    disable = {"vim", "lua"},
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+    }
+}
+EOF
+'''
+merged = 0
+on_event = 'VimEnter'
+repo = 'nvim-treesitter/nvim-treesitter'
+
+[[plugins]]
+depends = ['nvim-treesitter']
+#on_event = 'VimEnter'
+repo = 'p00f/nvim-ts-rainbow'
+
+[[plugins]]
+build = 'sh -c "cd app && yarn install"'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+repo = 'iamcco/markdown-preview.nvim'
+
+[ftplugin]
+markdown = '''
+setlocal wrap
+setlocal tabstop=2
+setlocal shiftwidth=2
+'''

@@ -43,6 +43,10 @@ if dein#check_install()
   call dein#install()
 endif
 
-"End dein Scripts-------------------------
-
-
+" https://knowledge.sakura.ad.jp/23248/
+" plugin remove check {{{
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call dein#recache_runtimepath()
+endif
+" }}}

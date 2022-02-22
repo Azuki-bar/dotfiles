@@ -1,0 +1,102 @@
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+hook_add = '''
+'''
+repo = 'Shougo/pum.vim'
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+
+[[plugins]]
+hook_add = '''
+let g:lexima_enable_endwise_rules = 1
+let g:lexima_enable_newline_rules = 1
+
+'''
+on_event = ['InsertEnter']
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
+hook_add = '''
+nnoremap <F22> :QuickRun<CR>
+nnoremap <S-F10> :QuickRun<CR>
+'''
+repo = 'thinca/vim-quickrun'
+
+[[plugins]] # gitの表示
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+hook_add = '''
+nnoremap <F5> :UndotreeToggle<CR>
+'''
+repo = 'mbbill/undotree'
+
+[[plugins]]
+hook_post_source = '''
+source $HOME/.config/nvim/plug_confs/context_filetype.vim
+'''
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+depends = ['context_filetype_vim']
+repo = 'osyo-manga/vim-precious'
+
+
+[[plugins]]
+repo = '907th/vim-auto-save'
+# repo = 'vim-scripts/vim-auto-save'
+hook_add = '''
+    if expand("%:p") =~ 'COMMIT_EDITMSG'
+    else
+        let g:auto_save = 1
+    endif
+    let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+'''
+on_event = ['InsertEnter']
+
+[[plugins]]
+hook_post_source = '''
+nnoremap <M-1> :NERDTreeToggle<CR>
+'''
+repo = 'preservim/nerdtree'
+
+[[plugins]]
+build = './install --all'
+merged = 0
+repo = 'junegunn/fzf'
+
+[[plugins]]
+depends = ['fzf']
+hook_post_source = '''
+nnoremap <M-F> :Rg<CR>
+'''
+on_source = ['fzf']
+repo = 'junegunn/fzf.vim'
+
+[[plugins]]
+hook_post_source = '''
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+'''
+repo = 'bkad/CamelCaseMotion'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'tpope/vim-surround'

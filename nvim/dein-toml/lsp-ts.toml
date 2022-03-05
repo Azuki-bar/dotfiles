@@ -65,5 +65,6 @@ repo = 'mattn/vim-lsp-icons'
 [[plugins]]
 hook_add = '''
 let g:UltiSnipsSnippetDirectories = [$HOME . "/.config/nvim/ultisnips"]
+let g:UltiSnipsExpandTrigger = "<C-l>"
 '''
 repo = 'SirVer/ultisnips'

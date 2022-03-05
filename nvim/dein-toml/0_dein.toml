@@ -1,10 +1,10 @@
 [[plugins]]
 repo = 'vim-denops/denops.vim'
 
-[[plugins]]
-hook_add = '''
-'''
-repo = 'Shougo/pum.vim'
+#[[plugins]]
+#hook_add = '''
+#'''
+#repo = 'Shougo/pum.vim'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
@@ -35,13 +35,17 @@ nnoremap <F5> :UndotreeToggle<CR>
 repo = 'mbbill/undotree'
 
 [[plugins]]
-hook_post_source = '''
-source $HOME/.config/nvim/plug_confs/context_filetype.vim
-'''
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 depends = ['context_filetype_vim']
+hook_post_source = '''
+let g:precious_enable_switchers = {
+            \   "markdown": {
+            \       "setfiletype": 0
+            \       }
+            \   }
+'''
 repo = 'osyo-manga/vim-precious'
 
 

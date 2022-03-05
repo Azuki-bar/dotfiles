@@ -1,4 +1,8 @@
 [ftplugin]
+go = '''
+set tabstop=4
+set nowrap
+'''
 markdown = '''
 setlocal wrap
 setlocal tabstop=2
@@ -37,4 +41,3 @@ let g:vim_markdown_conceal = 0
 '''
 on_ft = ['markdown']
 repo = 'preservim/vim-markdown'
-

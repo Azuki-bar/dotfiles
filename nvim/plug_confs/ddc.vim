@@ -40,6 +40,6 @@ call ddc#custom#patch_global('filterParams',{
       \})
 call ddc#custom#patch_global('keywordPattern', '[a-zA-Z_:]\w*')
 
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
+"call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#enable()
 

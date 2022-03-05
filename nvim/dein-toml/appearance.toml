@@ -1,0 +1,63 @@
+[[plugins]]
+hook_add = '''
+augroup MyAutoCmd
+  autocmd!
+augroup END
+lua <<EOD
+require('onedark').setup {
+    style = 'darker'
+}
+EOD
+autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark 
+'''
+repo = 'navarasu/onedark.nvim'
+
+#[[plugins]]
+#hook_add = '''
+#augroup MyAutoCmd
+#  autocmd!
+#augroup END
+#
+#"colorscheme onedark
+#let g:onedark_termcolors=256
+#autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark 
+#'''
+#repo = 'joshdick/onedark.vim'
+
+# [[plugins]]
+# hook_add = '''
+# source $HOME/.config/nvim/plug_confs/vim-airline.vim
+# '''
+# repo = 'vim-airline/vim-airline'
+# 
+# [[plugins]]
+# depends = ['vim-airline']
+# hook_add = '''
+# let g:airline_theme = "onedark"
+# '''
+# repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'nvim-lualine/lualine.nvim'
+hook_add = '''
+lua << EOF
+require('lualine').setup {
+    options = {
+        theme = 'onedark'
+    }
+}
+EOF
+'''
+
+
+# [[plugins]]
+# repo = 'ayu-theme/ayu-vim'
+# hook_add = '''
+# set termguicolors 
+# let ayucolor="mirage"
+# colorscheme ayu
+# '''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+

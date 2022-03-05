@@ -1,3 +1,4 @@
+" https://github.com/4513ECHO/dotfiles/blob/515d0026cc17bdbc6d693d61bca41a06c497a559/config/vim/dein/ddu.toml
 " https://zaief.jp/vim/dein
 "dein Scripts-----------------------------
 if &compatible
@@ -28,9 +29,10 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
   " TOML を読み込み、キャッシュしておく
   call dein#load_toml(s:rc_dir . '0_dein.toml', {'lazy': 0})
-  call dein#load_toml(s:rc_dir . 'color.toml', {'lazy': 0})
+  call dein#load_toml(s:rc_dir . 'appearance.toml', {'lazy': 0})
   call dein#load_toml(s:rc_dir . 'lsp-ts.toml', {'lazy': 1})
   call dein#load_toml(s:rc_dir . 'ddc.toml', {'lazy': 1})
+  "call dein#load_toml(s:rc_dir . 'ddu.toml', {'lazy': 1})
   call dein#load_toml(s:rc_dir . 'ftplugins.toml', {'lazy': 1})
 
   call dein#end()

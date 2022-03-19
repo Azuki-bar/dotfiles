@@ -24,7 +24,7 @@ echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
 # polybar HDMI1 2>&1 | tee -a /tmp/polybar2.log & disown
 counter=1
 if which "xrandr"; then
-  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+  for m in $(xrandr --query | grep "mm" | cut -d" " -f1); do
       echo $m
       MONITOR=$m polybar --reload azukibar 2>&1 |tee -a /tmp/polybar$(( counter )).log 
       #MONITOR=$m polybar --reload azukibar 
@@ -33,4 +33,3 @@ if which "xrandr"; then
 # else
 #   polybar --reload azukibar 
 fi
-echo "Bars launched..." echo "Polybar launched..."

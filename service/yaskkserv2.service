@@ -1,0 +1,13 @@
+[Unit]
+Description=SKK server yaskkserv2
+After=network.target
+
+[Service]
+Environment=CACHE_PATH=/home/azukibar/.yaskkserv2.cache
+Environment=DICT_PATH=/home/azukibar/.config/skk/dictionary.yaskkserv2
+ExecStart=/usr/local/sbin/yaskkserv2 --no-daemonize --google-japanese-input=notfound --google-suggest --google-cache-filename=${CACHE_PATH} $DICT_PATH
+User=azukibar
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

@@ -13,7 +13,7 @@ nnoremap x "_x
 nnoremap s "_s
 
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#use-tab-and-s-tab-to-navigate-the-completion-list
-inoremap <expr> <Tab> pumvisible() ? "<C-n>" : ""<Tab>"
+inoremap <expr> <Tab> pumvisible() ? "<C-n>" : "<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "<C-p>" : "<S-Tab>"
 
 " お借りしてきた https://note.com/yasukotelin/n/na87dc604e042

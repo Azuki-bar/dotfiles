@@ -18,10 +18,11 @@ if test -n "$DESKTOP_SESSION"
     set -x (gnome-keyring-daemon --start | string split "=")
 end
 
-set -xU LESS_TERMCAP_md (printf "\e[01;31m")
-set -xU LESS_TERMCAP_me (printf "\e[0m")
-set -xU LESS_TERMCAP_se (printf "\e[0m")
-set -xU LESS_TERMCAP_so (printf "\e[1;37;42m")
-set -xU LESS_TERMCAP_ue (printf "\e[0m")
-set -xU LESS_TERMCAP_us (printf "\e[01;32m")
+# set -xU LESS_TERMCAP_md (printf "\e[01;31m")
+# set -xU LESS_TERMCAP_me (printf "\e[0m")
+# set -xU LESS_TERMCAP_se (printf "\e[0m")
+# set -xU LESS_TERMCAP_so (printf "\e[1;37;42m")
+# set -xU LESS_TERMCAP_ue (printf "\e[0m")
+# set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
+set -xU MANPAGER 'less -R --use-color -Dd+r -Du+b'

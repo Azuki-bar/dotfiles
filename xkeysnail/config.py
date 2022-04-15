@@ -5,12 +5,12 @@
 $ sudo groupadd uinput
 """
 import re
-from xkeysnail.transform import *
+from xkeysnail.transform import Key, define_modmap, define_conditional_multipurpose_modmap, K, define_keymap
 
 define_modmap({
     Key.MUHENKAN: Key.LEFT_ALT,
     Key.HENKAN: Key.RIGHT_ALT,
-    Key.CAPSLOCK: Key.LEFT_CTRL
+    Key.CAPSLOCK: Key.LEFT_CTRL,
 })
 
 exclude_apps = [r"Inkscape", r"Gimp", r"Minecraft.*"]

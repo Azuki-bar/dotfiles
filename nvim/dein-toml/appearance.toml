@@ -53,6 +53,7 @@ EOF
 '''
 on_source = ['onedark.nvim']
 repo = 'nvim-lualine/lualine.nvim'
+merged = 0
 
 
 # [[plugins]]

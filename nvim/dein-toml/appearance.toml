@@ -13,6 +13,7 @@ require('onedark').setup {
 EOD
 '''
 repo = 'navarasu/onedark.nvim'
+merged = 0
 
 #[[plugins]]
 #hook_add = '''

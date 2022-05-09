@@ -24,12 +24,6 @@ repo = 'osyo-manga/vim-precious'
 
 [[plugins]]
 hook_post_source = '''
-nnoremap <M-1> :NERDTreeToggle<CR>
-'''
-repo = 'preservim/nerdtree'
-
-[[plugins]]
-hook_post_source = '''
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e

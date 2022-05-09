@@ -47,3 +47,11 @@ nnoremap <S-F10> :QuickRun<CR>
 '''
 on_cmd = [':QuickRun']
 repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+hook_post_source = '''
+nnoremap <M-1> :NERDTreeToggle<CR>
+'''
+repo = 'preservim/nerdtree'
+on_cmd = ['NERDTreeToggle']
+

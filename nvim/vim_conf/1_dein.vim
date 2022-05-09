@@ -30,6 +30,7 @@ if dein#load_state(s:dein_dir)
   " TOML を読み込み、キャッシュしておく
   call dein#load_toml(s:rc_dir . '0_dein.toml', {'lazy': 0})
   call dein#load_toml(s:rc_dir . 'appearance.toml', {'lazy': 0})
+  call dein#load_toml(s:rc_dir . 'lazy.toml', {'lazy': 1})
   call dein#load_toml(s:rc_dir . 'lsp-ts.toml', {'lazy': 1})
   call dein#load_toml(s:rc_dir . 'ddc.toml', {'lazy': 1})
   "call dein#load_toml(s:rc_dir . 'ddu.toml', {'lazy': 1})

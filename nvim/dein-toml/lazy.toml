@@ -1,0 +1,49 @@
+[[plugins]]
+hook_add = '''
+let g:lexima_enable_endwise_rules = 1
+let g:lexima_enable_newline_rules = 1
+'''
+on_event = ['InsertEnter']
+repo = 'cohama/lexima.vim'
+
+
+[[plugins]]
+repo = '907th/vim-auto-save'
+# repo = 'vim-scripts/vim-auto-save'
+hook_add = '''
+    if expand("%:p") =~ 'COMMIT_EDITMSG'
+    else
+        let g:auto_save = 1
+    endif
+    let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+'''
+on_event = ['InsertEnter']
+
+[[plugins]]
+build = './install --all'
+merged = 0
+on_cmd = ['Rg']
+repo = 'junegunn/fzf'
+
+[[plugins]]
+depends = ['fzf']
+hook_post_source = '''
+nnoremap <M-F> :Rg<CR>
+'''
+on_source = ['fzf']
+repo = 'junegunn/fzf.vim'
+
+[[plugins]]
+hook_add = '''
+nnoremap <F5> :UndotreeToggle<CR>
+'''
+on_cmd = ['UndotreeToggle']
+repo = 'mbbill/undotree'
+
+[[plugins]]
+hook_add = '''
+nnoremap <F22> :QuickRun<CR>
+nnoremap <S-F10> :QuickRun<CR>
+'''
+on_cmd = [':QuickRun']
+repo = 'thinca/vim-quickrun'

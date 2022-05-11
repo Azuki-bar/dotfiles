@@ -461,7 +461,16 @@ depends = ['plenary.nvim','ripgrep','fd']
 on_event = 'VimEnter'
 hook_post_source= """
 lua <<EOF
+local actions = require("telescope.actions")
+
 require('telescope').setup {
+  defaults = {
+    mappings = {
+        i = {
+            ["<esc>"] = actions.close,
+        },
+    }
+  },
   extensions = {
     fzf = {
       fuzzy = true,                    -- false will only do exact matching

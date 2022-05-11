@@ -52,6 +52,34 @@ repo = 'thinca/vim-quickrun'
 hook_add = '''
 nnoremap <M-1> :NERDTreeToggle<CR>
 '''
-repo = 'preservim/nerdtree'
 on_cmd = ['NERDTreeToggle']
+repo = 'preservim/nerdtree'
 
+
+[[plugins]]
+depends = 'denops'
+hook_post_source = '''
+nmap  <C-a>  <Plug>(dps-dial-increment)
+nmap  <C-x>  <Plug>(dps-dial-decrement)
+xmap  <C-a>  <Plug>(dps-dial-increment)
+xmap  <C-x>  <Plug>(dps-dial-decrement)
+xmap g<C-a> g<Plug>(dps-dial-increment)
+xmap g<C-x> g<Plug>(dps-dial-decrement)
+'''
+on_source = ['denops']
+repo = 'monaqa/dps-dial.vim'
+
+[[plugins]]
+depends = ['onedark.nvim']
+hook_post_source = '''
+lua << EOF
+require('lualine').setup {
+    options = {
+        theme = 'onedark'
+    }
+}
+EOF
+'''
+merged = 0
+on_source = ['onedark.nvim']
+repo = 'nvim-lualine/lualine.nvim'

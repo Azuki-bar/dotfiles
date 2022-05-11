@@ -40,22 +40,6 @@ merged = 0
 # '''
 # repo = 'vim-airline/vim-airline-themes'
 
-[[plugins]]
-depends = ['onedark.nvim']
-hook_post_source = '''
-lua << EOF
-require('lualine').setup {
-    options = {
-        theme = 'onedark'
-    }
-}
-EOF
-'''
-on_source = ['onedark.nvim']
-repo = 'nvim-lualine/lualine.nvim'
-merged = 0
-
-
 # [[plugins]]
 # repo = 'ayu-theme/ayu-vim'
 # hook_add = '''

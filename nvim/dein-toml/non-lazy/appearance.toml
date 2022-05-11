@@ -15,6 +15,21 @@ EOD
 repo = 'navarasu/onedark.nvim'
 merged = 0
 
+[[plugins]]
+depends = ['onedark.nvim']
+hook_post_source = '''
+lua << EOF
+require('lualine').setup {
+    options = {
+        theme = 'onedark'
+    }
+}
+EOF
+'''
+merged = 0
+#on_source = ['onedark.nvim']
+repo = 'nvim-lualine/lualine.nvim'
+
 #[[plugins]]
 #hook_add = '''
 #augroup MyAutoCmd
@@ -50,3 +65,4 @@ merged = 0
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+

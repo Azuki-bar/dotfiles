@@ -50,10 +50,16 @@ repo = 'thinca/vim-quickrun'
 
 [[plugins]]
 hook_add = '''
-nnoremap <M-1> :NERDTreeToggle<CR>
+nnoremap <M-1> :NvimTreeToggle<CR>
 '''
-on_cmd = ['NERDTreeToggle']
-repo = 'preservim/nerdtree'
+hook_post_source = '''
+lua <<EOF
+require'nvim-tree'.setup {
+}
+EOF
+'''
+on_cmd = ['NvimTreeToggle']
+repo = 'kyazdani42/nvim-tree.lua'
 
 
 [[plugins]]
@@ -68,171 +74,6 @@ xmap g<C-x> g<Plug>(dps-dial-decrement)
 '''
 on_source = ['denops']
 repo = 'monaqa/dps-dial.vim'
-
-[[plugins]]
-depends = ['onedark.nvim']
-hook_post_source = '''
-lua << EOF
-require('lualine').setup {
-    options = {
-        theme = 'onedark'
-    }
-}
-EOF
-'''
-merged = 0
-on_source = ['onedark.nvim']
-repo = 'nvim-lualine/lualine.nvim'
-[[plugins]]
-depends = ['denops.vim']
-repo = 'Shougo/ddu.vim'
-# on_source = ['denops.vim']
-hook_source = '''
-let s:patch_global = {}
-let s:sourceOptions = {}
-let s:sourceParams = {}
-let s:uiParams = {}
-let s:kindOptions = {}
-let s:patch_global.ui = 'ff'
-let s:sourceOptions._ = {
-      \ 'ignoreCase': v:true,
-      \ 'matchers': ['matcher_fzf'],
-      \ }
-let s:sourceOptions.file_old = {
-      \ 'matchers': ['matcher_fzf', 'matcher_relative', 'matcher_hidden'],
-      \ }
-let s:sourceOptions.file_external = {
-      \ 'matchers': ['matcher_fzf', 'matcher_hidden'],
-      \ }
-let s:sourceParams.file_external = {
-      \ 'cmd': ['git', 'ls-files', '-co', '--exclude-standard'],
-      \ }
-let s:uiParams.ff = {
-    \ 'split': has('nvim') ? 'floating' : 'horizontal',
-    \ 'prompt': '> ',
-    \ }
-let s:kindOptions.file = {
-      \ 'defaultAction': 'open',
-      \ }
-let s:kindOptions.readme_viewer = {
-      \ 'defaultAction': 'open',
-      \ }
-let s:kindOptions.colorscheme = {
-      \ 'defaultAction': 'set',
-      \ }
-let s:kindOptions.help = {
-      \ 'defaultAction': 'open',
-      \ }
-let s:patch_global.sourceOptions = s:sourceOptions
-let s:patch_global.sourceParams = s:sourceParams
-let s:patch_global.uiParams = s:uiParams
-let s:patch_global.kindOptions = s:kindOptions
-call ddu#custom#patch_global(s:patch_global)
-'''
-
-[plugins.ftplugin]
-ddu-ff = '''
-nnoremap <silent><buffer> <CR>
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-nnoremap <silent><buffer> <Space>
-      \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
-nnoremap <silent><buffer> i
-      \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
-nnoremap <silent><buffer> <C-l>
-      \ <Cmd>call ddu#ui#ff#do_action('refreshItems')<CR>
-nnoremap <silent><buffer> p
-      \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
-nnoremap <silent><buffer> q
-      \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
-'''
-
-ddu-ff-filter = '''
-inoremap <silent><buffer> <CR>
-      \ <Esc><Cmd>close<CR>
-nnoremap <silent><buffer> <CR>
-      \ <Cmd>close<CR>
-'''
-
-[[plugins]]
-depends = ['ddu.vim']
-on_cmd = ['Ddu']
-repo = 'Shougo/ddu-commands.vim'
-
-# UI
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-ui-ff'
-
-# filters
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-filter-matcher_hidden'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-filter-matcher_relative'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-filter-matcher_substring'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'yuki-yano/ddu-filter-fzf'
-
-# kinds
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-kind-file'
-
-# sources
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = '4513echo/ddu-source-colorscheme'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = '4513echo/ddu-source-ghq'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-source-file'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-source-file_old'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-source-file_point'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-source-file_rec'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'Shougo/ddu-source-line'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'matsui54/ddu-source-file_external'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'matsui54/ddu-source-help'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'shun/ddu-source-buffer'
-
-[[plugins]]
-on_source = 'ddu.vim'
-repo = 'shun/ddu-source-rg'
 
 [ftplugin]
 go = '''
@@ -290,7 +131,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
 
     -- list of language that will be disabled
-    disable = {"vim", "lua"},
+       disable = {"vim", "lua"},
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -318,28 +159,28 @@ depends = ['nvim-treesitter']
 on_source = 'nvim-treesitter'
 repo = 'p00f/nvim-ts-rainbow'
 
-[[plugins]]
-hook_add = '''
-" check with C-k and key result
-" vim help key-notaion
-nnoremap <A-l> :LspDocumentFormat<CR>
-noremap <S-F6> :LspRename<CR>
-noremap <F18> :LspRename<CR>
-let g:lsp_fold_enabled = 0
-let g:lsp_document_highlight_enabled = 0
-'''
-on_event = 'VimEnter'
-repo = 'prabirshrestha/vim-lsp'
-
-[[plugins]]
-depends = ['vim-lsp']
-on_source = ['vim-lsp']
-repo = 'mattn/vim-lsp-settings'
-
-[[plugins]]
-depends = ['vim-lsp']
-on_source = ['vim-lsp']
-repo = 'mattn/vim-lsp-icons'
+# [[plugins]]
+# hook_add = '''
+# " check with C-k and key result
+# " vim help key-notaion
+# nnoremap <A-l> :LspDocumentFormat<CR>
+# noremap <S-F6> :LspRename<CR>
+# noremap <F18> :LspRename<CR>
+# let g:lsp_fold_enabled = 0
+# let g:lsp_document_highlight_enabled = 0
+# '''
+# on_event = 'VimEnter'
+# repo = 'prabirshrestha/vim-lsp'
+# 
+# [[plugins]]
+# depends = ['vim-lsp']
+# on_source = ['vim-lsp']
+# repo = 'mattn/vim-lsp-settings'
+# 
+# [[plugins]]
+# depends = ['vim-lsp']
+# on_source = ['vim-lsp']
+# repo = 'mattn/vim-lsp-icons'
 
 [[plugins]]
 hook_add = '''

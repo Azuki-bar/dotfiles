@@ -83,3 +83,325 @@ EOF
 merged = 0
 on_source = ['onedark.nvim']
 repo = 'nvim-lualine/lualine.nvim'
+[[plugins]]
+depends = ['denops.vim']
+repo = 'Shougo/ddu.vim'
+# on_source = ['denops.vim']
+hook_source = '''
+let s:patch_global = {}
+let s:sourceOptions = {}
+let s:sourceParams = {}
+let s:uiParams = {}
+let s:kindOptions = {}
+let s:patch_global.ui = 'ff'
+let s:sourceOptions._ = {
+      \ 'ignoreCase': v:true,
+      \ 'matchers': ['matcher_fzf'],
+      \ }
+let s:sourceOptions.file_old = {
+      \ 'matchers': ['matcher_fzf', 'matcher_relative', 'matcher_hidden'],
+      \ }
+let s:sourceOptions.file_external = {
+      \ 'matchers': ['matcher_fzf', 'matcher_hidden'],
+      \ }
+let s:sourceParams.file_external = {
+      \ 'cmd': ['git', 'ls-files', '-co', '--exclude-standard'],
+      \ }
+let s:uiParams.ff = {
+    \ 'split': has('nvim') ? 'floating' : 'horizontal',
+    \ 'prompt': '> ',
+    \ }
+let s:kindOptions.file = {
+      \ 'defaultAction': 'open',
+      \ }
+let s:kindOptions.readme_viewer = {
+      \ 'defaultAction': 'open',
+      \ }
+let s:kindOptions.colorscheme = {
+      \ 'defaultAction': 'set',
+      \ }
+let s:kindOptions.help = {
+      \ 'defaultAction': 'open',
+      \ }
+let s:patch_global.sourceOptions = s:sourceOptions
+let s:patch_global.sourceParams = s:sourceParams
+let s:patch_global.uiParams = s:uiParams
+let s:patch_global.kindOptions = s:kindOptions
+call ddu#custom#patch_global(s:patch_global)
+'''
+
+[plugins.ftplugin]
+ddu-ff = '''
+nnoremap <silent><buffer> <CR>
+      \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+nnoremap <silent><buffer> <Space>
+      \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+nnoremap <silent><buffer> i
+      \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+nnoremap <silent><buffer> <C-l>
+      \ <Cmd>call ddu#ui#ff#do_action('refreshItems')<CR>
+nnoremap <silent><buffer> p
+      \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
+nnoremap <silent><buffer> q
+      \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+'''
+
+ddu-ff-filter = '''
+inoremap <silent><buffer> <CR>
+      \ <Esc><Cmd>close<CR>
+nnoremap <silent><buffer> <CR>
+      \ <Cmd>close<CR>
+'''
+
+[[plugins]]
+depends = ['ddu.vim']
+on_cmd = ['Ddu']
+repo = 'Shougo/ddu-commands.vim'
+
+# UI
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-ui-ff'
+
+# filters
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-filter-matcher_hidden'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-filter-matcher_relative'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-filter-matcher_substring'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'yuki-yano/ddu-filter-fzf'
+
+# kinds
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-kind-file'
+
+# sources
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = '4513echo/ddu-source-colorscheme'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = '4513echo/ddu-source-ghq'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-source-file'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-source-file_old'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-source-file_point'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-source-file_rec'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'Shougo/ddu-source-line'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'matsui54/ddu-source-file_external'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'matsui54/ddu-source-help'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'shun/ddu-source-buffer'
+
+[[plugins]]
+on_source = 'ddu.vim'
+repo = 'shun/ddu-source-rg'
+
+[ftplugin]
+go = '''
+set tabstop=4
+set nowrap
+'''
+markdown = '''
+setlocal wrap
+setlocal tabstop=2
+setlocal shiftwidth=2
+'''
+
+[[plugins]]
+hook_source = '''
+    set shellslash
+    let g:vimtex_compiler_progname = 'nvr'  
+    let g:vimtex_view_general_viewer = 'evince'
+    let g:vimtex_compiler_latexmk = {
+    \     'background': 1,
+    \     'build_dir': '',
+    \     'executable': 'latexmk',
+    \     'options': [
+    \     '-lualatex',
+    \    ],
+    \}
+'''
+on_ft = ['plaintex', 'tex']
+repo = 'lervag/vimtex'
+
+[[plugins]]
+build = 'sh -c "cd app && yarn install"'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+repo = 'iamcco/markdown-preview.nvim'
+
+[[plugins]]
+hook_add = '''
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_math = 0
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_auto_iinsert_bullets= 0 
+let g:vim_markdown_conceal = 0
+'''
+on_ft = ['markdown']
+repo = 'preservim/vim-markdown'
+[[plugins]]
+hook_post_source = '''
+"source $HOME/.config/nvim/plug_confs/nvim-treesitter.vim
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "all",
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    disable = {"vim", "lua"},
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+    }
+}
+EOF
+'''
+merged = 0
+on_event = 'VimEnter'
+repo = 'nvim-treesitter/nvim-treesitter'
+
+[[plugins]]
+depends = ['nvim-treesitter']
+on_source = 'nvim-treesitter'
+repo = 'p00f/nvim-ts-rainbow'
+
+[[plugins]]
+hook_add = '''
+" check with C-k and key result
+" vim help key-notaion
+nnoremap <A-l> :LspDocumentFormat<CR>
+noremap <S-F6> :LspRename<CR>
+noremap <F18> :LspRename<CR>
+let g:lsp_fold_enabled = 0
+let g:lsp_document_highlight_enabled = 0
+'''
+on_event = 'VimEnter'
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+depends = ['vim-lsp']
+on_source = ['vim-lsp']
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+depends = ['vim-lsp']
+on_source = ['vim-lsp']
+repo = 'mattn/vim-lsp-icons'
+
+[[plugins]]
+hook_add = '''
+let g:UltiSnipsSnippetDirectories = [$HOME . "/.config/nvim/ultisnips"]
+let g:UltiSnipsExpandTrigger = "<C-l>"
+'''
+repo = 'SirVer/ultisnips'
+
+# [[plugins]]
+# repo = 'prabirshrestha/async.vim'
+# 
+# [[plugins]]
+# depends = ['ultisnips', 'async.vim', 'vim-lsp']
+# on_source = ['vim-lsp']
+# repo = 'thomasfaingnaert/vim-lsp-ultisnips'
+# hook_post_source = '''
+# let g:UltiSnipsExpandTrigger="<tab>"
+# let g:UltiSnipsJumpForwardTrigger="<tab>"
+# let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+# '''
+[[plugins]]
+depends = ['denops.vim']
+hook_source = '''
+source $HOME/.config/nvim/plug_confs/ddc.vim
+'''
+on_event = ['insertEnter']
+repo = 'Shougo/ddc.vim'
+
+[[plugins]]
+on_source = 'ddc.vim'
+repo = 'Shougo/ddc-around'
+
+[[plugins]]
+on_source = 'ddc.vim'
+repo = 'Shougo/ddc-matcher_head'
+
+[[plugins]]
+on_source = 'ddc.vim'
+repo = 'tani/ddc-fuzzy'
+
+[[plugins]]
+on_source = 'ddc.vim'
+repo = 'Shougo/ddc-converter_remove_overlap'
+
+[[plugins]]
+depends = ['ddc.vim', 'vim-lsp']
+on_source = ['ddc.vim', 'vim-lsp']
+repo = 'shun/ddc-vim-lsp'
+
+[[plugins]]
+on_source = 'ddc.vim'
+repo = 'LumaKernel/ddc-file'
+
+[[plugins]]
+on_source = 'ddc.vim'
+repo = 'delphinus/ddc-treesitter'
+
+[[plugins]]
+depends = ['ultisnips']
+on_source = 'ddc.vim'
+repo = 'matsui54/ddc-ultisnips'
+
+[[plugins]]
+on_source = 'ddc.vim'
+repo = 'gamoutatsumi/ddc-emoji'

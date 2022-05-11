@@ -19,19 +19,19 @@ hook_add = '''
 '''
 on_event = ['InsertEnter']
 
-[[plugins]]
-build = './install --all'
-merged = 0
-on_cmd = ['Rg']
-repo = 'junegunn/fzf'
-
-[[plugins]]
-depends = ['fzf']
-hook_add = '''
-nnoremap <M-F> :Rg<CR>
-'''
-on_source = ['fzf']
-repo = 'junegunn/fzf.vim'
+# [[plugins]]
+# build = './install --all'
+# merged = 0
+# on_cmd = ['Rg']
+# repo = 'junegunn/fzf'
+# 
+# [[plugins]]
+# depends = ['fzf']
+# hook_add = '''
+# nnoremap <M-F> :Rg<CR>
+# '''
+# on_source = ['fzf']
+# repo = 'junegunn/fzf.vim'
 
 [[plugins]]
 hook_add = '''
@@ -86,38 +86,39 @@ setlocal tabstop=2
 setlocal shiftwidth=2
 '''
 
-[[plugins]]
-hook_source = '''
-    set shellslash
-    let g:vimtex_compiler_progname = 'nvr'  
-    let g:vimtex_view_general_viewer = 'evince'
-    let g:vimtex_compiler_latexmk = {
-    \     'background': 1,
-    \     'build_dir': '',
-    \     'executable': 'latexmk',
-    \     'options': [
-    \     '-lualatex',
-    \    ],
-    \}
-'''
-on_ft = ['plaintex', 'tex']
-repo = 'lervag/vimtex'
+# [[plugins]]
+# hook_source = '''
+#     set shellslash
+#     let g:vimtex_compiler_progname = 'nvr'  
+#     let g:vimtex_view_general_viewer = 'evince'
+#     let g:vimtex_compiler_latexmk = {
+#     \     'background': 1,
+#     \     'build_dir': '',
+#     \     'executable': 'latexmk',
+#     \     'options': [
+#     \     '-lualatex',
+#     \    ],
+#     \}
+# '''
+# on_ft = ['plaintex', 'tex']
+# repo = 'lervag/vimtex'
 
-[[plugins]]
-build = 'sh -c "cd app && yarn install"'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-repo = 'iamcco/markdown-preview.nvim'
+# [[plugins]]
+# build = 'sh -c "cd app && yarn install"'
+# on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+# repo = 'iamcco/markdown-preview.nvim'
+# 
+# [[plugins]]
+# hook_add = '''
+# let g:vim_markdown_folding_disabled = 1
+# let g:vim_markdown_math = 0
+# let g:vim_markdown_new_list_item_indent = 2
+# let g:vim_markdown_auto_iinsert_bullets= 0 
+# let g:vim_markdown_conceal = 0
+# '''
+# on_ft = ['markdown']
+# repo = 'preservim/vim-markdown'
 
-[[plugins]]
-hook_add = '''
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_math = 0
-let g:vim_markdown_new_list_item_indent = 2
-let g:vim_markdown_auto_iinsert_bullets= 0 
-let g:vim_markdown_conceal = 0
-'''
-on_ft = ['markdown']
-repo = 'preservim/vim-markdown'
 [[plugins]]
 hook_post_source = '''
 "source $HOME/.config/nvim/plug_confs/nvim-treesitter.vim
@@ -130,8 +131,8 @@ require'nvim-treesitter.configs'.setup {
     -- `false` will disable the whole extension
     enable = true,
 
-    -- list of language that will be disabled
-       disable = {"vim", "lua"},
+   -- list of language that will be disabled
+    disable = {"vim", "lua"},
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -183,11 +184,119 @@ repo = 'p00f/nvim-ts-rainbow'
 # repo = 'mattn/vim-lsp-icons'
 
 [[plugins]]
+repo = 'neovim/nvim-lspconfig'
+on_event = ['insertEnter']
+
+[[plugins]]
+repo = 'williamboman/nvim-lsp-installer'
+on_source = ['nvim-lspconfig']
+
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+on_event=['insertEnter']
+hook_post_source = '''
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      -- ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      -- ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#intellij-like-mapping
+      ["<Tab>"] = cmp.mapping(function(fallback)
+      -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+      if cmp.visible() then
+        local entry = cmp.get_selected_entry()
+	if not entry then
+	  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+	else
+	  cmp.confirm()
+	end
+      else
+        fallback()
+      end
+    end, {"i","s","c",}),
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'ultisnips' }, -- For ultisnips users.
+      { name = 'nvim_lsp_signature_help' },
+    }, {
+      { name = 'buffer' },
+
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  -- require('lspconfig')['YOUR_LSP_SERVER'].setup {
+  --   capabilities = capabilities
+  -- }
+  -- require('lspconfig')['taplo'].setup {}
+EOF
+'''
+
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+on_source = ['nvim-cmp']
+depends = ['nvim-lspconfig','nvim-cmp']
+
+[[plugins]]
+repo = 'quangnguyen30192/cmp-nvim-ultisnips'
+
+[[plugins]]
 hook_add = '''
 let g:UltiSnipsSnippetDirectories = [$HOME . "/.config/nvim/ultisnips"]
 let g:UltiSnipsExpandTrigger = "<C-l>"
 '''
 repo = 'SirVer/ultisnips'
+
+[[plugins]]
+repo= 'hrsh7th/cmp-nvim-lsp-signature-help'
+on_source=['nvim-cmp']
 
 # [[plugins]]
 # repo = 'prabirshrestha/async.vim'
@@ -201,48 +310,48 @@ repo = 'SirVer/ultisnips'
 # let g:UltiSnipsJumpForwardTrigger="<tab>"
 # let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 # '''
-[[plugins]]
-depends = ['denops.vim']
-hook_source = '''
-source $HOME/.config/nvim/plug_confs/ddc.vim
-'''
-on_event = ['insertEnter']
-repo = 'Shougo/ddc.vim'
-
-[[plugins]]
-on_source = 'ddc.vim'
-repo = 'Shougo/ddc-around'
-
-[[plugins]]
-on_source = 'ddc.vim'
-repo = 'Shougo/ddc-matcher_head'
-
-[[plugins]]
-on_source = 'ddc.vim'
-repo = 'tani/ddc-fuzzy'
-
-[[plugins]]
-on_source = 'ddc.vim'
-repo = 'Shougo/ddc-converter_remove_overlap'
-
-[[plugins]]
-depends = ['ddc.vim', 'vim-lsp']
-on_source = ['ddc.vim', 'vim-lsp']
-repo = 'shun/ddc-vim-lsp'
-
-[[plugins]]
-on_source = 'ddc.vim'
-repo = 'LumaKernel/ddc-file'
-
-[[plugins]]
-on_source = 'ddc.vim'
-repo = 'delphinus/ddc-treesitter'
-
-[[plugins]]
-depends = ['ultisnips']
-on_source = 'ddc.vim'
-repo = 'matsui54/ddc-ultisnips'
-
-[[plugins]]
-on_source = 'ddc.vim'
-repo = 'gamoutatsumi/ddc-emoji'
+# [[plugins]]
+# depends = ['denops.vim']
+# hook_source = '''
+# source $HOME/.config/nvim/plug_confs/ddc.vim
+# '''
+# on_event = ['insertEnter']
+# repo = 'Shougo/ddc.vim'
+# 
+# [[plugins]]
+# on_source = 'ddc.vim'
+# repo = 'Shougo/ddc-around'
+# 
+# [[plugins]]
+# on_source = 'ddc.vim'
+# repo = 'Shougo/ddc-matcher_head'
+# 
+# [[plugins]]
+# on_source = 'ddc.vim'
+# repo = 'tani/ddc-fuzzy'
+# 
+# [[plugins]]
+# on_source = 'ddc.vim'
+# repo = 'Shougo/ddc-converter_remove_overlap'
+# 
+# [[plugins]]
+# depends = ['ddc.vim', 'vim-lsp']
+# on_source = ['ddc.vim', 'vim-lsp']
+# repo = 'shun/ddc-vim-lsp'
+# 
+# [[plugins]]
+# on_source = 'ddc.vim'
+# repo = 'LumaKernel/ddc-file'
+# 
+# [[plugins]]
+# on_source = 'ddc.vim'
+# repo = 'delphinus/ddc-treesitter'
+# 
+# [[plugins]]
+# depends = ['ultisnips']
+# on_source = 'ddc.vim'
+# repo = 'matsui54/ddc-ultisnips'
+# 
+# [[plugins]]
+# on_source = 'ddc.vim'
+# repo = 'gamoutatsumi/ddc-emoji'

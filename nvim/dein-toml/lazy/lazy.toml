@@ -35,22 +35,22 @@ on_event = ['InsertEnter']
 
 [[plugins]]
 hook_add = '''
-nnoremap <F5> :UndotreeToggle<CR>
+nnoremap <F5> <cmd>UndotreeToggle<CR>
 '''
 on_cmd = ['UndotreeToggle']
 repo = 'mbbill/undotree'
 
 [[plugins]]
 hook_add = '''
-nnoremap <F22> :QuickRun<CR>
-nnoremap <S-F10> :QuickRun<CR>
+nnoremap <F22> <cmd>QuickRun<CR>
+nnoremap <S-F10> <cmd>QuickRun<CR>
 '''
-on_cmd = [':QuickRun']
+on_cmd = ['QuickRun']
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
 hook_add = '''
-nnoremap <M-1> :NvimTreeToggle<CR>
+nnoremap <M-1> <cmd>NvimTreeToggle<CR>
 '''
 hook_post_source = '''
 lua <<EOF
@@ -124,14 +124,9 @@ hook_post_source = '''
 "source $HOME/.config/nvim/plug_confs/nvim-treesitter.vim
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = "all",
-
   highlight = {
-    -- `false` will disable the whole extension
     enable = true,
-
-   -- list of language that will be disabled
     disable = {"vim", "lua"},
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -147,7 +142,8 @@ require'nvim-treesitter.configs'.setup {
     max_file_lines = nil, -- Do not enable for files with more than n lines, int
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings
-    }
+    },
+  yati = {enable =true}
 }
 EOF
 '''
@@ -159,6 +155,29 @@ repo = 'nvim-treesitter/nvim-treesitter'
 depends = ['nvim-treesitter']
 on_source = 'nvim-treesitter'
 repo = 'p00f/nvim-ts-rainbow'
+
+[[plugins]] 
+depends=['nvim-treesitter']
+repo = 'yioneko/nvim-yati'
+on_source= ['nvim-treesitter']
+
+[[plugins]]
+repo = 'SmiteshP/nvim-gps'
+depends=['nvim-treesitter']
+on_source= ['nvim-treesitter']
+hook_post_source= '''
+lua <<EOF
+local gps = require("nvim-gps")
+require("lualine").setup({
+sections = {
+lualine_c = {
+{gps.get_location, cond = gps.is_available},
+}
+}
+})
+EOF
+
+'''
 
 # [[plugins]]
 # hook_add = '''
@@ -185,15 +204,70 @@ repo = 'p00f/nvim-ts-rainbow'
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
-on_event = ['insertEnter']
+on_source = ['nvim-lsp-installer']
+depends = 'nvim-lsp-installer'
+hook_post_source = '''
+lua <<EOF
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-l>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+-- local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+
+
+local installer = require("nvim-lsp-installer")
+installer.setup {}
+local servers = installer.get_installed_servers()
+  -- print(dump(servers))
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+for _, server in pairs(servers) do
+  require("lspconfig")[server.name].setup {
+    on_attach = on_attach,
+    capabilities= capabilities,
+  }
+end
+EOF
+'''
 
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-on_source = ['nvim-lspconfig']
+on_event= ['insertEnter']
 
 [[plugins]]
-repo = 'hrsh7th/nvim-cmp'
 on_event=['insertEnter']
+repo = 'hrsh7th/nvim-cmp'
 hook_post_source = '''
 lua <<EOF
   -- Setup nvim-cmp.
@@ -216,25 +290,30 @@ lua <<EOF
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#intellij-like-mapping
-      ["<Tab>"] = cmp.mapping(function(fallback)
-      -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+      ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        local entry = cmp.get_selected_entry()
-	if not entry then
-	  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-	else
-	  cmp.confirm()
-	end
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
-    end, {"i","s","c",}),
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'ultisnips' }, -- For ultisnips users.
       { name = 'nvim_lsp_signature_help' },
+      { name = 'path' },
     }, {
       { name = 'buffer' },
 
@@ -269,13 +348,14 @@ lua <<EOF
   })
 
   -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
   -- require('lspconfig')['YOUR_LSP_SERVER'].setup {
   --   capabilities = capabilities
   -- }
   -- require('lspconfig')['taplo'].setup {}
+-- end
+-- end
 EOF
 '''
 
@@ -286,6 +366,10 @@ depends = ['nvim-lspconfig','nvim-cmp']
 
 [[plugins]]
 repo = 'quangnguyen30192/cmp-nvim-ultisnips'
+on_source = ['nvim-cmp']
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+on_source=['nvim_lsp']
 
 [[plugins]]
 hook_add = '''
@@ -298,6 +382,19 @@ repo = 'SirVer/ultisnips'
 repo= 'hrsh7th/cmp-nvim-lsp-signature-help'
 on_source=['nvim-cmp']
 
+[[plugins]]
+repo = 'stevearc/aerial.nvim'
+hook_post_source= '''
+lua << EOF
+require('aerial').setup{
+default_bindings = false,
+}
+EOF
+'''
+hook_add = '''
+nnoremap <M-2> :AerialToggle left<CR>
+'''
+on_cmd = ['AerialToggle']
 # [[plugins]]
 # repo = 'prabirshrestha/async.vim'
 # 

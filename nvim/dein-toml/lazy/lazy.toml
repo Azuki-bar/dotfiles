@@ -263,10 +263,10 @@ EOF
 
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-on_event= ['insertEnter']
+on_event= ['VimEnter']
 
 [[plugins]]
-on_event=['insertEnter']
+on_event=['VimEnter']
 repo = 'hrsh7th/nvim-cmp'
 hook_post_source = '''
 lua <<EOF
@@ -387,12 +387,12 @@ repo = 'stevearc/aerial.nvim'
 hook_post_source= '''
 lua << EOF
 require('aerial').setup{
-default_bindings = false,
 }
 EOF
 '''
 hook_add = '''
 nnoremap <M-2> :AerialToggle left<CR>
+
 '''
 on_cmd = ['AerialToggle']
 # [[plugins]]

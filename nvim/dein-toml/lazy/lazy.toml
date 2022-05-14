@@ -1,12 +1,27 @@
+# [[plugins]]
+# hook_add = '''
+# let g:lexima_enable_endwise_rules = 1
+# let g:lexima_enable_newline_rules = 1
+# '''
+# on_event = ['InsertEnter']
+# repo = 'cohama/lexima.vim'
+
 [[plugins]]
-hook_add = '''
-let g:lexima_enable_endwise_rules = 1
-let g:lexima_enable_newline_rules = 1
-'''
+repo = 'windwp/nvim-autopairs'
 on_event = ['InsertEnter']
-repo = 'cohama/lexima.vim'
+hook_post_source = '''
+lua <<EOF
+require('nvim-autopairs').setup{}
 
+local cmp = require("nvim-cmp")
+-- https://github.com/windwp/nvim-autopairs#you-need-to-add-mapping-cr-on-nvim-cmp-setupcheck-readmemd-on-nvim-cmp-repo
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+-- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
+cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
 
+EOF
+'''
 [[plugins]]
 repo = '907th/vim-auto-save'
 # repo = 'vim-scripts/vim-auto-save'
@@ -103,11 +118,11 @@ setlocal shiftwidth=2
 # on_ft = ['plaintex', 'tex']
 # repo = 'lervag/vimtex'
 
-# [[plugins]]
-# build = 'sh -c "cd app && yarn install"'
-# on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-# repo = 'iamcco/markdown-preview.nvim'
-# 
+[[plugins]]
+build = 'sh -c "cd app && yarn install"'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+repo = 'iamcco/markdown-preview.nvim'
+
 # [[plugins]]
 # hook_add = '''
 # let g:vim_markdown_folding_disabled = 1
@@ -133,7 +148,7 @@ require'nvim-treesitter.configs'.setup {
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
+    -- additional_vim_regex_highlighting = false,
   },
   rainbow = {
     enable = true,
@@ -143,7 +158,8 @@ require'nvim-treesitter.configs'.setup {
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings
     },
-  yati = {enable =true}
+  indent = { enable =false },
+  yati = {enable =true},
 }
 EOF
 '''
@@ -157,50 +173,27 @@ on_source = 'nvim-treesitter'
 repo = 'p00f/nvim-ts-rainbow'
 
 [[plugins]] 
-depends=['nvim-treesitter']
 repo = 'yioneko/nvim-yati'
 on_source= ['nvim-treesitter']
+depends=['nvim-treesitter']
 
 [[plugins]]
 repo = 'SmiteshP/nvim-gps'
-depends=['nvim-treesitter']
-on_source= ['nvim-treesitter']
+depends = ['nvim-treesitter']
+on_source = ['nvim-treesitter']
 hook_post_source= '''
 lua <<EOF
 local gps = require("nvim-gps")
-require("lualine").setup({
-sections = {
-lualine_c = {
-{gps.get_location, cond = gps.is_available},
-}
-}
-})
+-- require("lualine").setup({
+-- sections = {
+-- lualine_c = {
+-- {gps.get_location, cond = gps.is_available},
+-- }
+-- }
+-- })
 EOF
 
 '''
-
-# [[plugins]]
-# hook_add = '''
-# " check with C-k and key result
-# " vim help key-notaion
-# nnoremap <A-l> :LspDocumentFormat<CR>
-# noremap <S-F6> :LspRename<CR>
-# noremap <F18> :LspRename<CR>
-# let g:lsp_fold_enabled = 0
-# let g:lsp_document_highlight_enabled = 0
-# '''
-# on_event = 'VimEnter'
-# repo = 'prabirshrestha/vim-lsp'
-# 
-# [[plugins]]
-# depends = ['vim-lsp']
-# on_source = ['vim-lsp']
-# repo = 'mattn/vim-lsp-settings'
-# 
-# [[plugins]]
-# depends = ['vim-lsp']
-# on_source = ['vim-lsp']
-# repo = 'mattn/vim-lsp-icons'
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
@@ -210,7 +203,7 @@ hook_post_source = '''
 lua <<EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap=true, silent=false}
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
@@ -263,7 +256,7 @@ EOF
 
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-on_event= ['VimEnter']
+on_event= ['BufRead']
 
 [[plugins]]
 on_event=['VimEnter']
@@ -293,8 +286,6 @@ lua <<EOF
       ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -302,8 +293,6 @@ lua <<EOF
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -356,6 +345,7 @@ lua <<EOF
   -- require('lspconfig')['taplo'].setup {}
 -- end
 -- end
+
 EOF
 '''
 
@@ -391,68 +381,10 @@ require('aerial').setup{
 EOF
 '''
 hook_add = '''
-nnoremap <M-2> :AerialToggle left<CR>
+nnoremap <M-2> <cmd>AerialToggle left<CR>
 
 '''
 on_cmd = ['AerialToggle']
-# [[plugins]]
-# repo = 'prabirshrestha/async.vim'
-# 
-# [[plugins]]
-# depends = ['ultisnips', 'async.vim', 'vim-lsp']
-# on_source = ['vim-lsp']
-# repo = 'thomasfaingnaert/vim-lsp-ultisnips'
-# hook_post_source = '''
-# let g:UltiSnipsExpandTrigger="<tab>"
-# let g:UltiSnipsJumpForwardTrigger="<tab>"
-# let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-# '''
-# [[plugins]]
-# depends = ['denops.vim']
-# hook_source = '''
-# source $HOME/.config/nvim/plug_confs/ddc.vim
-# '''
-# on_event = ['insertEnter']
-# repo = 'Shougo/ddc.vim'
-# 
-# [[plugins]]
-# on_source = 'ddc.vim'
-# repo = 'Shougo/ddc-around'
-# 
-# [[plugins]]
-# on_source = 'ddc.vim'
-# repo = 'Shougo/ddc-matcher_head'
-# 
-# [[plugins]]
-# on_source = 'ddc.vim'
-# repo = 'tani/ddc-fuzzy'
-# 
-# [[plugins]]
-# on_source = 'ddc.vim'
-# repo = 'Shougo/ddc-converter_remove_overlap'
-# 
-# [[plugins]]
-# depends = ['ddc.vim', 'vim-lsp']
-# on_source = ['ddc.vim', 'vim-lsp']
-# repo = 'shun/ddc-vim-lsp'
-# 
-# [[plugins]]
-# on_source = 'ddc.vim'
-# repo = 'LumaKernel/ddc-file'
-# 
-# [[plugins]]
-# on_source = 'ddc.vim'
-# repo = 'delphinus/ddc-treesitter'
-# 
-# [[plugins]]
-# depends = ['ultisnips']
-# on_source = 'ddc.vim'
-# repo = 'matsui54/ddc-ultisnips'
-# 
-# [[plugins]]
-# on_source = 'ddc.vim'
-# repo = 'gamoutatsumi/ddc-emoji'
-
 
 [[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
@@ -492,6 +424,7 @@ nnoremap <M-g> <cmd>Telescope live_grep<CR>
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 on_event = 'VimEnter'
+
 
 [[plugins]]
 repo = 'BurntSushi/ripgrep'

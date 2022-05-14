@@ -46,9 +46,6 @@ set clipboard=unnamedplus
 
 set wrap
 
-" 80列目に縦線を入れる
-set colorcolumn=80
-
 " :eで開くときにファイル候補表示
 set wildmenu 
 

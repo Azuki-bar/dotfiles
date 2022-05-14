@@ -2,10 +2,10 @@
 set expandtab
 
 " インデント幅
-set shiftwidth=4
+set shiftwidth=2
 
 " タブキー押下時に挿入される文字幅を指定
-set softtabstop=4
+set softtabstop=2
 
 " オートインデント
 " set autoindent

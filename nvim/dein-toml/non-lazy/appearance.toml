@@ -1,27 +1,27 @@
-[[plugins]]
-hook_add = '''
-augroup MyAutoCmd
-  autocmd!
-augroup END
-autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark 
-'''
-hook_post_source = '''
-lua <<EOD
-require('onedark').setup {
-    style = 'darker'
-}
-EOD
-'''
-repo = 'navarasu/onedark.nvim'
-merged = 0
+# [[plugins]]
+# hook_add = '''
+# augroup MyAutoCmd
+#   autocmd!
+# augroup END
+# autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark 
+# '''
+# hook_post_source = '''
+# lua <<EOD
+# require('onedark').setup {
+#     style = 'darker'
+# }
+# EOD
+# '''
+# repo = 'navarasu/onedark.nvim'
+# merged = 0
+# 
 
 [[plugins]]
-depends = ['onedark.nvim']
 hook_post_source = '''
 lua << EOF
 require('lualine').setup {
     options = {
-        theme = 'onedark'
+        theme = 'iceberg_dark'
     }
 }
 EOF
@@ -29,6 +29,18 @@ EOF
 merged = 0
 #on_source = ['onedark.nvim']
 repo = 'nvim-lualine/lualine.nvim'
+
+[[plugins]]
+hook_add = '''
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
+"colorscheme onedark
+let g:onedark_termcolors=256
+autocmd MyAutoCmd VimEnter * ++nested colorscheme iceberg
+'''
+repo = 'cocopon/iceberg.vim'
 
 #[[plugins]]
 #hook_add = '''
@@ -66,3 +78,10 @@ repo = 'nvim-lualine/lualine.nvim'
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
 
+[[plugins]]
+repo = 'crispgm/nvim-tabline'
+hook_post_source = """
+lua <<EOF
+require("tabline").setup{}
+EOF
+"""

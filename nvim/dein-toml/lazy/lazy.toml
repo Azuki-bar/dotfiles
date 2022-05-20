@@ -197,7 +197,7 @@ EOF
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
-on_source = ['nvim-lsp-installer']
+on_source = ['VimEnter']
 depends = 'nvim-lsp-installer'
 hook_post_source = '''
 lua <<EOF
@@ -256,7 +256,7 @@ EOF
 
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-on_event= ['BufRead']
+on_event= ['VimEnter']
 
 [[plugins]]
 on_event=['VimEnter']
@@ -439,3 +439,17 @@ repo = 'nvim-telescope/telescope-fzf-native.nvim'
 on_event = 'VimEnter'
 build = 'make'
 
+[[plugins]]
+repo = 'twitvim/twitvim'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'mattn/vim-maketable'
+on_ft=['markdown']
+
+[[plugins]]
+repo = 'prettier/vim-prettier'
+on_ft=['markdown']
+hook_post_source = '''
+nnoremap <M-l> <cmd>PrettierAsync<CR>
+'''

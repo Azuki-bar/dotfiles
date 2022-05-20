@@ -53,7 +53,7 @@ set wildmenu
 set clipboard=unnamedplus
 
 " ★が崩れるのを解決
-set ambiwidth=double
+"set ambiwidth=double
 
 " カーソルラインハイライト
 set cursorline

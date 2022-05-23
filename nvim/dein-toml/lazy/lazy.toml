@@ -451,5 +451,6 @@ on_ft=['markdown']
 repo = 'prettier/vim-prettier'
 on_ft=['markdown']
 hook_post_source = '''
-nnoremap <M-l> <cmd>PrettierAsync<CR>
+"nnoremap <M-l> <cmd>PrettierAsync<CR>
 '''
+

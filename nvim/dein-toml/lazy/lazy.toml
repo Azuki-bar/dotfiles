@@ -500,3 +500,13 @@ let g:neoformat_enabled_markdown = ['prettier']
 "let g:neoformat_verbose = 1
 '''
 on_cmd = ['NeoFormat']
+
+[[plugins]]
+repo ='akinsho/bufferline.nvim'
+on_event = ['VimEnter']
+hook_post_source = '''
+set termguicolors
+lua << EOF
+require("bufferline").setup{}
+EOF
+'''

@@ -8,17 +8,10 @@
 
 [[plugins]]
 repo = 'windwp/nvim-autopairs'
-on_event = ['InsertEnter']
+on_source = ['InsertEnter']
 hook_post_source = '''
 lua <<EOF
-require('nvim-autopairs').setup{}
-
-local cmp = require("nvim-cmp")
--- https://github.com/windwp/nvim-autopairs#you-need-to-add-mapping-cr-on-nvim-cmp-setupcheck-readmemd-on-nvim-cmp-repo
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
--- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
-cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
+require('nvim-autopairs').setup {}
 
 EOF
 '''
@@ -138,28 +131,28 @@ repo = 'iamcco/markdown-preview.nvim'
 hook_post_source = '''
 "source $HOME/.config/nvim/plug_confs/nvim-treesitter.vim
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
-  highlight = {
-    enable = true,
-    disable = {"vim", "lua"},
+require("nvim-treesitter.configs").setup {
+    ensure_installed = "all",
+    highlight = {
+        enable = true
+        -- disable = {"vim", "lua"},
 
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    -- additional_vim_regex_highlighting = false,
-  },
-  rainbow = {
-    enable = true,
-    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-    -- colors = {}, -- table of hex strings
-    -- termcolors = {} -- table of colour name strings
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        -- additional_vim_regex_highlighting = false,
     },
-  indent = { enable =false },
-  yati = {enable =true},
+    rainbow = {
+        enable = true,
+        -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+        extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+        max_file_lines = nil -- Do not enable for files with more than n lines, int
+        -- colors = {}, -- table of hex strings
+        -- termcolors = {} -- table of colour name strings
+    },
+    indent = {enable = false},
+    yati = {enable = true}
 }
 EOF
 '''
@@ -167,21 +160,22 @@ merged = 0
 on_event = 'VimEnter'
 repo = 'nvim-treesitter/nvim-treesitter'
 
+
 [[plugins]]
 depends = ['nvim-treesitter']
 on_source = 'nvim-treesitter'
 repo = 'p00f/nvim-ts-rainbow'
 
-[[plugins]] 
+[[plugins]]
 repo = 'yioneko/nvim-yati'
-on_source= ['nvim-treesitter']
-depends=['nvim-treesitter']
+on_source = ['nvim-treesitter']
+depends = ['nvim-treesitter']
 
 [[plugins]]
 repo = 'SmiteshP/nvim-gps'
 depends = ['nvim-treesitter']
 on_source = ['nvim-treesitter']
-hook_post_source= '''
+hook_post_source = '''
 lua <<EOF
 local gps = require("nvim-gps")
 -- require("lualine").setup({
@@ -203,64 +197,71 @@ hook_post_source = '''
 lua <<EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=false}
-vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+local opts = {noremap = true, silent = false}
+vim.api.nvim_set_keymap('n', '<space>e',
+                        '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
+                        opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>',
+                        opts)
+vim.api.nvim_set_keymap('n', '<space>q',
+                        '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Enable completion triggered by <c-x><c-o>
+    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F18>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-l>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F18>',
+                                '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-l>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
 
-
 local installer = require("nvim-lsp-installer")
 installer.setup {}
 local servers = installer.get_installed_servers()
-  -- print(dump(servers))
+-- print(dump(servers))
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
+                                                                     .protocol
+                                                                     .make_client_capabilities())
 
 for _, server in pairs(servers) do
-  require("lspconfig")[server.name].setup {
-    on_attach = on_attach,
-    capabilities= capabilities,
-  }
+    require("lspconfig")[server.name].setup {
+        on_attach = on_attach,
+        capabilities = capabilities
+    }
 end
 EOF
 '''
 
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-on_event= ['VimEnter']
+on_event = ['VimEnter']
 
 [[plugins]]
-on_event=['VimEnter']
+on_event = ['VimEnter']
 repo = 'hrsh7th/nvim-cmp'
+depends = ['nvim-autopairs']
 hook_post_source = '''
 lua <<EOF
   -- Setup nvim-cmp.
@@ -346,20 +347,33 @@ lua <<EOF
 -- end
 -- end
 
+-- https://github.com/windwp/nvim-autopairs#you-need-to-add-mapping-cr-on-nvim-cmp-setupcheck-readmemd-on-nvim-cmp-repo
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on('confirm_done',
+             cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))
+-- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
+cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
+
 EOF
 '''
 
 [[plugins]]
 repo = 'hrsh7th/cmp-nvim-lsp'
 on_source = ['nvim-cmp']
-depends = ['nvim-lspconfig','nvim-cmp']
+depends = ['nvim-lspconfig', 'nvim-cmp']
 
 [[plugins]]
 repo = 'quangnguyen30192/cmp-nvim-ultisnips'
 on_source = ['nvim-cmp']
+depends = ['nvim-cmp']
+
 [[plugins]]
 repo = 'hrsh7th/cmp-path'
-on_source=['nvim_lsp']
+on_source = ['nvim_cmp']
+hook_post_source = '''
+echo 'loaded path'
+'''
+depends = ['nvim-cmp']
 
 [[plugins]]
 hook_add = '''
@@ -369,12 +383,12 @@ let g:UltiSnipsExpandTrigger = "<C-l>"
 repo = 'SirVer/ultisnips'
 
 [[plugins]]
-repo= 'hrsh7th/cmp-nvim-lsp-signature-help'
-on_source=['nvim-cmp']
+repo = 'hrsh7th/cmp-nvim-lsp-signature-help'
+on_source = ['nvim-cmp']
 
 [[plugins]]
 repo = 'stevearc/aerial.nvim'
-hook_post_source= '''
+hook_post_source = '''
 lua << EOF
 require('aerial').setup{
 }
@@ -389,29 +403,26 @@ on_cmd = ['AerialToggle']
 [[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
 # depends = ['plenary.nvim','ripgrep','fd','telescope-fzf-native.nvim']
-depends = ['plenary.nvim','ripgrep','fd']
+depends = ['plenary.nvim', 'ripgrep', 'fd']
 on_event = 'VimEnter'
-hook_post_source= """
+hook_post_source = """
 lua <<EOF
 local actions = require("telescope.actions")
-
 require('telescope').setup {
-  defaults = {
-    mappings = {
-        i = {
-            ["<esc>"] = actions.close,
+    defaults = {
+        mappings = {i = {["<esc>"] = actions.close}},
+        -- https://github.com/nvim-telescope/telescope.nvim/issues/938
+        themes = require("telescope.themes").get_dropdown
         },
+    extensions = {
+        fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case" -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+        }
     }
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
-    }
-  }
 }
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
@@ -419,6 +430,7 @@ require('telescope').load_extension('fzf')
 EOF
 nnoremap <M-f> <cmd>Telescope<CR>
 nnoremap <M-g> <cmd>Telescope live_grep<CR>
+nnoremap <M-b> <cmd>Telescope lsp_references<CR>
 """
 
 [[plugins]]
@@ -431,7 +443,7 @@ repo = 'BurntSushi/ripgrep'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo ='sharkdp/fd'
+repo = 'sharkdp/fd'
 on_event = 'VimEnter'
 
 [[plugins]]
@@ -445,12 +457,46 @@ on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
-on_ft=['markdown']
+on_ft = ['markdown']
+
+# [[plugins]]
+# repo = 'prettier/vim-prettier'
+# on_ft=['markdown']
+# hook_post_source = '''
+# "nnoremap <M-l> <cmd>PrettierAsync<CR>
+# '''
+
 
 [[plugins]]
-repo = 'prettier/vim-prettier'
-on_ft=['markdown']
+repo = 'numToStr/Comment.nvim'
+on_event = 'BufRead'
 hook_post_source = '''
-"nnoremap <M-l> <cmd>PrettierAsync<CR>
+lua << EOF
+require('Comment').setup()
+EOF
 '''
 
+
+[[plugins]]
+repo = 'folke/trouble.nvim'
+on_event = 'BufRead'
+hook_post_source = '''
+lua << EOF
+  require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+'''
+
+[[plugins]]
+repo = 'sbdchd/neoformat'
+hook_add = '''
+nnoremap <M-l> <cmd>Neoformat<CR>
+'''
+hook_post_source = '''
+let g:neoformat_enabled_markdown = ['prettier']
+"let g:neoformat_verbose = 1
+'''
+on_cmd = ['NeoFormat']

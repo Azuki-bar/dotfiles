@@ -35,8 +35,8 @@ sunmap ge
 '''
 repo = 'bkad/CamelCaseMotion'
 
-[[plugins]]
-repo = 'tpope/vim-commentary'
+# [[plugins]]
+# repo = 'tpope/vim-commentary'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'

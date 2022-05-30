@@ -76,12 +76,28 @@ repo = 'cocopon/iceberg.vim'
 # '''
 
 [[plugins]]
-repo = 'ryanoasis/vim-devicons'
-
-[[plugins]]
 repo = 'crispgm/nvim-tabline'
 hook_post_source = """
 lua <<EOF
 require("tabline").setup{}
 EOF
 """
+
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+
+# [[plugins]]
+# repo = 'lukas-reineke/indent-blankline.nvim'
+# hook_post_source = '''
+# lua <<EOF
+# require("indent_blankline").setup {
+#     -- for example, context is off by default, use this to turn it on
+#     show_current_context = true,
+#     show_current_context_start = true,
+# }
+# EOF
+# '''

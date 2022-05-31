@@ -1,9 +1,9 @@
-# [[plugins]]
+[[plugins]]
 # hook_add = '''
 # augroup MyAutoCmd
 #   autocmd!
 # augroup END
-# autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark 
+# autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark
 # '''
 # hook_post_source = '''
 # lua <<EOD
@@ -12,9 +12,9 @@
 # }
 # EOD
 # '''
-# repo = 'navarasu/onedark.nvim'
-# merged = 0
-# 
+repo = 'navarasu/onedark.nvim'
+merged = 0
+
 
 [[plugins]]
 hook_post_source = '''
@@ -27,7 +27,6 @@ require('lualine').setup {
 EOF
 '''
 merged = 0
-#on_source = ['onedark.nvim']
 repo = 'nvim-lualine/lualine.nvim'
 
 [[plugins]]

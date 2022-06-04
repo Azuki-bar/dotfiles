@@ -6,17 +6,19 @@ alias vi='nvim'
 alias vim='nvim'
 alias ls='exa'
 alias chmod='chmod --preserve-root'
+alias ip='ip --color=auto'
+alias cp='cp -i'
 #status --is-interactive; and source (rbenv init -|psub)
 
 set -g theme_display_date no
 set -g theme_display_cmd_duration no
-set -g theme_color_scheme solarized-light
+#set -g theme_color_scheme solarized-light
 set -gx GPG_TTY (tty)
 
 # https://wiki.archlinux.org/title/GNOME/Keyring
-if test -n "$DESKTOP_SESSION"
-    set -x (gnome-keyring-daemon --start | string split "=")
-end
+# if test -n "$DESKTOP_SESSION"
+#     set -x (gnome-keyring-daemon --start | string split "=")
+# end
 
 # set -xU LESS_TERMCAP_md (printf "\e[01;31m")
 # set -xU LESS_TERMCAP_me (printf "\e[0m")
@@ -26,3 +28,4 @@ end
 # set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
 set -xU MANPAGER 'less -R --use-color -Dd+r -Du+b'
+kubectl completion fish |source

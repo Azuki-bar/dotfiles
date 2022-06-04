@@ -27,8 +27,7 @@ font pango:ubuntu 9
 
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # Myconfig
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3locker.sh 
-# exec --no-startup-id xss-lock --transfer-sleep-lock -n "xset dpms force off" -- i3lock -n -i `ls $HOME/Pictures/wallpaper/png_image/*.png |shuf -n1`
+
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -i "$HOME/Pictures/wallpaper/png_image/tokyo-station.png"
 # end
 exec --no-startup-id fcitx5
@@ -264,3 +263,9 @@ title_align center
 
 # client.background       #ffffff
 
+exec --no-startup-id picom
+exec --no-startup-id light-locker
+
+for_window [class="zoom"] floating enable
+for_window [class="zoom" title="Zoom - Licensed Account"] floating disable
+for_window [class="zoom" title="Zoom Meeting"] floating disable

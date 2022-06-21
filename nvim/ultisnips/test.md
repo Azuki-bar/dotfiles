@@ -1,7 +1,3 @@
-***
+---
 
-title: hoge
-author:  fuga
--------------
-
-
+## title: hogeauthor: fuga

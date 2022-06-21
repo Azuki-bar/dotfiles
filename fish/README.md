@@ -1,4 +1,5 @@
 現在のconfig.fish
+
 ```fish
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
@@ -15,13 +16,12 @@ set -g theme_color_scheme solarized-light
 if test -n "$DESKTOP_SESSION"
     set -x (gnome-keyring-daemon --start | string split "=")
 end
-
 ```
 
 `fish_plugins`
+
 ```fish
 jorgebucaran/fisher
 oh-my-fish/theme-bobthefish
 edc/bass
-
 ```

@@ -1,5 +1,6 @@
 # how to setup git
-```toml 
+
+```toml
 [user]
 	name = Azuki-bar
 	email = 42642269+Azuki-bar@users.noreply.github.com

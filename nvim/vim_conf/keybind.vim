@@ -29,6 +29,11 @@ nnoremap Q <Nop>
 
 nnoremap <silent> j gj
 nnoremap <silent> k gk
-nnoremap gj j
-nnoremap gk k
+nnoremap <silent> gj j
+nnoremap <silent> gk k
 
+" tnoremap <Esc> <C-\><C-n>
+" 
+" command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
+" autocmd TermOpen * startinsert
+" 

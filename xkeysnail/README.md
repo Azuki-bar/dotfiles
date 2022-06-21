@@ -15,6 +15,7 @@ Environment=DISPLAY=:0
 [Install]
 WantedBy=default.target
 ```
+
 please write this script to `~/.config/systemd/user/xkeysnail.service`
 
 ```bash

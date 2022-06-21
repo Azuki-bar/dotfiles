@@ -1,10 +1,13 @@
 # arch linux package list
 
 pacmanでインストールしたパッケージのリスト取得
+
 ```
-pacman -Qqen 
+pacman -Qqen
 ```
+
 yayでAURからインストールしたパッケージのリスト取得
+
 ```
 pacman -Qqem
 ```

@@ -15,7 +15,6 @@
 repo = 'navarasu/onedark.nvim'
 merged = 0
 
-
 [[plugins]]
 hook_add = '''
 augroup MyAutoCmd
@@ -28,23 +27,23 @@ autocmd MyAutoCmd VimEnter * ++nested colorscheme iceberg
 '''
 repo = 'cocopon/iceberg.vim'
 
-#[[plugins]]
-#hook_add = '''
-#augroup MyAutoCmd
+# [[plugins]]
+# hook_add = '''
+# augroup MyAutoCmd
 #  autocmd!
-#augroup END
+# augroup END
 # "colorscheme onedark
-#let g:onedark_termcolors=256
-#autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark 
-#'''
-#repo = 'joshdick/onedark.vim'
+# let g:onedark_termcolors=256
+# autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark
+# '''
+# repo = 'joshdick/onedark.vim'
 
 # [[plugins]]
 # hook_add = '''
 # source $HOME/.config/nvim/plug_confs/vim-airline.vim
 # '''
 # repo = 'vim-airline/vim-airline'
-# 
+#
 # [[plugins]]
 # depends = ['vim-airline']
 # hook_add = '''
@@ -55,7 +54,7 @@ repo = 'cocopon/iceberg.vim'
 # [[plugins]]
 # repo = 'ayu-theme/ayu-vim'
 # hook_add = '''
-# set termguicolors 
+# set termguicolors
 # let ayucolor="mirage"
 # colorscheme ayu
 # '''

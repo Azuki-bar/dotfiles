@@ -21,7 +21,6 @@ let g:precious_enable_switchers = {
 '''
 repo = 'osyo-manga/vim-precious'
 
-
 [[plugins]]
 hook_post_source = '''
 map <silent> w <Plug>CamelCaseMotion_w
@@ -46,4 +45,3 @@ repo = 'tpope/vim-repeat'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
-

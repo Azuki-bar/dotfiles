@@ -8,7 +8,15 @@ alias ls='exa'
 alias chmod='chmod --preserve-root'
 alias ip='ip --color=auto'
 alias cp='cp -i'
+alias cat='bat'
+alias diff='delta -s'
 #status --is-interactive; and source (rbenv init -|psub)
+
+if test -n "$DESKTOP_SESSION"
+    for env_var in (gnome-keyring-daemon --start)
+        set -x (echo $env_var | string split "=")
+    end
+end
 
 set -g theme_display_date no
 set -g theme_display_cmd_duration no
@@ -27,5 +35,7 @@ set -gx GPG_TTY (tty)
 # set -xU LESS_TERMCAP_ue (printf "\e[0m")
 # set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
+set -gx PATH $PATH $HOME/.krew/bin
 set -xU MANPAGER 'less -R --use-color -Dd+r -Du+b'
 kubectl completion fish |source
+kubectl krew completion fish |source

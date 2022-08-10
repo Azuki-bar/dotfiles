@@ -7,6 +7,7 @@ for file in splt
 	" ファイルの読み込み
 	execute 'source' file
 endfor
+colorscheme iceberg
 
 " thank you for https://qiita.com/reireias/items/230c77b3ff5575832654
 " thank you for https://qiita.com/iwaseasahi/items/0b2da68269397906c14c

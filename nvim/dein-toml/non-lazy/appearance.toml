@@ -17,13 +17,9 @@ merged = 0
 
 [[plugins]]
 hook_add = '''
-augroup MyAutoCmd
-   autocmd!
-augroup END
-
-"colorscheme iceberg
+colorscheme iceberg
 "let g:onedark_termcolors=256
-autocmd MyAutoCmd VimEnter * ++nested colorscheme iceberg
+"autocmd MyAutoCmd VimEnter * ++nested colorscheme iceberg
 '''
 repo = 'cocopon/iceberg.vim'
 

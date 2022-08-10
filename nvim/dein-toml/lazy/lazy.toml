@@ -35,7 +35,8 @@ hook_post_source = '''
 let g:quickrun_config = {
 \   "_" : {
 \       "outputter/buffer/split" : ":botright",
-\       "outputter/buffer/close_on_empty" : 1
+\       "outputter/buffer/close_on_empty" : 1,
+\       "runner/job": 1
 \   },
 \   "markdown": {
 \     "command": "md2pdf",
@@ -44,7 +45,12 @@ let g:quickrun_config = {
 \}
 '''
 on_cmd = ['QuickRun']
+depends = ['vimproc.vim']
 repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
 
 [[plugins]]
 on_cmd = ['NvimTreeToggle']
@@ -72,19 +78,6 @@ EOF
 '''
 repo = 'kyazdani42/nvim-tree.lua'
 
-[[plugins]]
-depends = 'denops'
-hook_post_source = '''
-nmap  <C-a>  <Plug>(dps-dial-increment)
-nmap  <C-x>  <Plug>(dps-dial-decrement)
-xmap  <C-a>  <Plug>(dps-dial-increment)
-xmap  <C-x>  <Plug>(dps-dial-decrement)
-xmap g<C-a> g<Plug>(dps-dial-increment)
-xmap g<C-x> g<Plug>(dps-dial-decrement)
-'''
-on_source = ['denops']
-repo = 'monaqa/dps-dial.vim'
-
 [ftplugin]
 go = '''
 set tabstop=2
@@ -96,38 +89,10 @@ setlocal tabstop=2
 setlocal shiftwidth=2
 '''
 
-# [[plugins]]
-# hook_source = '''
-#     set shellslash
-#     let g:vimtex_compiler_progname = 'nvr'
-#     let g:vimtex_view_general_viewer = 'evince'
-#     let g:vimtex_compiler_latexmk = {
-#     \     'background': 1,
-#     \     'build_dir': '',
-#     \     'executable': 'latexmk',
-#     \     'options': [
-#     \     '-lualatex',
-#     \    ],
-#     \}
-# '''
-# on_ft = ['plaintex', 'tex']
-# repo = 'lervag/vimtex'
-
 [[plugins]]
 build = 'sh -c "cd app && yarn install"'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
 repo = 'iamcco/markdown-preview.nvim'
-
-# [[plugins]]
-# hook_add = '''
-# let g:vim_markdown_folding_disabled = 1
-# let g:vim_markdown_math = 0
-# let g:vim_markdown_new_list_item_indent = 2
-# let g:vim_markdown_auto_iinsert_bullets= 0
-# let g:vim_markdown_conceal = 0
-# '''
-# on_ft = ['markdown']
-# repo = 'preservim/vim-markdown'
 
 [[plugins]]
 hook_post_source = '''
@@ -151,9 +116,9 @@ require("nvim-treesitter.configs").setup {
         max_file_lines = 100 -- Do not enable for files with more than n lines, int
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
-    }
+    },
     -- indent = {enable = false},
-    -- yati = {enable = true}
+    yati = {enable = true}
 }
 EOF
 '''
@@ -164,9 +129,61 @@ repo = 'nvim-treesitter/nvim-treesitter'
 
 [[plugins]]
 repo = 'p00f/nvim-ts-rainbow'
+on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'yioneko/nvim-yati'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter-context'
+on_event = 'VimEnter'
+hook_post_source = '''
+lua <<EOF
+require'treesitter-context'.setup{
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+    patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        -- For all filetypes
+        -- Note that setting an entry here replaces all other patterns for this entry.
+        -- By setting the 'default' entry below, you can control which nodes you want to
+        -- appear in the context window.
+        default = {
+            'class',
+            'function',
+            'method',
+            -- 'for', -- These won't appear in the context
+            -- 'while',
+            -- 'if',
+            -- 'switch',
+            -- 'case',
+        },
+        -- Example for a specific filetype.
+        -- If a pattern is missing, *open a PR* so everyone can benefit.
+        --   rust = {
+        --       'impl_item',
+        --   },
+    },
+    exact_patterns = {
+        -- Example for a specific filetype with Lua patterns
+        -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+        -- exactly match "impl_item" only)
+        -- rust = true,
+    },
+
+    -- [!] The options below are exposed but shouldn't require your attention,
+    --     you can safely ignore them.
+
+    zindex = 20, -- The Z-index of the context window
+    mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+}
+EOF
+'''
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter-refactor'
+on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'SmiteshP/nvim-gps'
@@ -188,24 +205,21 @@ on_source = 'UIEnter'
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 on_source = ['VimEnter']
-depends = ['nvim-lsp-installer']
+depends = ['mason.nvim', 'vim-illuminate']
 hook_post_source = '''
 lua <<EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = {noremap = true, silent = false}
-vim.api.nvim_set_keymap('n', '<space>e',
-                        '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
-                        opts)
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>',
-                        opts)
-vim.api.nvim_set_keymap('n', '<space>q',
-                        '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
     -- Enable completion triggered by <c-x><c-o>
     -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -220,47 +234,77 @@ local on_attach = function(client, bufnr)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F18>',
-                                '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F18>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-l>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-end
-
+  end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
--- local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
 
-local installer = require("nvim-lsp-installer")
-installer.setup {}
-local servers = installer.get_installed_servers()
--- print(dump(servers))
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
                                                                      .protocol
                                                                      .make_client_capabilities())
 
-for _, server in pairs(servers) do
-    require("lspconfig")[server.name].setup {
-        on_attach = on_attach,
-        capabilities = capabilities
-    }
-end
+local installer = require("mason")
+installer.setup{}
+
+local mason_lspconfig = require("mason-lspconfig")
+    mason_lspconfig.setup_handlers({ function(server_name)
+      require("lspconfig")[server_name].setup {
+          on_attach = on_attach,
+          capabilities = capabilities
+      }
+      end
+    })
 require("lspconfig").yamlls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
-    yaml = { schemas = { kubernetes = "globPattern" } }
+    yaml = { 
+      schemas = {
+        kubernetes = "/*.yaml",
+        ["https://json.schemastore.org/kustomization.json"]="*/kustomization.ya?ml",
+        ["https://json.schemastore.org/github-workflow.json"]= "*/.github/workflow/*.ya?ml",
+        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "(docker-)?compose.*.ya?ml",
+      },
+    }
   }
 }
 EOF
 '''
+[[plugins]]
+repo = 'RRethy/vim-illuminate'
+on_event = 'VimEnter'
+hook_post_source = '''
+let g:Illuminate_delay = 0
+let g:Illuminate_ftblacklist = ['nerdtree', 'NvimTree', 'yaml']
+'''
 
 [[plugins]]
-repo = 'williamboman/nvim-lsp-installer'
+repo = 'folke/lsp-colors.nvim'
+on_event = 'VimEnter'
+hook_post_source = '''
+lua <<EOF
+-- Lua
+require("lsp-colors").setup({
+  Error = "#db4b4b",
+  Warning = "#e0af68",
+  Information = "#0db9d7",
+  Hint = "#10B981"
+})
+EOF
+'''
+[[plugins]]
+repo = 'williamboman/mason.nvim'
 on_event = ['VimEnter']
+
+[[plugins]]
+repo = "williamboman/mason-lspconfig.nvim"
+on_source = 'mason.nvim'
 
 [[plugins]]
 repo = 'hrsh7th/cmp-nvim-lsp'
@@ -274,8 +318,6 @@ depends = ['ultisnips']
 
 [[plugins]]
 repo = 'hrsh7th/cmp-path'
-hook_post_source = '''
-'''
 on_event = ['VimEnter']
 
 [[plugins]]
@@ -290,11 +332,13 @@ on_event = ['VimEnter']
 [[plugins]]
 repo = 'hrsh7th/cmp-nvim-lsp-signature-help'
 on_event = ['VimEnter']
+
 [[plugins]]
-on_event = ['VimEnter']
+on_event = ['VimEnter', 'BufRead']
 repo = 'hrsh7th/nvim-cmp'
 depends = ['nvim-autopairs', 'cmp-nvim-lsp', 'cmp-nvim-ultisnips', 'cmp-path']
 hook_post_source = '''
+colorscheme iceberg
 lua <<EOF
   -- Setup nvim-cmp.
   local cmp = require'cmp'
@@ -387,7 +431,6 @@ cmp.event:on('confirm_done',
 cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 
 EOF
-colorscheme iceberg
 '''
 
 [[plugins]]
@@ -582,3 +625,7 @@ require"fidget".setup{}
 EOF
 '''
 on_event = ['VimEnter']
+
+[[plugins]]
+repo = 'folke/zen-mode.nvim'
+on_cmd = 'ZenMode'

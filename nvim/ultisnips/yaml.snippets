@@ -1,0 +1,122 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet ma "invoke latex math mode" w
+\( ${1} \) 
+endsnippet
+
+snippet kser "kubernetes service" b
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${1}
+  namespace: ${1}
+spec:
+  selector:
+    app: ${1}
+  ports:
+  - protocol: TCP
+    port: ${2}
+  type: ClusterIP
+endsnippet
+
+snippet kdep "kubernetes deploy" b
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${1}
+  labels:
+    app: ${1}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${1}
+  template:
+    metadata:
+      labels:
+        app: ${1}
+    spec:
+      containers:
+      - name: ${2}
+        image: ${3}
+        ports:
+        - containerPort: ${4}
+endsnippet
+
+snippet king "kubernetes ingress" b
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${1}
+  namespace: ${1}
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ${2}
+            port:
+              number: ${3}
+endsnippet
+
+snippet kns "kubernetes namespace" b
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ${1}
+endsnippet
+snippet krel "flux release" b
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ${1}
+  namespace: ${1}
+spec:
+  chart:
+    spec:
+      chart: 
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: 
+        namespace: flux-system
+  values: {}
+  interval: 1h
+endsnippet
+
+snippet ksource "flux source" b
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: 
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: 
+endsnippet

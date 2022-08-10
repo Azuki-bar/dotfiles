@@ -10,6 +10,8 @@ alias ip='ip --color=auto'
 alias cp='cp -i'
 alias cat='bat'
 alias diff='delta -s'
+alias k='kubectl'
+alias sudo='sudo '
 #status --is-interactive; and source (rbenv init -|psub)
 
 if test -n "$DESKTOP_SESSION"

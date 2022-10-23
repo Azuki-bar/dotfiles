@@ -37,7 +37,8 @@ set -gx GPG_TTY (tty)
 # set -xU LESS_TERMCAP_ue (printf "\e[0m")
 # set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
-set -gx PATH $PATH $HOME/.krew/bin
+set -gx PATH $PATH $HOME/.krew/bin (go env GOPATH)/bin
 set -xU MANPAGER 'less -R --use-color -Dd+r -Du+b'
 kubectl completion fish |source
 kubectl krew completion fish |source
+

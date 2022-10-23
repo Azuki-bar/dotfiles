@@ -245,22 +245,22 @@ local on_attach = function(client, bufnr)
 -- map buffer local keybindings when the language server attaches
 
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
-                                                                     .protocol
-                                                                     .make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local installer = require("mason")
 installer.setup{}
+local lspconfig = require("lspconfig")
 
 local mason_lspconfig = require("mason-lspconfig")
     mason_lspconfig.setup_handlers({ function(server_name)
-      require("lspconfig")[server_name].setup {
+      lspconfig[server_name].setup {
           on_attach = on_attach,
           capabilities = capabilities
       }
       end
     })
-require("lspconfig").yamlls.setup {
+
+lspconfig.yamlls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -273,6 +273,25 @@ require("lspconfig").yamlls.setup {
       },
     }
   }
+}
+lspconfig.denols.setup {
+  root_dir = lspconfig.util.root_pattern("deno.json"),
+  init_options = {
+    lint = true,
+    unstable = true,
+    suggest = {
+      imports = {
+        hosts = {
+          ["https://deno.land"] = true,
+          ["https://cdn.nest.land"] = true,
+          ["https://crux.land"] = true,
+        },
+      },
+    },
+  },
+}
+lspconfig.tsserver.setup {
+  root_dir = lspconfig.util.root_pattern("package.json"),
 }
 EOF
 '''

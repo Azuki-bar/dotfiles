@@ -353,7 +353,7 @@ repo = 'hrsh7th/cmp-nvim-lsp-signature-help'
 on_event = ['VimEnter']
 
 [[plugins]]
-on_event = ['VimEnter', 'BufRead']
+on_event = ['VimEnter', 'BufEnter']
 repo = 'hrsh7th/nvim-cmp'
 depends = ['nvim-autopairs', 'cmp-nvim-lsp', 'cmp-nvim-ultisnips', 'cmp-path']
 hook_post_source = '''
@@ -648,3 +648,14 @@ on_event = ['VimEnter']
 [[plugins]]
 repo = 'folke/zen-mode.nvim'
 on_cmd = 'ZenMode'
+
+[[plugins]]
+repo = 'scalameta/nvim-metals'
+depends = ["plenary.nvim", "cmp-nvim-lsp"]
+on_event = ['VimEnter']
+hook_post_source = """
+lua << EOF
+  local metals_config = require("metals").bare_config()
+  metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+EOF
+"""

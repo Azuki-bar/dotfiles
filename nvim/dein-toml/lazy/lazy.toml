@@ -1,10 +1,10 @@
 [[plugins]]
 repo = 'windwp/nvim-autopairs'
-on_source = ['InsertEnter']
+on_source = ['BufRead']
 hook_post_source = '''
 lua <<EOF
 require('nvim-autopairs').setup {}
-
+-- print("auto")
 EOF
 '''
 [[plugins]]
@@ -330,7 +330,11 @@ repo = 'hrsh7th/cmp-nvim-lsp'
 depends = ['nvim-lspconfig']
 on_source = ['nvim-lspconfig', 'nvim-cmp']
 on_event = ['VimEnter']
-
+hook_post_source = '''
+lua <<EOF
+-- print("cmp-nvim-lsp")
+EOF
+'''
 [[plugins]]
 repo = 'quangnguyen30192/cmp-nvim-ultisnips'
 on_event = ['VimEnter']
@@ -353,17 +357,18 @@ on_event = ['VimEnter']
 [[plugins]]
 repo = 'hrsh7th/cmp-nvim-lsp-signature-help'
 on_event = ['VimEnter']
+depends = ['nvim-cmp']
 
 [[plugins]]
-on_event = ['VimEnter', 'BufRead']
+on_event = ['BufRead']
 repo = 'hrsh7th/nvim-cmp'
 depends = ['nvim-autopairs', 'cmp-nvim-lsp', 'cmp-nvim-ultisnips', 'cmp-path']
 hook_post_source = '''
 colorscheme iceberg
 lua <<EOF
   -- Setup nvim-cmp.
+  -- print("nvim-cmp")
   local cmp = require'cmp'
-
   cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine
@@ -465,8 +470,7 @@ repo = 'SirVer/ultisnips'
 repo = 'stevearc/aerial.nvim'
 hook_post_source = '''
 lua << EOF
-require('aerial').setup{
-}
+require('aerial').setup{}
 EOF
 '''
 hook_add = '''
@@ -534,10 +538,6 @@ on_event = 'VimEnter'
 repo = 'nvim-telescope/telescope-fzf-native.nvim'
 on_event = 'VimEnter'
 build = 'make'
-
-# [[plugins]]
-# repo = 'twitvim/twitvim'
-# on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
@@ -631,9 +631,7 @@ on_event = ['UIEnter']
 repo = 'akinsho/toggleterm.nvim'
 hook_post_source = '''
 lua <<EOF
-require("toggleterm").setup{
-  open_mapping = [[<M-0>]]
-}
+require("toggleterm").setup{ open_mapping = [[<M-0>]] }
 EOF
 '''
 on_event = ['VimEnter']

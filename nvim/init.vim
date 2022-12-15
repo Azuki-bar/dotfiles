@@ -7,7 +7,6 @@ for file in splt
 	" ファイルの読み込み
 	execute 'source' file
 endfor
-colorscheme iceberg
 
 " thank you for https://qiita.com/reireias/items/230c77b3ff5575832654
 " thank you for https://qiita.com/iwaseasahi/items/0b2da68269397906c14c
@@ -20,9 +19,6 @@ set showmatch matchtime=1
 
 " 入力中コマンド表示
 set showcmd
-
-" 行末のスペースを可視化
-set listchars=tab:^\ ,trail:~
 
 " 対応カッコ強調
 set showmatch

@@ -1,4 +1,4 @@
-[[plugins]]
+# [[plugins]]
 # hook_add = '''
 # augroup MyAutoCmd
 #   autocmd!
@@ -12,63 +12,58 @@
 # }
 # EOD
 # '''
-repo = 'navarasu/onedark.nvim'
-merged = 0
+# repo = 'navarasu/onedark.nvim'
+# merged = 0
+
+# [[plugins]]
+# hook_add = '''
+# colorscheme iceberg
+# "let g:onedark_termcolors=256
+# "autocmd MyAutoCmd VimEnter * ++nested colorscheme iceberg
+# '''
+# repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
+repo = 'projekt0n/github-nvim-theme'
 hook_add = '''
-colorscheme iceberg
-"let g:onedark_termcolors=256
-"autocmd MyAutoCmd VimEnter * ++nested colorscheme iceberg
+lua <<EOF
+-- Example config in Lua
+require("github-theme").setup({
+  theme_style = "dimmed",
+  function_style = "italic",
+  sidebars = {"qf", "vista_kind", "terminal", "packer"},
+
+  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+  -- colors = {hint = "orange", error = "#ff0000"},
+
+  -- Overwrite the highlight groups
+  overrides = function(c)
+    return {
+      htmlTag = {fg = c.red, bg = "#282c34", sp = c.hint, style = "underline"},
+      DiagnosticHint = {link = "LspDiagnosticsDefaultHint"},
+      -- this will remove the highlight groups
+      TSField = {},
+    }
+  end
+})
+EOF
+
 '''
-repo = 'cocopon/iceberg.vim'
 
 # [[plugins]]
-# hook_add = '''
-# augroup MyAutoCmd
-#  autocmd!
-# augroup END
-# "colorscheme onedark
-# let g:onedark_termcolors=256
-# autocmd MyAutoCmd VimEnter * ++nested colorscheme onedark
-# '''
-# repo = 'joshdick/onedark.vim'
-
-# [[plugins]]
-# hook_add = '''
-# source $HOME/.config/nvim/plug_confs/vim-airline.vim
-# '''
-# repo = 'vim-airline/vim-airline'
-#
-# [[plugins]]
-# depends = ['vim-airline']
-# hook_add = '''
-# let g:airline_theme = "onedark"
-# '''
-# repo = 'vim-airline/vim-airline-themes'
-
-# [[plugins]]
-# repo = 'ayu-theme/ayu-vim'
-# hook_add = '''
-# set termguicolors
-# let ayucolor="mirage"
-# colorscheme ayu
-# '''
+# repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
-repo = 'ryanoasis/vim-devicons'
+repo = "nvim-tree/nvim-web-devicons"
 
 [[plugins]]
-repo = 'kyazdani42/nvim-web-devicons'
-
-# [[plugins]]
-# repo = 'lukas-reineke/indent-blankline.nvim'
-# hook_post_source = '''
-# lua <<EOF
-# require("indent_blankline").setup {
-#     -- for example, context is off by default, use this to turn it on
-#     show_current_context = true,
-#     show_current_context_start = true,
-# }
-# EOF
-# '''
+repo = 'lukas-reineke/indent-blankline.nvim'
+hook_post_source = '''
+lua <<EOF
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
+EOF
+'''

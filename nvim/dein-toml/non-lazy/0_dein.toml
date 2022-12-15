@@ -4,7 +4,8 @@ repo = 'vim-denops/denops.vim'
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 
-[[plugins]] # gitの表示
+[[plugins]]
+# gitの表示
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]

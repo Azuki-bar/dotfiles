@@ -4,7 +4,7 @@ on_source = ['BufRead']
 hook_post_source = '''
 lua <<EOF
 require('nvim-autopairs').setup {}
--- print("auto")
+print("nvim-autopairs")
 EOF
 '''
 [[plugins]]
@@ -208,13 +208,14 @@ on_source = ['VimEnter']
 depends = ['mason.nvim', 'vim-illuminate']
 hook_post_source = '''
 lua <<EOF
+print("nvim-lspconfig")
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = {noremap = true, silent = false}
-vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -239,7 +240,7 @@ local on_attach = function(client, bufnr)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-l>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-l>', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
   end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -249,6 +250,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local installer = require("mason")
 installer.setup{}
+print("mason setup")
 local lspconfig = require("lspconfig")
 
 local mason_lspconfig = require("mason-lspconfig")
@@ -328,11 +330,10 @@ on_source = 'mason.nvim'
 [[plugins]]
 repo = 'hrsh7th/cmp-nvim-lsp'
 depends = ['nvim-lspconfig']
-on_source = ['nvim-lspconfig', 'nvim-cmp']
 on_event = ['VimEnter']
 hook_post_source = '''
 lua <<EOF
--- print("cmp-nvim-lsp")
+print("cmp-nvim-lsp")
 EOF
 '''
 [[plugins]]
@@ -364,10 +365,9 @@ on_event = ['BufRead']
 repo = 'hrsh7th/nvim-cmp'
 depends = ['nvim-autopairs', 'cmp-nvim-lsp', 'cmp-nvim-ultisnips', 'cmp-path']
 hook_post_source = '''
-colorscheme iceberg
 lua <<EOF
   -- Setup nvim-cmp.
-  -- print("nvim-cmp")
+  print("nvim-cmp")
   local cmp = require'cmp'
   cmp.setup({
     snippet = {
@@ -567,16 +567,16 @@ EOF
 nnoremap <M-3> <cmd>TroubleToggle<CR>
 '''
 
-[[plugins]]
-repo = 'sbdchd/neoformat'
-hook_add = '''
-nnoremap <M-l> <cmd>Neoformat<CR>
-'''
-hook_post_source = '''
-let g:neoformat_enabled_markdown = ['prettier']
-"let g:neoformat_verbose = 1
-'''
-on_cmd = ['NeoFormat']
+# [[plugins]]
+# repo = 'sbdchd/neoformat'
+# hook_add = '''
+# nnoremap <M-l> <cmd>Neoformat<CR>
+# '''
+# hook_post_source = '''
+# let g:neoformat_enabled_markdown = ['prettier']
+# "let g:neoformat_verbose = 1
+# '''
+# on_cmd = ['NeoFormat']
 
 [[plugins]]
 repo = 'akinsho/bufferline.nvim'
@@ -605,7 +605,7 @@ hook_post_source = '''
 lua << EOF
 require('lualine').setup {
     options = {
-        theme = 'iceberg_dark'
+        theme = 'auto'
     }
 }
 function dump(o)
@@ -624,7 +624,6 @@ end
 EOF
 '''
 repo = 'nvim-lualine/lualine.nvim'
-depends = ['iceberg.vim']
 on_event = ['UIEnter']
 
 [[plugins]]

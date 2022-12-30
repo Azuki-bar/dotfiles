@@ -40,7 +40,12 @@ set -gx GPG_TTY (tty)
 
 set -gx PATH $PATH $HOME/.krew/bin (go env GOPATH)/bin
 set -xU MANPAGER 'less -R --use-color -Dd+r -Du+b'
-if [ type kubectl -q ]
+if type kubectl -q
     kubectl completion fish | source
     kubectl krew completion fish | source
+end
+
+if [ -e /usr/local/opt/asdf/libexec/asdf.fish ]
+    source /usr/local/opt/asdf/libexec/asdf.fish
+    . ~/.asdf/plugins/java/set-java-home.fish
 end

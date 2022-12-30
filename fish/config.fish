@@ -1,5 +1,3 @@
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
 alias view='nvim -R'
 alias vvim='/usr/bin/vim'
 alias vi='nvim'
@@ -15,9 +13,12 @@ alias sudo='sudo '
 #status --is-interactive; and source (rbenv init -|psub)
 
 if test -n "$DESKTOP_SESSION"
+    # only linux
     for env_var in (gnome-keyring-daemon --start)
         set -x (echo $env_var | string split "=")
     end
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
 end
 
 set -g theme_display_date no
@@ -39,6 +40,7 @@ set -gx GPG_TTY (tty)
 
 set -gx PATH $PATH $HOME/.krew/bin (go env GOPATH)/bin
 set -xU MANPAGER 'less -R --use-color -Dd+r -Du+b'
-kubectl completion fish |source
-kubectl krew completion fish |source
-
+if [ type kubectl -q ]
+    kubectl completion fish | source
+    kubectl krew completion fish | source
+end

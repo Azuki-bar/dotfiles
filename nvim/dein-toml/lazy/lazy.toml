@@ -240,7 +240,7 @@ local on_attach = function(client, bufnr)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-l>', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-l>', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
   end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -567,16 +567,16 @@ EOF
 nnoremap <M-3> <cmd>TroubleToggle<CR>
 '''
 
-# [[plugins]]
-# repo = 'sbdchd/neoformat'
-# hook_add = '''
-# nnoremap <M-l> <cmd>Neoformat<CR>
-# '''
-# hook_post_source = '''
-# let g:neoformat_enabled_markdown = ['prettier']
-# "let g:neoformat_verbose = 1
-# '''
-# on_cmd = ['NeoFormat']
+[[plugins]]
+repo = 'sbdchd/neoformat'
+hook_add = '''
+nnoremap <M-l> <cmd>Neoformat<CR>
+'''
+hook_post_source = '''
+let g:neoformat_enabled_markdown = ['prettier']
+"let g:neoformat_verbose = 1
+'''
+on_cmd = ['NeoFormat']
 
 [[plugins]]
 repo = 'akinsho/bufferline.nvim'

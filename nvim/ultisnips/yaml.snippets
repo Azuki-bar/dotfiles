@@ -74,8 +74,9 @@ metadata:
   namespace: ${1}
 spec:
   rules:
-  - http:
-      paths:
+  - host:
+    http:
+     paths:
       - path: /
         pathType: Prefix
         backend:
@@ -120,3 +121,15 @@ spec:
   interval: 1h
   url: 
 endsnippet
+
+snippet ksec "k8s secret" b
+apiVersion: v1
+kind: Secret
+metadata:
+  name: 
+  namespace: 
+type: Opaque
+stringData:
+  
+endsnippet
+

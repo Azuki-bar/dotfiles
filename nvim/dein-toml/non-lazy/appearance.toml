@@ -58,6 +58,7 @@ repo = "nvim-tree/nvim-web-devicons"
 
 [[plugins]]
 repo = 'lukas-reineke/indent-blankline.nvim'
+depends = ["nvim-treesitter"]
 hook_post_source = '''
 lua <<EOF
 require("indent_blankline").setup {

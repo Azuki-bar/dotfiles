@@ -652,6 +652,7 @@ on_cmd = 'ZenMode'
 repo = 'scalameta/nvim-metals'
 depends = ["plenary.nvim", "cmp-nvim-lsp"]
 on_source = 'cmp-nvim-lsp'
+on_ft = ['scala']
 hook_post_source = """
 lua << EOF
   local metals_config = require("metals").bare_config()
@@ -667,3 +668,17 @@ lua << EOF
   })
 EOF
 """
+
+[[plugins]]
+repo = "folke/todo-comments.nvim"
+depends = ["plenary.nvim"]
+on_event = ['VimEnter']
+hook_post_source = '''
+lua <<EOF
+require("todo-comments").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+EOF
+'''

@@ -2,6 +2,7 @@ alias view='nvim -R'
 alias vvim='/usr/bin/vim'
 alias vi='nvim'
 alias vim='nvim'
+alias vimdiff='nvim -d'
 alias ls='exa'
 alias chmod='chmod --preserve-root'
 alias ip='ip --color=auto'
@@ -39,6 +40,7 @@ set -gx GPG_TTY (tty)
 # set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
 set -gx PATH $PATH $HOME/.krew/bin (go env GOPATH)/bin
+
 set -xU MANPAGER 'less -R --use-color -Dd+r -Du+b'
 if type kubectl -q
     kubectl completion fish | source
@@ -48,4 +50,9 @@ end
 if [ -e /usr/local/opt/asdf/libexec/asdf.fish ]
     source /usr/local/opt/asdf/libexec/asdf.fish
     . ~/.asdf/plugins/java/set-java-home.fish
+end
+
+if [ -e /opt/asdf-vm/bin/asdf ]
+    set -gx PATH $PATH /opt/asdf-vm/bin
+    source /opt/asdf-vm/asdf.fish
 end

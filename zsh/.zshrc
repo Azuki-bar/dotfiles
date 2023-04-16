@@ -135,10 +135,13 @@ alias ls='ls --color=auto'
 export PATH=$PATH:$HOME/.local/bin
 
 DEVICE=$(uname -o)
-if [ $DEVICE = 'GNU/Linux' ]; then
-  # linux
-  . /opt/asdf-vm/asdf.sh
-else
-  # mac
+if [ $DEVICE = 'Darwin' ];then 
   echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+else
+  if [ -n /opt/asdf-vm/asdf.sh ]; then
+    . /opt/asdf-vm/asdf.sh
+  elif [ -n $HOME/.asdf/asdf.sh ]; then
+    . "$HOME/.asdf/asdf.sh"
+  fi
 fi
+

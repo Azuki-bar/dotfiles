@@ -138,9 +138,9 @@ DEVICE=$(uname -o)
 if [ $DEVICE = 'Darwin' ];then 
   echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 else
-  if [ -n /opt/asdf-vm/asdf.sh ]; then
+  if [ -e /opt/asdf-vm/asdf.sh ]; then
     . /opt/asdf-vm/asdf.sh
-  elif [ -n $HOME/.asdf/asdf.sh ]; then
+  elif [ -e $HOME/.asdf/asdf.sh ]; then
     . "$HOME/.asdf/asdf.sh"
   fi
 fi

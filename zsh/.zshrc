@@ -136,8 +136,10 @@ export PATH=$PATH:$HOME/.local/bin
 
 DEVICE=$(uname -o)
 if [ $DEVICE = 'Darwin' ];then 
-  echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+  # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 else
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
   if [ -n /opt/asdf-vm/asdf.sh ]; then
     . /opt/asdf-vm/asdf.sh
   elif [ -n $HOME/.asdf/asdf.sh ]; then
@@ -147,3 +149,4 @@ else
 fi
 
 PATH=$PATH:$HOME/.krew/bin/
+

@@ -140,9 +140,9 @@ if [ $DEVICE = 'Darwin' ];then
 else
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
-  if [ -n /opt/asdf-vm/asdf.sh ]; then
+  if [ -e /opt/asdf-vm/asdf.sh ]; then
     . /opt/asdf-vm/asdf.sh
-  elif [ -n $HOME/.asdf/asdf.sh ]; then
+  elif [ -e $HOME/.asdf/asdf.sh ]; then
     . "$HOME/.asdf/asdf.sh"
     fpath=(${ASDF_DIR}/completions $fpath)
   fi

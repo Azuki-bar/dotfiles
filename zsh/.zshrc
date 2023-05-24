@@ -132,12 +132,13 @@ alias vim=nvim
 alias cp='cp -i'
 alias ls='ls --color=auto'
 
-export PATH=$PATH:$HOME/.local/bin
-
+export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin
+export GOPATH=$HOME/go
 DEVICE=$(uname -o)
 if [ $DEVICE = 'Darwin' ];then 
   # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 else
+<<<<<<< Updated upstream
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
   if [ -e /opt/asdf-vm/asdf.sh ]; then
@@ -146,7 +147,11 @@ else
     . "$HOME/.asdf/asdf.sh"
     fpath=(${ASDF_DIR}/completions $fpath)
   fi
+  # mac
+  # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 fi
 
 PATH=$PATH:$HOME/.krew/bin/
 
+. /usr/local/opt/asdf/libexec/asdf.sh
+source ~/.config/op/plugins.sh

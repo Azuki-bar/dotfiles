@@ -1,0 +1,12 @@
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+alias ip='ip --color=auto'
+alias  reboot-win='systemctl reboot --boot-loader-entry=auto-windows'
+if [ -e /opt/asdf-vm/asdf.sh ]; then
+  . /opt/asdf-vm/asdf.sh
+elif [ -e $HOME/.asdf/asdf.sh ]; then
+  . "$HOME/.asdf/asdf.sh"
+  fpath=(${ASDF_DIR}/completions $fpath)
+fi
+
+

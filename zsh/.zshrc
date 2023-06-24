@@ -138,15 +138,12 @@ DEVICE=$(uname -o)
 if [ $DEVICE = 'Darwin' ];then 
   # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 else
-  alias pbcopy='xsel --clipboard --input'
-  alias pbpaste='xsel --clipboard --output'
-  if [ -e /opt/asdf-vm/asdf.sh ]; then
-    . /opt/asdf-vm/asdf.sh
-  elif [ -e $HOME/.asdf/asdf.sh ]; then
-    . "$HOME/.asdf/asdf.sh"
-    fpath=(${ASDF_DIR}/completions $fpath)
-  fi
+  source ${HOME}/dotfiles/zsh/zshrc-linux
 fi
 
 PATH=$PATH:$HOME/.krew/bin/
 
+SECRET_CONFIG_PATH=${SECRET_CONFIG_PATH:-$HOME/.zshrc.secret}
+if [ -e $SECRET_CONFIG_PATH ]; then
+  source $SECRET_CONFIG_PATH
+fi

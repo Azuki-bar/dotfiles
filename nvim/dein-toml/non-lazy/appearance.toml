@@ -29,9 +29,16 @@ hook_add = '''
 lua <<EOF
 -- Example config in Lua
 require("github-theme").setup({
-  theme_style = "dimmed",
-  function_style = "italic",
-  sidebars = {"qf", "vista_kind", "terminal", "packer"},
+  options = {
+    styles = {
+      functions = "Italic"
+    },
+    darken = {
+      sidebars = {
+        list = {"qf", "vista_kind", "terminal", "packer"}
+      }
+    }
+  },
 
   -- Change the "hint" color to the "orange" color, and make the "error" color bright red
   -- colors = {hint = "orange", error = "#ff0000"},
@@ -46,6 +53,8 @@ require("github-theme").setup({
     }
   end
 })
+
+vim.cmd.colorscheme('github_dimmed')
 EOF
 
 '''

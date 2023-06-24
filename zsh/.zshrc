@@ -128,22 +128,27 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 # }}} End configuration added by Zim install
 
+function source_if_exist() {
+  if [ -e $1 ]; then
+    source $1
+  fi
+}
+
 alias vim=nvim
 alias cp='cp -i'
 alias ls='ls --color=auto'
 
-export PATH=$PATH:$HOME/.local/bin
-
+export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin
+export GOPATH=$HOME/go
 DEVICE=$(uname -o)
-if [ $DEVICE = 'Darwin' ];then 
+if [ $DEVICE = 'Darwin' ];then
   # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+  source_if_exist ${HOME}/dotfiles/zsh/zshrc-darwin
 else
-  source ${HOME}/dotfiles/zsh/zshrc-linux
+  source_if_exist ${HOME}/dotfiles/zsh/zshrc-linux
 fi
 
 PATH=$PATH:$HOME/.krew/bin/
 
 SECRET_CONFIG_PATH=${SECRET_CONFIG_PATH:-$HOME/.zshrc.secret}
-if [ -e $SECRET_CONFIG_PATH ]; then
-  source $SECRET_CONFIG_PATH
-fi
+source_if_exist $SECRET_CONFIG_PATH

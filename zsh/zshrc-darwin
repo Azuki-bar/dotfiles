@@ -1,0 +1,3 @@
+
+. /usr/local/opt/asdf/libexec/asdf.sh
+source ~/.config/op/plugins.sh

@@ -124,8 +124,8 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     Default:
-      - PlemolJP Console NFJ
-    family: PlemolJP Console NFJ
+      - PlemolJP Console NF
+    family: PlemolJP Console NF
 
     # The `style` can be specified to pick a specific face.
     #style: Text
@@ -138,7 +138,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "PlemolJP Console NFJ"
+    family: "PlemolJP Console NF"
     #family: monospace
 
     # The `style` can be specified to pick a specific face.

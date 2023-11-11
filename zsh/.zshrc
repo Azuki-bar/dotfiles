@@ -145,7 +145,31 @@ if [ $DEVICE = 'Darwin' ];then
   # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
   source_if_exist ${HOME}/dotfiles/zsh/zshrc-darwin
 else
+<<<<<<< HEAD
   source_if_exist ${HOME}/dotfiles/zsh/zshrc-linux
+||||||| parent of b6e20fb (fix zsh)
+<<<<<<< Updated upstream
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+  if [ -e /opt/asdf-vm/asdf.sh ]; then
+    . /opt/asdf-vm/asdf.sh
+  elif [ -e $HOME/.asdf/asdf.sh ]; then
+    . "$HOME/.asdf/asdf.sh"
+    fpath=(${ASDF_DIR}/completions $fpath)
+  fi
+  # mac
+  # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+=======
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+  if [ -e /opt/asdf-vm/asdf.sh ]; then
+    . /opt/asdf-vm/asdf.sh
+  elif [ -e $HOME/.asdf/asdf.sh ]; then
+    . "$HOME/.asdf/asdf.sh"
+    fpath=(${ASDF_DIR}/completions $fpath)
+  fi
+  # mac
+  # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 fi
 
 PATH=$PATH:$HOME/.krew/bin/
@@ -162,3 +186,8 @@ export SHOW_AWS_PROMPT=false
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+. /usr/local/opt/asdf/libexec/asdf.sh
+source ~/.config/op/plugins.sh
+if [ -e ~/dotfiles/zsh/ignored/*.zsh ]; then
+  . ~/dotfiles/zsh/ignored/*.zsh
+fi

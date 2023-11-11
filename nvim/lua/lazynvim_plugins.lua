@@ -142,7 +142,11 @@ require("lazy").setup({
     {
         "907th/vim-auto-save",
         config = function()
-            vim.g.auto_save = 1
+	    if vim.fn.expand("%:p") == 'COMMIT_EDITMSG' then
+	        vim.g.auto_save = 0
+	    else
+	        vim.g.auto_save = 1
+	    end
             -- insertモードのときは無効
             vim.g.auto_save_in_insert_mode = 0
         end

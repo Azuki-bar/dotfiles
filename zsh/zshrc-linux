@@ -9,4 +9,3 @@ elif [ -e $HOME/.asdf/asdf.sh ]; then
   fpath=(${ASDF_DIR}/completions $fpath)
 fi
 
-

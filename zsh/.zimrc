@@ -58,3 +58,5 @@ zmodule zsh-users/zsh-autosuggestions
 
 zmodule eriner
 zmodule prompt-pwd
+
+zmodule ohmyzsh/ohmyzsh --root plugins/aws

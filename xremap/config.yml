@@ -1,0 +1,35 @@
+modmap:
+  # - name: Replace CapsLock To Control
+    # application:
+    #   not: Google-chrome
+    # remap:
+    #   CapsLock: Ctrl_L
+  - name: SandS
+    remap:
+      Space:
+        alone: Space
+        held: Shift_L
+  - name: Capslock-Esc
+    remap:
+      CapsLock:
+        alone: Esc
+        held: Ctrl_L
+  - name: Alt-To-Henkan
+    remap:
+      LeftAlt:
+        alone: Muhenkan
+        held: LeftAlt
+      RightAlt:
+        alone: Henkan
+        held: RightAlt
+
+      
+# keymap:
+#   - name: Emacs binding
+#     application:
+#       only: Slack
+#     remap:
+#       C-b: left
+#       C-f: right
+#       C-p: up
+#       C-n: down

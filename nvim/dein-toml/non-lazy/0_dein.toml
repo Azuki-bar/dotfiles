@@ -46,3 +46,13 @@ repo = 'tpope/vim-repeat'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
+
+# mason.nvim is optimized to load as little as possible during setup. Lazy-loading the plugin, or somehow deferring the setup, is not recommended.
+# 遅延評価するなってドキュメントにあるので従う
+# https://github.com/williamboman/mason.nvim
+[[plugins]]
+repo = 'williamboman/mason.nvim'
+hook_post_source = '''
+lua <<EOF
+EOF
+'''

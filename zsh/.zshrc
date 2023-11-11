@@ -137,7 +137,7 @@ function source_if_exist() {
 alias vim=nvim
 alias cp='cp -i'
 alias ls='ls --color=auto'
-
+export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin
 export GOPATH=$HOME/go
 DEVICE=$(uname -o)
@@ -152,3 +152,13 @@ PATH=$PATH:$HOME/.krew/bin/
 
 SECRET_CONFIG_PATH=${SECRET_CONFIG_PATH:-$HOME/.zshrc.secret}
 source_if_exist $SECRET_CONFIG_PATH
+
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aws#plugin-options
+export SHOW_AWS_PROMPT=false
+
+# bun completions
+[ -s "/home/azukibar/.bun/_bun" ] && source "/home/azukibar/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

@@ -1,0 +1,14 @@
+[Unit]
+Description=xremap
+
+[Service]
+Type=simple
+KillMode=process
+ExecStart=/usr//bin/keyszer /home/azukibar/dotfiles/xremap/config.yml
+Restart=on-failure
+RestartSec=3
+Environment=DISPLAY=:0
+User=root
+
+[Install]
+WantedBy=graphical.target

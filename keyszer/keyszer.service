@@ -1,0 +1,16 @@
+# /etc/systemd/system/keyszer.service
+[Unit]
+Description=keyszer
+
+[Service]
+Type=simple
+KillMode=process
+ExecStart=/usr/local/bin/keyszer --config /home/azukibar/.config/keyszer/keyszer.conf
+Restart=on-failure
+RestartSec=3
+Environment=DISPLAY=:0
+User=keymapper
+Group=input
+
+[Install]
+WantedBy=graphical.target

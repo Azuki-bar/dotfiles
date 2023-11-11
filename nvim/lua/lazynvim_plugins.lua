@@ -525,7 +525,6 @@ require("lazy").setup({
         config = function()
             vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true })
 
-	    print("hoge")
         end
     },
     {

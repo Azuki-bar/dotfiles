@@ -175,6 +175,7 @@ require("lazy").setup({
             })
         end,
         cmd = {"NvimTreeToggle", "NvimTreeOpen"},
+	vim.api.nvim_set_keymap('n', '<M-1>',':NvimTreeToggle<CR>', {noremap = true})
     },
     -------------------------------------------------
     -- treesitter
@@ -287,6 +288,7 @@ require("lazy").setup({
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "petertriho/cmp-git",
+	    "hrsh7th/cmp-cmdline",
         },
         config = function()
             -- Setup nvim-cmp.
@@ -355,9 +357,9 @@ require("lazy").setup({
             cmp.setup.cmdline(':', {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
-                { name = 'path' }
+                    { name = 'path' }
                 }, {
-                { name = 'cmdline' }
+                    { name = 'cmdline' }
                 })
             })
 
@@ -511,14 +513,15 @@ require("lazy").setup({
     },
     {
         'stevearc/aerial.nvim',
-        opts = {},
         -- Optional dependencies
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
-            "nvim-tree/nvim-web-devicons"
+            "nvim-tree/nvim-web-devicons",
         },
         config = function()
             vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true })
+
+	    print("hoge")
         end
     },
     {
@@ -557,6 +560,7 @@ require("lazy").setup({
             vim.api.nvim_set_keymap('n', '<M-f>', '<cmd>Telescope<CR>', {noremap = true})
             vim.api.nvim_set_keymap('n', '<M-g>', '<cmd>Telescope live_grep theme=dropdown<CR>', {noremap = true})
             vim.api.nvim_set_keymap('n', '<M-b>', '<cmd>Telescope lsp_references theme=cursor<CR>', {noremap = true})
+	    vim.api.nvim_set_keymap('n', "<M-p>", '<cmd>Telescope find_files theme=dropdown<CR>', {noremap = true})
         end
     },
     "BurntSushi/ripgrep",

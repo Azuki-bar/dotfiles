@@ -13,7 +13,6 @@ hook_add = '''
     if expand("%:p") =~ 'COMMIT_EDITMSG'
     else
         let g:auto_save = 1
-    endif
     let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 '''
 on_event = ['InsertEnter']

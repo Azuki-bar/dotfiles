@@ -1,7 +1,6 @@
 " https://zenn.dev/comamoca/articles/58aa4c48f56e95 
-let splt = split(glob("~/.config/nvim/vim_conf/" . "*.vim"))
   
-for file in splt
+for file in split(glob("~/.config/nvim/vim_conf/" . "*.vim"))
 	" 読み込んだファイルを表示するもの消しても大丈夫
 	" echo "load " . file
 	" ファイルの読み込み

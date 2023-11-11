@@ -1,0 +1,7 @@
+-- require("1_packer_install")
+require("1_install_lazynvim")
+require("indent")
+require("keybind")
+require("search")
+require("util")
+require("lazynvim_plugins")

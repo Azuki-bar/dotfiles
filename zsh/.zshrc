@@ -1,6 +1,6 @@
 # Start configuration added by Zim install {{{
 #
-# User configuration sourced by interactive shells
+# User configuration sou
 #
 
 # -----------------
@@ -138,7 +138,9 @@ alias vim=nvim
 alias cp='cp -i'
 alias ls='ls --color=auto'
 export EDITOR=nvim
-export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin:/usr/local/texlive/2023/bin/x86_64-linux:/usr/local/go/bin
+
+
 export GOPATH=$HOME/go
 DEVICE=$(uname -o)
 if [ $DEVICE = 'Darwin' ];then

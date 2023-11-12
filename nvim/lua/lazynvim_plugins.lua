@@ -524,8 +524,10 @@ require("lazy").setup({
         },
         config = function()
             vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true })
-
         end
+    },
+    {
+        'github/copilot.vim',
     },
     {
         'nvim-telescope/telescope.nvim', 
@@ -570,8 +572,7 @@ require("lazy").setup({
     "sharkdp/fd",
     {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make"
-    },
+        build = "make" },
     {
         "numToStr/Comment.nvim",
         config = function()
@@ -604,4 +605,7 @@ require("lazy").setup({
             }
         end
     },
+    {
+        "natecraddock/sessions.nvim"
+    }
 })

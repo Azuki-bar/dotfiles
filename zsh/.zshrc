@@ -172,8 +172,6 @@ export SHOW_AWS_PROMPT=false
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-. /usr/local/opt/asdf/libexec/asdf.sh
-source ~/.config/op/plugins.sh
-if [ -e ~/dotfiles/zsh/ignored/*.zsh ]; then
-  . ~/dotfiles/zsh/ignored/*.zsh
-fi
+[ -s /usr/local/opt/asdf/libexec/asdf.sh ] && source /usr/local/opt/asdf/libexec/asdf.sh
+[ -s ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
+[ -s ~/dotfiles/zsh/ignored/*.zsh ] && source ~/dotfiles/zsh/ignored/*.zsh

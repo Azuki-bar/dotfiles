@@ -5,7 +5,7 @@
 vim.keymap.set('i', 'jj', '<ESC>', {silent = true, noremap = true})
 
 -- ハイライトをESC二度押しで解除
-vim.keymap.set('n', '<ESC><ESC>', ':set nohlsearch!<CR>', {silent = true, noremap = true})
+vim.keymap.set('n', '<ESC><ESC>', '<CMD>set nohlsearch!<CR>', {silent = true, noremap = true})
 
 -- https://qiita.com/itmammoth/items/312246b4b7688875d023#10x%E3%82%84s%E3%81%A7%E3%81%AF%E3%83%A4%E3%83%B3%E3%82%AF%E3%81%97%E3%81%AA%E3%81%84
 -- xキーでヤンクしないようにする
@@ -40,4 +40,5 @@ vim.keymap.set('n', 'j', 'gj', {silent = true, noremap = true})
 vim.keymap.set('n', 'k', 'gk', {silent = true, noremap = true})
 vim.keymap.set('n', 'gj', 'j', {silent = true, noremap = true})
 vim.keymap.set('n', 'gk', 'k', {silent = true, noremap = true})
+vim.keymap.set('n', '<F1>', '<CMD>Telescope keymaps<CR>', {silent = true, noremap = true})
 

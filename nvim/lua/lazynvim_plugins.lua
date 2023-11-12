@@ -179,7 +179,7 @@ require("lazy").setup({
             })
         end,
         cmd = {"NvimTreeToggle", "NvimTreeOpen"},
-	vim.api.nvim_set_keymap('n', '<M-1>',':NvimTreeToggle<CR>', {noremap = true})
+	vim.api.nvim_set_keymap('n', '<M-1>',':NvimTreeToggle<CR>', {noremap = true, silent = true})
     },
     -------------------------------------------------
     -- treesitter
@@ -607,5 +607,5 @@ require("lazy").setup({
     },
     {
         "natecraddock/sessions.nvim"
-    }
+    },
 })

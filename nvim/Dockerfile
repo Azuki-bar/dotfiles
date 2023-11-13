@@ -16,11 +16,12 @@ RUN apt-get update && \
 ADD https://deb.nodesource.com/setup_current.x /setup_current.x
 RUN bash /setup_current.x
 RUN apt-get install -y nodejs
-ADD https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb nvim-linux64.deb
+ADD https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz nvim.tar.gz
 ADD https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb ripgrep.deb
 
-RUN apt-get -y install ./nvim-linux64.deb ./ripgrep.deb
-
+RUN apt-get -y install ./ripgrep.deb
+RUN tar zxvf nvim.tar.gz
+RUN mv nvim.tar.gz/bin/nvim /bin/nvim
 ADD https://deno.land/install.sh deno-install.sh
 RUN chmod +x ./deno-install.sh
 RUN ./deno-install.sh

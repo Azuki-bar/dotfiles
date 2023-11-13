@@ -1,6 +1,5 @@
 require("lazy").setup({
     "wbthomason/packer.nvim",
-    "Shougo/context_filetype.vim",
     {
         "osyo-manga/vim-precious",
         lazy = true,
@@ -31,7 +30,6 @@ require("lazy").setup({
             vim.cmd.colorscheme("github_dark_dimmed")
         end
     },
-    "ryanoasis/vim-devicons",
     { 
         "nvim-tree/nvim-web-devicons",
         lazy = true,
@@ -142,13 +140,13 @@ require("lazy").setup({
     {
         "907th/vim-auto-save",
         config = function()
-	    if vim.fn.expand("%:p") == 'COMMIT_EDITMSG' then
-	        vim.g.auto_save = 0
-	    else
-	        vim.g.auto_save = 1
-	    end
-            -- insertモードのときは無効
-            vim.g.auto_save_in_insert_mode = 0
+          if vim.fn.expand("%:p") == 'COMMIT_EDITMSG' then
+              vim.g.auto_save = 0
+          else
+              vim.g.auto_save = 1
+          end
+          -- insertモードのときは無効
+          vim.g.auto_save_in_insert_mode = 0
         end
     },
     {
@@ -193,7 +191,7 @@ require("lazy").setup({
                 ensure_installed = "all",
                 highlight = {
                     enable = true,
-                    disable = {"vim", "lua"},
+                    disable = {"vim"},
                     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
                     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -214,14 +212,6 @@ require("lazy").setup({
             }
         end,
         dependencies = {"yioneko/nvim-yati", "p00f/nvim-ts-rainbow"},
-    },
-    {
-        "yioneko/nvim-yati",
-        lazy = true,
-    },
-    {
-        "p00f/nvim-ts-rainbow",
-        lazy = true,
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
@@ -292,7 +282,7 @@ require("lazy").setup({
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "petertriho/cmp-git",
-	    "hrsh7th/cmp-cmdline",
+	          "hrsh7th/cmp-cmdline",
         },
         config = function()
             -- Setup nvim-cmp.
@@ -465,8 +455,8 @@ require("lazy").setup({
                 yaml = { 
                 schemas = {
                     kubernetes = "/*.yaml",
-                    ["https://json.schemastore.org/kustomization.json"]="*/kustomization.ya?ml",
-                    ["https://json.schemastore.org/github-workflow.json"]= "*/.github/workflow/*.ya?ml",
+                    ["https://json.schemastore.org/kustomization.json"] = "*/kustomization.ya?ml",
+                    ["https://json.schemastore.org/github-workflow.json"] = "*/.github/workflow/*.ya?ml",
                     ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "(docker-)?compose.*.ya?ml",
                 },
                 }
@@ -523,7 +513,10 @@ require("lazy").setup({
             "nvim-tree/nvim-web-devicons",
         },
         config = function()
-            vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true })
+            require("aerial").setup({
+              lazy_load = false
+            })
+            vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true, silent = true })
         end
     },
     {

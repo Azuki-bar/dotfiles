@@ -28,7 +28,9 @@ require("lazy").setup({
             }}
             )
             vim.cmd.colorscheme("github_dark_dimmed")
-        end
+        end,
+        lazy = false,
+        priority = 1000,
     },
     { 
         "nvim-tree/nvim-web-devicons",
@@ -127,6 +129,9 @@ require("lazy").setup({
             })
         end
     },
+    {
+        "sindrets/diffview.nvim"
+    },
     -------------------------------------------------
     -- Editing
     -------------------------------------------------
@@ -177,7 +182,7 @@ require("lazy").setup({
             })
         end,
         cmd = {"NvimTreeToggle", "NvimTreeOpen"},
-	vim.api.nvim_set_keymap('n', '<M-1>',':NvimTreeToggle<CR>', {noremap = true, silent = true})
+	      vim.api.nvim_set_keymap('n', '<M-1>','<cmd>NvimTreeToggle<CR>', {noremap = true, silent = true})
     },
     -------------------------------------------------
     -- treesitter
@@ -516,6 +521,7 @@ require("lazy").setup({
             require("aerial").setup({
               lazy_load = false
             })
+            require("telescope").load_extension("aerial")
             vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true, silent = true })
         end
     },

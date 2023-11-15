@@ -1,7 +1,6 @@
 require("lazy").setup({
     {
         "osyo-manga/vim-precious",
-        lazy = true,
         dependencies = {"Shougo/context_filetype.vim"}
     },
     "tpope/vim-fugitive",
@@ -31,9 +30,20 @@ require("lazy").setup({
         lazy = false,
         priority = 1000,
     },
-    { 
+    {
+        "pwntester/octo.nvim",
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'nvim-tree/nvim-web-devicons',
+        },
+        config = function()
+            require("octo").setup({})
+        end,
+        cmd = "Octo",
+    },
+    {
         "nvim-tree/nvim-web-devicons",
-        lazy = true,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -43,24 +53,21 @@ require("lazy").setup({
     },
     {
         "SmiteshP/nvim-gps",
-        dependencies = {"nvim-lualine/lualine.nvim"},
-        config = function()
-            local gps = require("nvim-gps")
-            require("lualine").setup({
-                sections = {
-                    lualine_c = {
-                        {gps.get_location, cond = gps.is_available},
-                    }
-                }
-            })
-        end
+        dependencies = {"nvim-treesitter/nvim-treesitter"}
     },
     {
         "nvim-lualine/lualine.nvim",
+        dependencies = {"SmiteshP/nvim-gps"},
         config = function()
+            local gps = require("nvim-gps")
             require('lualine').setup {
                 options = {
                     theme = 'auto'
+                },
+                sections = {
+                    lualine_c = {
+                        { gps.get_location, cond = gps.is_available }
+                    }
                 }
             }
             function dump(o)
@@ -129,7 +136,10 @@ require("lazy").setup({
         end
     },
     {
-        "sindrets/diffview.nvim"
+        "sindrets/diffview.nvim",
+        cmd = {
+          "DiffviewOpen",
+        }
     },
     -------------------------------------------------
     -- Editing
@@ -189,7 +199,7 @@ require("lazy").setup({
 
     {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
+        build = ':TSUpdate',
         config = function()
             require("nvim-treesitter.configs").setup {
                 ensure_installed = "all",
@@ -219,6 +229,7 @@ require("lazy").setup({
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
+        dependencies = {"nvim-treesitter/nvim-treesitter"},
         config = function()
             require("treesitter-context").setup({
                 enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -259,11 +270,10 @@ require("lazy").setup({
                 mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
             })
         end,
-        lazy = true,
     },
     {
         "nvim-treesitter/nvim-treesitter-refactor",
-        lazy = true,
+        dependencies = {"nvim-treesitter/nvim-treesitter"}
     },
     --------------------------------------
     -- LSP
@@ -273,7 +283,6 @@ require("lazy").setup({
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        lazy = true,
         dependencies = {"williamboman/mason.nvim"},
     },
     {
@@ -398,7 +407,12 @@ require("lazy").setup({
     },
     {
         "neovim/nvim-lspconfig",
-        dependencies = {"williamboman/mason.nvim", "hrsh7th/nvim-cmp", "hrsh7th/cmp-nvim-lsp", "williamboman/mason-lspconfig.nvim"},
+        dependencies = {
+            "williamboman/mason.nvim", 
+            "hrsh7th/nvim-cmp", 
+            "hrsh7th/cmp-nvim-lsp", 
+            "williamboman/mason-lspconfig.nvim"
+        },
         config = function()
             -- Mappings.
             -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -521,16 +535,27 @@ require("lazy").setup({
               lazy_load = false
             })
             require("telescope").load_extension("aerial")
-            vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true, silent = true })
-        end
+        end,
+        cmd = {"AerialToggle"},
+        vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true, silent = true })
     },
-    {
-        'github/copilot.vim',
-    },
+  -- TODO: copilotの設定をいい感じにする
+    -- {
+    --     "zbirenbaum/copilot.lua",
+    --     opts = {
+    --         filetypes = { ["*"] = true },
+    --     },
+    -- },
     {
         'nvim-telescope/telescope.nvim', 
         -- tag = '0.1.4',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = { 
+            'nvim-lua/plenary.nvim',
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make"
+            },
+        },
         config = function()
             require('telescope').setup {
                 defaults = {
@@ -566,16 +591,13 @@ require("lazy").setup({
 	    vim.api.nvim_set_keymap('n', "<M-p>", '<cmd>Telescope find_files theme=dropdown<CR>', {noremap = true})
         end
     },
-    "BurntSushi/ripgrep",
-    "sharkdp/fd",
-    {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make" },
+    -- "BurntSushi/ripgrep",
+    -- "sharkdp/fd",
     {
         "numToStr/Comment.nvim",
         config = function()
             require('Comment').setup()
-        end
+        end,
     },
     {
         "folke/trouble.nvim",
@@ -593,7 +615,7 @@ require("lazy").setup({
         config = function()
             vim.g.neoformat_enabled_markdown = {'prettier'}
             vim.api.nvim_set_keymap('n', '<M-l>', '<cmd>Neoformat<CR>', {noremap = true})
-        end
+        end,
     },
     {
         "akinsho/toggleterm.nvim",
@@ -602,8 +624,5 @@ require("lazy").setup({
                 open_mapping = [[<M-0>]],
             }
         end
-    },
-    {
-        "natecraddock/sessions.nvim"
     },
 })

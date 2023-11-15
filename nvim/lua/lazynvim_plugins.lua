@@ -1,5 +1,4 @@
 require("lazy").setup({
-    "wbthomason/packer.nvim",
     {
         "osyo-manga/vim-precious",
         lazy = true,

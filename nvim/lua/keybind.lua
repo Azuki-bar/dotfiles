@@ -40,5 +40,4 @@ vim.keymap.set('n', 'j', 'gj', {silent = true, noremap = true})
 vim.keymap.set('n', 'k', 'gk', {silent = true, noremap = true})
 vim.keymap.set('n', 'gj', 'j', {silent = true, noremap = true})
 vim.keymap.set('n', 'gk', 'k', {silent = true, noremap = true})
-vim.keymap.set('n', '<F1>', '<CMD>Telescope keymaps<CR>', {silent = true, noremap = true})
 

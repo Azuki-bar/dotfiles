@@ -9,7 +9,10 @@ require("lazy").setup({
     -------------------------------------------------
     -- UI
     -------------------------------------------------
-    "airblade/vim-gitgutter",
+    {
+        "airblade/vim-gitgutter",
+        event = {"UIEnter"},
+    },
     {
         "projekt0n/github-nvim-theme",
         config = function()
@@ -48,7 +51,10 @@ require("lazy").setup({
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        dependencies = {"nvim-treesitter/nvim-treesitter"},
+        dependencies = {
+            -- scopeを示したいときはtreesitterが必要になる
+            "nvim-treesitter/nvim-treesitter"
+        },
         opts = {},
     },
     {
@@ -83,20 +89,23 @@ require("lazy").setup({
                 end
             end
             -- print(dump(require('lualine').get_config()))
-        end
+        end,
+        event = {"UIEnter"},
     },
     {
         "j-hui/fidget.nvim",
         config = function()
             require"fidget".setup{}
-        end
+        end,
+        event = {"UIEnter"},
     },
     {
         "folke/todo-comments.nvim",
         dependencies = {"nvim-lua/plenary.nvim"},
         config = function()
             require("todo-comments").setup{}
-        end
+        end,
+        event = {"UIEnter"},
     },
     {
         "akinsho/bufferline.nvim",
@@ -115,7 +124,8 @@ require("lazy").setup({
             }
             }
             vim.g.mouse = "a"
-        end
+        end,
+        event = {"UIEnter"},
     },
     {
         "RRethy/vim-illuminate",
@@ -169,6 +179,7 @@ require("lazy").setup({
             vim.api.nvim_set_keymap('n', '<F5>', ':UndotreeToggle<CR>', {noremap = true})
         end,
         cmd = {"UndotreeToggle"},
+        keys = {"<F5>"},
     },
     {
         'kyazdani42/nvim-tree.lua',
@@ -189,9 +200,10 @@ require("lazy").setup({
                 end
             end
             })
+	      vim.api.nvim_set_keymap('n', '<M-1>','<cmd>NvimTreeToggle<CR>', {noremap = true, silent = true})
         end,
         cmd = {"NvimTreeToggle", "NvimTreeOpen"},
-	      vim.api.nvim_set_keymap('n', '<M-1>','<cmd>NvimTreeToggle<CR>', {noremap = true, silent = true})
+        keys = {"<M-1>"},
     },
     -------------------------------------------------
     -- treesitter
@@ -283,7 +295,10 @@ require("lazy").setup({
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        dependencies = {"williamboman/mason.nvim"},
+        dependencies = {
+            "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
+        },
     },
     {
         "hrsh7th/nvim-cmp",
@@ -529,15 +544,17 @@ require("lazy").setup({
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
+            
         },
         config = function()
             require("aerial").setup({
               lazy_load = false
             })
             require("telescope").load_extension("aerial")
+            vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true, silent = true })
         end,
         cmd = {"AerialToggle"},
-        vim.api.nvim_set_keymap('n', '<M-2>', '<cmd>AerialToggle left<CR>', { noremap = true, silent = true })
+        keys = {"<M-2>"},
     },
   -- TODO: copilotの設定をいい感じにする
     -- {
@@ -584,12 +601,20 @@ require("lazy").setup({
             -- To get fzf loaded and working with telescope, you need to call
             -- load_extension, somewhere after setup function:
             require('telescope').load_extension('fzf')
-
             vim.api.nvim_set_keymap('n', '<M-f>', '<cmd>Telescope<CR>', {noremap = true})
             vim.api.nvim_set_keymap('n', '<M-g>', '<cmd>Telescope live_grep theme=dropdown<CR>', {noremap = true})
             vim.api.nvim_set_keymap('n', '<M-b>', '<cmd>Telescope lsp_references theme=cursor<CR>', {noremap = true})
-	    vim.api.nvim_set_keymap('n', "<M-p>", '<cmd>Telescope find_files theme=dropdown<CR>', {noremap = true})
-        end
+            vim.api.nvim_set_keymap('n', "<M-p>", '<cmd>Telescope find_files theme=dropdown<CR>', {noremap = true})
+            vim.keymap.set('n', '<F1>', '<CMD>Telescope keymaps<CR>', {silent = true, noremap = true})
+        end,
+        keys = {
+            '<M-f>',
+            '<M-g>',
+            '<M-b>',
+            "<M-p>",
+            "<F1>",
+        },
+        cmd = {"Telescope"}
     },
     -- "BurntSushi/ripgrep",
     -- "sharkdp/fd",
@@ -616,6 +641,8 @@ require("lazy").setup({
             vim.g.neoformat_enabled_markdown = {'prettier'}
             vim.api.nvim_set_keymap('n', '<M-l>', '<cmd>Neoformat<CR>', {noremap = true})
         end,
+        keys = {"<M-l>"},
+        cmd = {"Neoformat"},
     },
     {
         "akinsho/toggleterm.nvim",
@@ -623,6 +650,7 @@ require("lazy").setup({
             require("toggleterm").setup{
                 open_mapping = [[<M-0>]],
             }
-        end
+        end,
+        keys = {"<M-0>"},
     },
 })

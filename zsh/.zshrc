@@ -148,14 +148,6 @@ if [ $DEVICE = 'Darwin' ];then
   source_if_exist ${HOME}/dotfiles/zsh/zshrc-darwin
 else
   source_if_exist ${HOME}/dotfiles/zsh/zshrc-linux
-  alias pbcopy='xsel --clipboard --input'
-  alias pbpaste='xsel --clipboard --output'
-  if [ -e /opt/asdf-vm/asdf.sh ]; then
-    . /opt/asdf-vm/asdf.sh
-  elif [ -e $HOME/.asdf/asdf.sh ]; then
-    . "$HOME/.asdf/asdf.sh"
-    fpath=(${ASDF_DIR}/completions $fpath)
-  fi
   # mac
   # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 fi
@@ -177,3 +169,41 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s /usr/local/opt/asdf/libexec/asdf.sh ] && source /usr/local/opt/asdf/libexec/asdf.sh
 [ -s ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
 [ -s ~/dotfiles/zsh/ignored/*.zsh ] && source ~/dotfiles/zsh/ignored/*.zsh
+
+
+function update-all() {
+  # ANSIエスケープコードを変数に格納
+  RED='\033[0;31m'
+  GREEN='\033[0;32m'
+  NC='\033[0m'  # No Color
+
+  command_list=(
+    asdf='asdf update'
+    asdf='asdf plugin update --all'
+    brew='brew update'
+    gem='gem update --system'
+    npm='npm update -g'
+    rustup='rustup update'
+    go='go run github.com/nao1215/gup@latest update'
+    yay='yay -Syu'
+    apt='sudo apt update && sudo apt upgrade -y'
+    flatpak='flatpak update'
+    snap='sudo snap refresh'
+    rye='rye self update'
+  )
+
+  for cmd in ${(k)command_list}; do
+    # echo "Running $command"
+    IFS='=' read -r cmd_name exec_command <<< "$cmd"
+    echo "${GREEN}running $cmd_name${NC}"
+    
+    # コマンドが存在するか確認
+    if ! command -v $cmd_name > /dev/null; then
+      # 赤色でエラーメッセージを出力
+      echo "${RED}$cmd_name is not installed${NC}"
+      continue
+    fi
+
+    eval "$exec_command"
+  done
+}

@@ -1,5 +1,5 @@
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
+alias pbcopy='wl-copy'
+alias pbpaste='wl-paste'
 alias ip='ip --color=auto'
 alias  reboot-win='systemctl reboot --boot-loader-entry=auto-windows'
 if [ -e /opt/asdf-vm/asdf.sh ]; then

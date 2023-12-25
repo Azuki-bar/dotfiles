@@ -9,6 +9,9 @@ alias  reboot-win='systemctl reboot --boot-loader-entry=auto-windows'
 #   fpath=(${ASDF_DIR}/completions $fpath)
 # fi
 
+# IDEからでもrtxを認識できるようにする
+# https://github.com/jdx/rtx#ide-integration
+export PATH="$HOME/.local/share/rtx/shims:$PATH"
 if command -v $HOME/.local/share/rtx/bin/rtx > /dev/null; then
     eval "$($HOME/.local/share/rtx/bin/rtx activate zsh)"
 fi

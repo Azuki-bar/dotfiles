@@ -186,6 +186,8 @@ function update-all() {
     # not require sudo
     asdf='asdf update'
     asdf='asdf plugin update --all'
+    rtx='rtx update'
+    rtx='rtx self-update'
     brew='brew update'
     npm='npm update -g'
     rustup='rustup update'

@@ -2,9 +2,14 @@ alias pbcopy='wl-copy'
 alias pbpaste='wl-paste'
 alias ip='ip --color=auto'
 alias  reboot-win='systemctl reboot --boot-loader-entry=auto-windows'
-if [ -e /opt/asdf-vm/asdf.sh ]; then
-  . /opt/asdf-vm/asdf.sh
-elif [ -e $HOME/.asdf/asdf.sh ]; then
-  . "$HOME/.asdf/asdf.sh"
-  fpath=(${ASDF_DIR}/completions $fpath)
+# if [ -e /opt/asdf-vm/asdf.sh ]; then
+#   . /opt/asdf-vm/asdf.sh
+# elif [ -e $HOME/.asdf/asdf.sh ]; then
+#   . "$HOME/.asdf/asdf.sh"
+#   fpath=(${ASDF_DIR}/completions $fpath)
+# fi
+
+if command -v $HOME/.local/share/rtx/bin/rtx > /dev/null; then
+    eval "$($HOME/.local/share/rtx/bin/rtx activate zsh)"
 fi
+

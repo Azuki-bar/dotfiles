@@ -152,7 +152,7 @@ else
   # echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 fi
 
-PATH=$PATH:$HOME/.krew/bin/
+export PATH=$PATH:$HOME/.krew/bin/
 
 SECRET_CONFIG_PATH=${SECRET_CONFIG_PATH:-$HOME/.zshrc.secret}
 source_if_exist $SECRET_CONFIG_PATH
@@ -166,7 +166,7 @@ export SHOW_AWS_PROMPT=false
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-[ -s /usr/local/opt/asdf/libexec/asdf.sh ] && source /usr/local/opt/asdf/libexec/asdf.sh
+# [ -s /usr/local/opt/asdf/libexec/asdf.sh ] && source /usr/local/opt/asdf/libexec/asdf.sh
 [ -s ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
 [ -s ~/dotfiles/zsh/ignored/*.zsh ] && source ~/dotfiles/zsh/ignored/*.zsh
 

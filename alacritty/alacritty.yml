@@ -24,7 +24,17 @@
 #TERM: alacritty
 env:
   TERM: xterm-256color
+  # waylandにしたらuimが動かなくなったので、xwaylandで動かしている。
+  # なので引き続きこの設定は必要
   WINIT_X11_SCALE_FACTOR: "1.0"
+  # https://qiita.com/StoneDot/items/ecd5ccad39b2c1b7e07a
+  # https://wiki.archlinux.jp/index.php/Alacritty#Wayland_.E7.92.B0.E5.A2.83.E3.81.AE_GNOME_.E3.81.A7.E3.82.BF.E3.82.A4.E3.83.88.E3.83.AB.E3.83.90.E3.83.BC.E3.81.8C.E7.84.A1.E3.81.8F.E3.81.AA.E3.82.8B
+  WAYLAND_DISPLAY: ''
+  # wayland環境で開いたalacrittyではuimのモード変換がなぜか使えない
+  # (x11からwaylandが見えない仕様が怪しいと思っている)
+  # QT_IM_MODULE=xim alacritty とすると起動するのでとりあえずenvにも入れておく
+  # しかし意味がない……
+  QT_IM_MODULE: xim
 
 window:
   # Window dimensions (changes require restart)
@@ -70,8 +80,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 1
-
+  opacity: 0.95
   # Startup Mode (changes require restart)
   #
   # Values for `startup_mode`:
@@ -105,7 +114,7 @@ window:
 #scrolling:
 # Maximum number of lines in the scrollback buffer.
 # Specifying '0' will disable scrolling.
-#history: 10000
+history: 100000
 
 # Scrolling distance multiplier.
 #multiplier: 3
@@ -882,4 +891,4 @@ key_bindings:
 #log_level: Warn
 
 # Print all received window events.
-#print_events: false
+print_events: true

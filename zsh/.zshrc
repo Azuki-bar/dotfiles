@@ -171,6 +171,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s ~/dotfiles/zsh/ignored/*.zsh ] && source ~/dotfiles/zsh/ignored/*.zsh
 
 
+
 function update-all() {
   # ANSIエスケープコードを変数に格納
   RED='\033[0;31m'
@@ -188,6 +189,8 @@ function update-all() {
     asdf='asdf plugin update --all'
     rtx='rtx update'
     rtx='rtx self-update'
+    mise='mise update'
+    mise='mise self-update'
     brew='brew update'
     npm='npm update -g'
     rustup='rustup update'
@@ -213,3 +216,4 @@ function update-all() {
     eval "$exec_command"
   done
 }
+

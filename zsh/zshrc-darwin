@@ -1,7 +1,7 @@
 # . /usr/local/opt/asdf/libexec/asdf.sh
 
 # export PATH="$HOME/.local/share/rtx/shims:$PATH"
-if command -v rtx > /dev/null; then
-    eval "$(rtx activate zsh)"
-fi
+# if command -v rtx > /dev/null; then
+#     eval "$(rtx activate zsh)"
+# fi
 source ~/.config/op/plugins.sh

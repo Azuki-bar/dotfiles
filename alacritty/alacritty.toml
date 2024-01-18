@@ -1,0 +1,49 @@
+history = 100000
+print_events = true
+
+[env]
+QT_IM_MODULE = "xim"
+TERM = "xterm-256color"
+WAYLAND_DISPLAY = ""
+WINIT_X11_SCALE_FACTOR = "1.0"
+
+[font]
+size = 11
+
+[font.bold]
+family = "PlemolJP Console NF"
+style = "Bold"
+
+[font.bold_italic]
+family = "PlemolJP Console NF"
+style = "Bold Italic"
+
+[font.italic]
+family = "PlemolJP Console NF"
+style = "Italic"
+
+[font.normal]
+Default = ["PlemolJP Console NF"]
+family = "PlemolJP Console NF"
+style = "Text"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[window]
+opacity = 0.95

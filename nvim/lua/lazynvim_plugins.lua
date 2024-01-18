@@ -301,6 +301,18 @@ require("lazy").setup({
         },
     },
     {
+        "vim-skk/skkeleton",
+        dependencies= {
+            "vim-denops/denops.vim",
+        },
+    },
+    {
+        "uga-rosa/cmp-skkeleton",
+        dependencies = {
+            "vim-skk/skkeleton",
+        },
+    },
+    {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "windwp/nvim-autopairs",
@@ -310,7 +322,8 @@ require("lazy").setup({
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "petertriho/cmp-git",
-	          "hrsh7th/cmp-cmdline",
+	        "hrsh7th/cmp-cmdline",
+            "uga-rosa/cmp-skkeleton"
         },
         config = function()
             -- Setup nvim-cmp.
@@ -348,6 +361,7 @@ require("lazy").setup({
                 end, { 'i', 's' }),
                 }),
                 sources = cmp.config.sources({
+                { name = "skkeleton" },
                 { name = 'nvim_lsp' },
                 { name = 'ultisnips' }, -- For ultisnips users.
                 { name = 'nvim_lsp_signature_help' },

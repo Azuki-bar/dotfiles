@@ -15,7 +15,7 @@ alias  reboot-win='systemctl reboot --boot-loader-entry=auto-windows'
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 if command -v $HOME/.local/share/mise/bin/mise > /dev/null; then
     eval "$($HOME/.local/share/mise/bin/mise activate zsh)"
-    [ ! -s /usr/local/share/zsh/site-functions/_mise ] && echo 'exec this command `mise completion zsh |sudo tee -a /usr/local/share/zsh/site-functions/_mise`'
+    [ ! -s /usr/local/share/zsh/site-functions/_mise ] && echo 'exec this command `sudo mkdir /usr/local/share/zsh/site-functions/ && mise completion zsh | sudo tee -a /usr/local/share/zsh/site-functions/_mise`'
 fi
 
 if command -v gh > /dev/null; then 

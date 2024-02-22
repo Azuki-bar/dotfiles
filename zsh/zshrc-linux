@@ -18,3 +18,9 @@ if command -v $HOME/.local/share/mise/bin/mise > /dev/null; then
     [ ! -s /usr/local/share/zsh/site-functions/_mise ] && echo 'exec this command `mise completion zsh |sudo tee -a /usr/local/share/zsh/site-functions/_mise`'
 fi
 
+if command -v gh > /dev/null; then 
+    [ ! -s /usr/local/share/zsh/site-functions/_gh ] && echo 'exec this command `gh completion -s zsh | sudo tee -a /usr/local/share/zsh/site-functions/_gh`'
+fi
+if command -v task > /dev/null ; then
+    [ ! -s /usr/local/share/zsh/site-functions/_task ] && echo 'exec this command `curl -L https://raw.githubusercontent.com/go-task/task/main/completion/zsh/_task | sudo tee -a /usr/local/share/zsh/site-functions/_task`'
+fi

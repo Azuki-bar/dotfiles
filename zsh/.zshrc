@@ -137,9 +137,12 @@ function source_if_exist() {
 alias vim=nvim
 alias cp='cp -i'
 alias ls='ls --color=auto'
+alias ghqf='cd $(ghq root)/$(ghq list | fzf)'
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin:/usr/local/texlive/2023/bin/x86_64-linux:/usr/local/go/bin
 
+
+source $HOME/dotfiles/zsh/functions/update-all
 
 export GOPATH=$HOME/go
 DEVICE=$(uname -o)
@@ -169,51 +172,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # [ -s /usr/local/opt/asdf/libexec/asdf.sh ] && source /usr/local/opt/asdf/libexec/asdf.sh
 [ -s ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
 [ -s ~/dotfiles/zsh/ignored/*.zsh ] && source ~/dotfiles/zsh/ignored/*.zsh
-
-
-
-function update-all() {
-  # ANSIエスケープコードを変数に格納
-  RED='\033[0;31m'
-  GREEN='\033[0;32m'
-  NC='\033[0m'  # No Color
-
-  command_list=(
-    # require sudo
-    yay='yay -Syu'
-    apt='sudo apt update && sudo apt upgrade -y'
-    snap='sudo snap refresh'
-
-    # not require sudo
-    asdf='asdf update'
-    asdf='asdf plugin update --all'
-    rtx='rtx update'
-    rtx='rtx self-update'
-    mise='mise update'
-    mise='mise self-update'
-    brew='brew update'
-    npm='npm update -g'
-    rustup='rustup update'
-    cargo-install-update='cargo-install-update install-update -a'
-    rye='rye self update'
-    go='go run github.com/nao1215/gup@latest update'
-    flatpak='flatpak update'
-    gem='gem update --system'
-  )
-
-  for cmd in ${(k)command_list}; do
-    # echo "Running $command"
-    IFS='=' read -r cmd_name exec_command <<< "$cmd"
-    echo "${GREEN}running $cmd_name${NC}"
-    
-    # コマンドが存在するか確認
-    if ! command -v $cmd_name > /dev/null; then
-      # 赤色でエラーメッセージを出力
-      echo "${RED}$cmd_name is not installed${NC}"
-      continue
-    fi
-
-    eval "$exec_command"
-  done
-}
+command -v kubectl > /dev/null && source <(kubectl completion zsh)
+command -v flux > /dev/null && source <(flux completion zsh)
 

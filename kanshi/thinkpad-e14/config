@@ -1,6 +1,6 @@
 profile home {
-    output "Chimei Innolux Corporation 0x14E5 Unknown" disable
-    output "LG Electronics LG HDR 4K 0x0000C7E0" enable
+    output "Chimei Innolux Corporation 0x14E5 Unknown" enable position 3840,1080
+    output "LG Electronics LG HDR 4K 0x0000C7E0" enable position 0,0
 }
 
 profile nomad {

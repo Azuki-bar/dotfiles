@@ -60,3 +60,4 @@ zmodule eriner
 zmodule prompt-pwd
 
 zmodule ohmyzsh/ohmyzsh --root plugins/aws
+zmodule joshskidmore/zsh-fzf-history-search

@@ -119,6 +119,11 @@ source ${ZIM_HOME}/init.zsh
 # zsh-history-substring-search
 #
 
+# https://github.com/joshskidmore/zsh-fzf-history-search/blob/741012388886e7ee39330fe3cdb6a4803012dc0b/README.md
+export ZSH_FZF_HISTORY_SEARCH_EVENT_NUMBERS=0
+export ZSH_FZF_HISTORY_SEARCH_DATES_IN_SEARCH=0
+export ZSH_FZF_HISTORY_SEARCH_REMOVE_DUPLICATES="1"
+
 zmodload -F zsh/terminfo +p:terminfo
 # Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
 for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up

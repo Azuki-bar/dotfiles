@@ -5,3 +5,4 @@
 #     eval "$(rtx activate zsh)"
 # fi
 source ~/.config/op/plugins.sh
+command -v mise > /dev/null && eval "$(mise activate zsh)"

@@ -147,7 +147,7 @@ export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin:/usr/local/texlive/2023/bin/x86_64-linux:/usr/local/go/bin
 
 
-source $HOME/dotfiles/zsh/functions/update-all
+source $HOME/dotfiles/zsh/functions/update-all.sh
 
 export GOPATH=$HOME/go
 DEVICE=$(uname -o)
